@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace _5StarsSchoolForum.Models
 {
@@ -21,7 +22,7 @@ namespace _5StarsSchoolForum.Models
             // Add custom user claims here
             return userIdentity;
         }
-       // public virtual ICollection
+        public virtual ICollection<Category> AttendedCategory { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -30,7 +31,10 @@ namespace _5StarsSchoolForum.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-
+        
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Reply> Replies { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

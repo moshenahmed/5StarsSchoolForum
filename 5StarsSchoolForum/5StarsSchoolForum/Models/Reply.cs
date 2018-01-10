@@ -5,10 +5,11 @@ using System.Web;
 
 namespace _5StarsSchoolForum.Models
 {
-    public class Categories
+    public class Reply
     {
+
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string ReplyMessage { get; set; }
+        public DateTime PostingTime { get; set; }
     }
 }
