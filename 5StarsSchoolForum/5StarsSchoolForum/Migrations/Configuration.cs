@@ -24,11 +24,12 @@ namespace _5StarsSchoolForum.Migrations
 
             ApplicationUser user = new ApplicationUser()
             {
-                UserName = "Teacher@SchoolForum.se",
+                UserName = "Sai",
                 Email = "Teacher@SchoolForum.se",
-                FirstName = "KTeacher",
-                LastName = "lay",
-
+              
+                Age = "10",
+                Gender = "Female",
+                Role="Teacher"
 
 
             };

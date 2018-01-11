@@ -136,8 +136,8 @@ namespace _5StarsSchoolForum.Controllers
 
         //
         // GET: /Account/Register
-        [Authorize]
-        //[AllowAnonymous]
+        //[Authorize]
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
@@ -146,8 +146,8 @@ namespace _5StarsSchoolForum.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [Authorize]
-        //[AllowAnonymous]
+        //[Authorize]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
