@@ -17,6 +17,7 @@ namespace _5StarsSchoolForum.Controllers
         // GET: Categories
         public ActionResult Index()
         {
+            
             return View(db.Categories.ToList());
         }
 
