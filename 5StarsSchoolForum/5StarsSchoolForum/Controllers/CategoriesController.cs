@@ -10,6 +10,7 @@ using _5StarsSchoolForum.Models;
 
 namespace _5StarsSchoolForum.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
