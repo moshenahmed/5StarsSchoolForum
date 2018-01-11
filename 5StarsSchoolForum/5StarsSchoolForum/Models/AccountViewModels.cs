@@ -65,9 +65,9 @@ namespace _5StarsSchoolForum.Models
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -79,6 +79,25 @@ namespace _5StarsSchoolForum.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email_Id")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Enter Age")]
+        public string Age { get; set; }
+
+        [Required]
+        [Display(Name = "Gender")]
+        public string Gender { get; set; }
+
+        [Required]
+        [Display(Name = "Select Role")]
+        public string Role { get; set; }
     }
 
     public class ResetPasswordViewModel

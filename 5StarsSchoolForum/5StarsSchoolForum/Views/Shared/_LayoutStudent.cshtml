@@ -24,9 +24,9 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Student", "LoginStudent", "Home")</li>
-                   
-                    <li>@Html.ActionLink("Teacher", "Login", "Account")</li>
+                    @*<li>@Html.ActionLink("Student", "LoginStudent", "Home")</li>
+                    @*<li>@Html.ActionLink("Student", "LoginStudent", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+                    @*<li>@Html.ActionLink("Teacher", "About", "Home")</li>*@*
                 </ul>
                 @*@Html.Partial("_LoginPartial")*@
             </div>
@@ -36,7 +36,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - 5-Starts-School-Forum</p>
+            <p>&copy; @DateTime.Now.Year - 5StartsSchoolForum</p>
         </footer>
     </div>
 

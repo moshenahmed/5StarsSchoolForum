@@ -12,11 +12,13 @@
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
         </div>
     </div>
+
+
     <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
@@ -29,11 +31,44 @@
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
         </div>
-    </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Age, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Age, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(m => m.Gender, "Male", true)Male
+                @Html.RadioButtonFor(m => m.Gender, "Female", false)Female
+                @Html.ValidationMessageFor(model => model.Gender)<br />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Role, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(m => m.Role, "Teacher", true)Teacher   @Html.RadioButtonFor(m => m.Role, "Student", false)Student
+                @Html.ValidationMessageFor(model => model.Role)<br />
+            </div>        </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Register" class="btn btn-success" />
+                </div>
+            </div>
 }
 
 @section Scripts {
