@@ -32,20 +32,6 @@ namespace _5StarsSchoolForum.Models
         [Display(Name = "Select Role")]
         public string Role { get; set; }
 
-
-        [Required]
-        [Display(Name = "Enter Age")]
-        public string Age { get; set; }
-
-        [Required]
-        [Display(Name = "Gender")]
-        public string Gender { get; set; }
-
-        [Required]
-        [Display(Name = "Select Role")]
-        public string Role { get; set; }
-
-
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -59,7 +45,7 @@ namespace _5StarsSchoolForum.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("Forum")
         {
         }
         
