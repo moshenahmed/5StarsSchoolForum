@@ -10,6 +10,7 @@ namespace _5StarsSchoolForum.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "_5StarsSchoolForum.Models.ApplicationDbContext";
         }
 
         protected override void Seed(_5StarsSchoolForum.Models.ApplicationDbContext context)

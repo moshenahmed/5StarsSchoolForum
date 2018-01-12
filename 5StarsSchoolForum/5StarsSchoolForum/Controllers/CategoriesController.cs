@@ -10,13 +10,15 @@ using _5StarsSchoolForum.Models;
 
 namespace _5StarsSchoolForum.Controllers
 {
-    public class CategoryController : Controller
+    [Authorize]
+    public class CategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Categories
         public ActionResult Index()
         {
+
             return View(db.Categories.ToList());
         }
 
