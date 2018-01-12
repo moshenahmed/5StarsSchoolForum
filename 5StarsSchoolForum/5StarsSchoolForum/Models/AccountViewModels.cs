@@ -49,9 +49,9 @@ namespace _5StarsSchoolForum.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "UserName")]
         [EmailAddress]
-        public string Email { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -80,9 +80,9 @@ namespace _5StarsSchoolForum.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+       
 
-
-        [Required]
+            [Required]
         [EmailAddress]
         [Display(Name = "Email_Id")]
         public string Email { get; set; }
@@ -98,6 +98,7 @@ namespace _5StarsSchoolForum.Models
         [Required]
         [Display(Name = "Select Role")]
         public string Role { get; set; }
+
     }
 
     public class ResetPasswordViewModel

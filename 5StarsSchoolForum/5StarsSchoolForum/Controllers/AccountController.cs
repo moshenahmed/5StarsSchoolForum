@@ -18,8 +18,10 @@ namespace _5StarsSchoolForum.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        ApplicationDbContext context;
         public AccountController()
         {
+            context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -60,7 +62,7 @@ namespace _5StarsSchoolForum.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-    
+
 
         //
         // POST: /Account/Login
@@ -76,7 +78,7 @@ namespace _5StarsSchoolForum.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -137,9 +139,16 @@ namespace _5StarsSchoolForum.Controllers
 
         //
         // GET: /Account/Register
+        //[Authorize]
         [AllowAnonymous]
         public ActionResult Register()
         {
+            //RegisterViewModel model = new RegisterViewModel();
+            ////model.Role=new SelectList(db
+
+            ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("SeniorTeacher")).ToList(), "Name", "Name");
+         //   ViewBag.Role = new SelectList(context.Categories.ToList(), "Name", "Name");
+
             return View();
         }
 
@@ -152,24 +161,24 @@ namespace _5StarsSchoolForum.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, Age = model.Age, Gender = model.Gender, Role = model.Role };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email,Age=model.Age, Gender = model.Gender, Role=model.Role};
                 var result = await UserManager.CreateAsync(user, model.Password);
-              
-             
-                    if (result.Succeeded)
-                    {
+                if (result.Succeeded)
+                {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    await this.UserManager.AddToRoleAsync(user.Id, model.Role);
+                    return RedirectToAction("Index", "Home");
+                }
 
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("SeniorTeacher")).ToList(), "Name", "Name");
+             // ViewBag.Role = new SelectList(context.Categories.ToList(), "Name", "Name");
 
-                        return RedirectToAction("Index", "Home");
-                    }
-                
-                
                 AddErrors(result);
             }
 
