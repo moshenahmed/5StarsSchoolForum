@@ -161,7 +161,7 @@ namespace _5StarsSchoolForum.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email,Age=model.Age, Gender = model.Gender, Role=model.Role};
+                var user = new ApplicationUser { UserName = model.UserName,FirstName=model.FirstName,LastName=model.LastName, Email = model.Email,DateOfBirth=model.DateOfBirth, Gender = model.Gender};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -408,6 +408,44 @@ namespace _5StarsSchoolForum.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
+
+
+        //public ActionResult UserList()
+        //{
+        //    var teacherrole = (from r in context.Roles where r.Name.Contains("Teacher") select r).FirstOrDefault();
+        //    var users = context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(teacherrole.Id)).ToList();
+
+        //    var TeacherVM = users.Select(user => new UserViewModel
+        //    {
+        //        FullName = user.FullName,
+        //        Email = user.Email,
+        //        RoleName = "Teacher"
+        //    }).ToList();
+
+
+        //    var studentrole = (from r in context.Roles where r.Name.Contains("Student") select r).FirstOrDefault();
+        //    var admins = context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(studentrole.Id)).ToList();
+
+        //    var StudentVM = admins.Select(user => new UserViewModel
+        //    {
+        //        FullName = user.FullName,
+        //        Email = user.Email,
+        //        RoleName = "Student"
+        //    }).ToList();
+
+
+        //    var model = new GroupedUserViewModel { Teachers = TeacherVM, Students = StudentVM };
+        //    return View(model);
+
+        //}
+
+
+
+
+
+
+
+
 
         //
         // GET: /Account/ExternalLoginFailure

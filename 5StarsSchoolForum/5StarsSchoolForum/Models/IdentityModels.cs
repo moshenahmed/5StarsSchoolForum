@@ -5,32 +5,35 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
 namespace _5StarsSchoolForum.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        //[Required]
-        //public string FirstName { get; set; }
-
-        //[Required]
-        //public string LastName { get; set; }
-        //[Required]
-        //public string FullName { get { return FirstName + " " + LastName; } }
-
-    
         [Required]
-        [Display(Name = "Enter Age")]
-        public string Age { get; set; }
+        public string FirstName { get; set; }
+
+        [Required]
+        public string LastName { get; set; }
+        [Required]
+        public string FullName { get { return FirstName + " " + LastName; } }
+
+
+        [Required]
+        [Column(TypeName = "datetime2")]
+        [DataType(DataType.Date)]
+        public DateTime DateOfBirth { get; set; }
 
         [Required]
         [Display(Name = "Gender")]
         public string Gender { get; set; }
 
-        [Required]
-        [Display(Name = "Select Role")]
-        public string Role { get; set; }
+        //[Required]
+        //[Display(Name = "Select Role")]
+        //public string Role { get; set; }
 
 
         [Required]
