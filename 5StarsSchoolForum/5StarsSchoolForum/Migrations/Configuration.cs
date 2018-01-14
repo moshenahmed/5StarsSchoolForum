@@ -18,13 +18,14 @@ namespace _5StarsSchoolForum.Migrations
 
         protected override void Seed(_5StarsSchoolForum.Models.ApplicationDbContext context)
         {
-            context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Teacher"));
-            context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Student"));
+            
 
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
+            context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Teacher"));
+            context.Roles.AddOrUpdate(s => s.Name, new IdentityRole("Student"));
             //creating a defaultuser
             ApplicationUser user = new ApplicationUser()
             {
@@ -39,9 +40,9 @@ namespace _5StarsSchoolForum.Migrations
             // Creating a password for the teacher user
             var result = UserManager.Create(user, "password");
 
-            ApplicationUser teacher =
+            ApplicationUser admin =
                 UserManager.FindByName("Teacher@5starschoolforum.se");
-            UserManager.AddToRole(teacher.Id, "Teacher");
+            UserManager.AddToRole(admin.Id, "Teacher");
             context.SaveChanges();
 
 

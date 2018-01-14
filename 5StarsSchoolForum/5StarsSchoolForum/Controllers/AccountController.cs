@@ -143,10 +143,10 @@ namespace _5StarsSchoolForum.Controllers
         public ActionResult Register()
         {
             //RegisterViewModel model = new RegisterViewModel();
-            ////model.Role=new SelectList(db
+            //model.Role = new SelectList(db.roles
 
-            ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("SeniorTeacher")).ToList(), "Name", "Name");
-         //   ViewBag.Role = new SelectList(context.Categories.ToList(), "Name", "Name");
+            ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("Teacher")).ToList(), "Name", "Name");
+         
 
             return View();
         }
@@ -173,11 +173,12 @@ namespace _5StarsSchoolForum.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     await this.UserManager.AddToRoleAsync(user.Id, model.Role);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Account/UserList");
                 }
 
-                ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("SeniorTeacher")).ToList(), "Name", "Name");
-             // ViewBag.Role = new SelectList(context.Categories.ToList(), "Name", "Name");
+                ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("Teacher")).ToList(), "Name", "Name");
+               
+             
 
                 AddErrors(result);
             }
@@ -410,40 +411,52 @@ namespace _5StarsSchoolForum.Controllers
         }
 
 
-        //public ActionResult UserList()
-        //{
-        //    var teacherrole = (from r in context.Roles where r.Name.Contains("Teacher") select r).FirstOrDefault();
-        //    var users = context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(teacherrole.Id)).ToList();
-
-        //    var TeacherVM = users.Select(user => new UserViewModel
-        //    {
-        //        FullName = user.FullName,
-        //        Email = user.Email,
-        //        RoleName = "Teacher"
-        //    }).ToList();
-
-
-        //    var studentrole = (from r in context.Roles where r.Name.Contains("Student") select r).FirstOrDefault();
-        //    var admins = context.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains(studentrole.Id)).ToList();
-
-        //    var StudentVM = admins.Select(user => new UserViewModel
-        //    {
-        //        FullName = user.FullName,
-        //        Email = user.Email,
-        //        RoleName = "Student"
-        //    }).ToList();
+        //--Action method for getting userlistview--//
+        public ActionResult UserList()
+        {
+            //var userWithRoles = (from user in context.Users
+            //                     from userRole in user.Roles
+            //                     join role in context.Roles on userRole.RoleId equals
+            //                     role.Id
+            //                     select new UserListViewModel()
+            //                     {
+            //                         UserName = user.UserName,
+            //                         Email = user.Email,
+            //                         Role=role.Name
+            //                     }).ToList();
 
 
-        //    var model = new GroupedUserViewModel { Teachers = TeacherVM, Students = StudentVM };
-        //    return View(model);
+            var userWithRoles = (from user in context.Users
+                                 select new
+                                 {
+                                     UserName= user.UserName,
+                                     Email = user.Email,
+                                     Role = (from userRole in user.Roles
+                                             join role in context.Roles on userRole.RoleId equals role.Id
+                                             select role.Name).ToList()
+                                 }).ToList().Select(p => new UserListViewModel()
+                                 {
+                                     UserName=p.UserName,
+                                     Email=p.Email,
+                                     Role=string.Join(",",p.Role)
 
-        //}
+                                 });
 
 
 
 
 
 
+
+
+            return View(userWithRoles);
+
+
+
+
+
+
+        }
 
 
 
