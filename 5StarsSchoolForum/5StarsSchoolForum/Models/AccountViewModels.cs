@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace _5StarsSchoolForum.Models
 {
@@ -68,8 +70,24 @@ namespace _5StarsSchoolForum.Models
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
+        [Required]
+        [Display(Name = "First Name")]
+        [MinLength(2)]
+        [RegularExpression(@"^[a-zA-Z'' ']+$", ErrorMessage = "Special characters  & Numbers are not allowed")]
+        public string FirstName { get; set; }
 
-       [Required]
+        [Required]
+        [Display(Name = "Last Name")]
+        [MinLength(2)]
+        [RegularExpression(@"^[a-zA-Z'' ']+$", ErrorMessage = "Special characters  & Numbers are not allowed")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Full Name")]
+        public string FullName { get { return FirstName + " " + LastName; } }
+
+
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -88,8 +106,11 @@ namespace _5StarsSchoolForum.Models
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "Enter Age")]
-        public string Age { get; set; }
+        [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
+        [Column(TypeName = "datetime2")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime DateOfBirth { get; set; }
 
         [Required]
         [Display(Name = "Gender")]
