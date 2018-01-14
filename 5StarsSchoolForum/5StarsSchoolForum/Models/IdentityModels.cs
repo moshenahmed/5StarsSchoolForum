@@ -36,17 +36,6 @@ namespace _5StarsSchoolForum.Models
         //public string Role { get; set; }
 
 
-        [Required]
-        [Display(Name = "Enter Age")]
-        public string Age { get; set; }
-
-        [Required]
-        [Display(Name = "Gender")]
-        public string Gender { get; set; }
-
-        [Required]
-        [Display(Name = "Select Role")]
-        public string Role { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

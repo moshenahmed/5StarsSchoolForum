@@ -146,7 +146,7 @@ namespace _5StarsSchoolForum.Controllers
             //RegisterViewModel model = new RegisterViewModel();
             ////model.Role=new SelectList(db
 
-            ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("SeniorTeacher")).ToList(), "Name", "Name");
+            ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("Teacher")).ToList(), "Name", "Name");
          //   ViewBag.Role = new SelectList(context.Categories.ToList(), "Name", "Name");
 
             return View();
@@ -176,7 +176,7 @@ namespace _5StarsSchoolForum.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("SeniorTeacher")).ToList(), "Name", "Name");
+                ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("Teacher")).ToList(), "Name", "Name");
              // ViewBag.Role = new SelectList(context.Categories.ToList(), "Name", "Name");
 
                 AddErrors(result);
