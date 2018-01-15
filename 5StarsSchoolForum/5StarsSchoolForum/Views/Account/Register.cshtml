@@ -56,10 +56,10 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Role, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @*@Html.RadioButtonFor(m => m.Role ,"Teacher", true)Teacher   @Html.RadioButtonFor(m => m.Role, "Student", false)Student*@
+            @Html.RadioButtonFor(m => m.Role ,"Teacher", true)Teacher   @Html.RadioButtonFor(m => m.Role, "Student", false)Student
          
             @*@Html.DropDownList("Name")*@
-            @Html.DropDownList("Role", (SelectList)ViewBag.Name, " ")
+            @*@Html.DropDownList("Role", (SelectList)ViewBag.Name, " ")*@
                @Html.ValidationMessageFor(model => model.Role)<br />
         </div>
     </div>

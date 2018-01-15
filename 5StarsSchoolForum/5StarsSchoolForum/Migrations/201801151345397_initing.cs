@@ -3,7 +3,7 @@ namespace _5StarsSchoolForum.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class initing : DbMigration
     {
         public override void Up()
         {
@@ -22,6 +22,8 @@ namespace _5StarsSchoolForum.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        FirstName = c.String(),
+                        LastName = c.String(),
                         Age = c.String(nullable: false),
                         Gender = c.String(nullable: false),
                         Role = c.String(nullable: false),
