@@ -9,7 +9,7 @@ namespace _5StarsSchoolForum.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "_5StarsSchoolForum.Models.ApplicationDbContext";
         }
 

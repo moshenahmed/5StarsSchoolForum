@@ -21,6 +21,11 @@ namespace _5StarsSchoolForum.Controllers
 
             return View(db.Categories.ToList());
         }
+        public ActionResult CategoryList()
+        {
+            var model = db.Categories.ToList();
+            return View("SelectCategories",model);
+        }
 
         // GET: Categories/Details/5
         public ActionResult Studentlist()
