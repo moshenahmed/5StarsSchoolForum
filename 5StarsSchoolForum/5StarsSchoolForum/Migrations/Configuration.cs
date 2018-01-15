@@ -1,8 +1,8 @@
 namespace _5StarsSchoolForum.Migrations
 {
+    using _5StarsSchoolForum.Models;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -13,47 +13,16 @@ namespace _5StarsSchoolForum.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            
         }
 
-        // In this method we will create default User roles and Admin user for login   
-        private void schoolRolesandUsers()
+        protected override void Seed(_5StarsSchoolForum.Models.ApplicationDbContext context)
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            // In Startup iam creating first Admin Role and creating a default Admin User 
-            if (!roleManager.RoleExists("SeniorTeacher"))
-            {
+            //context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Teacher"));
 
-                // first we create Admin rool  
-                var role = new IdentityRole();
-                role.Name = "SeniorTeacher";
-                roleManager.Create(role);
-             
-                //Here we create a Admin super user who will maintain the website   
-
-                var user = new ApplicationUser();
-                user.UserName = "Anna";
-                user.Email = "AnnaJames@hotmail.com";
-
-                string uPsswd = "S@123";
-
-                var result = UserManager.Create(user,uPsswd);
-
-                if(result.Succeeded)
-                {
-
-                    var result1 = UserManager.AddToRole(user.Id, "Teacher");
-                }
-
-            }
-
-            // creating Creating Manager role  
-
-            if(!roleManager.RoleExists("Teacher"))
+            if (!roleManager.RoleExists("Teacher"))
             {
                 var role = new IdentityRole();
                 role.Name = "Teacher";
@@ -61,7 +30,7 @@ namespace _5StarsSchoolForum.Migrations
 
             }
 
-            if(!roleManager.RoleExists("Student"))
+            if (!roleManager.RoleExists("Student"))
             {
                 var role = new IdentityRole();
                 role.Name = "Student";
@@ -69,38 +38,24 @@ namespace _5StarsSchoolForum.Migrations
 
             }
 
-          
-        }
+            //creating a defaultuser
+            ApplicationUser user = new ApplicationUser()
+            {
+                UserName = "Anna",
+                Email = "Teacher@5starschoolforum.se",
+                //FirstName = "Anna",
+                //LastName = "Teacher",
+                Gender = "Female"
 
-        protected override void Seed(ApplicationDbContext context)
-        {
+            };
 
-            schoolRolesandUsers();
-            //context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Teacher"));
+            // Creating a password for the teacher user
+            var result = UserManager.Create(user, "password");
 
-            //UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(context);
-            //UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(userStore);
-
-            //ApplicationUser user = new ApplicationUser()
-            //{
-            //    UserName = "Sai",
-            //    Email = "Teacher@SchoolForum.se",
-
-            //    Age = "10",
-            //    Gender = "Female",
-            //    Role="Teacher"
-
-
-            //};
-
-            //var result = userManager.Create(user, "password");
-
-            //ApplicationUser Teacher =
-            //    userManager.FindByName("Teacher@SchoolForum.se");
-            //userManager.AddToRole(Teacher.Id, "Teacher");
-            //context.SaveChanges();
-
+            ApplicationUser admin =
+                UserManager.FindByName("Anna");
+            UserManager.AddToRole(admin.Id, "Teacher");
+            context.SaveChanges();
         }
     }
-    }
-
+}
