@@ -151,4 +151,13 @@ namespace _5StarsSchoolForum.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+    public class UserListViewModel
+    {
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Role { get; set; }
+    }
+
+
+
 }

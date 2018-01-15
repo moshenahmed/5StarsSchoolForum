@@ -1,0 +1,31 @@
+﻿@model IEnumerable<_5StarsSchoolForum.Models.UserListViewModel>
+
+@{
+    ViewBag.Title = "UserList";
+}
+
+<h2>UserList</h2>
+
+<p>
+    @Html.ActionLink("Add a New User", "Account/Register")
+</p>
+<div class="row">
+    <h4>Users List</h4>
+
+    @foreach (var user in Model)
+    {
+        <p>
+            <strong>
+                @user.UserName | @user.Email | @user.Role
+            </strong>
+        </p>
+    }
+</div>
+<tr>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+      
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+    </td>
+</tr>
+}

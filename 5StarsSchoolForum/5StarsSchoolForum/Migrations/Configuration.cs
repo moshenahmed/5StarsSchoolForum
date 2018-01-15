@@ -63,27 +63,26 @@ namespace _5StarsSchoolForum.Migrations
         {
 
 
-            context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Teacher"));
-            context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Student"));
-
-
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            //if (!roleManager.RoleExists("Teacher"))
-            //{
-            //    var role = new IdentityRole();
-            //    role.Name = "Teacher";
-            //    roleManager.Create(role);
+            //context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Teacher"));
 
-            //}
-            //if (!roleManager.RoleExists("Student"))
-            //{
-            //    var role = new IdentityRole();
-            //    role.Name = "Student";
-            //    roleManager.Create(role);
+            if (!roleManager.RoleExists("Teacher"))
+            {
+                var role = new IdentityRole();
+                role.Name = "Teacher";
+                roleManager.Create(role);
 
-            //}
+            }
+
+            if (!roleManager.RoleExists("Student"))
+            {
+                var role = new IdentityRole();
+                role.Name = "Student";
+                roleManager.Create(role);
+
+            }
 
             //creating a defaultuser
             ApplicationUser user = new ApplicationUser()
@@ -100,7 +99,7 @@ namespace _5StarsSchoolForum.Migrations
             var result = UserManager.Create(user, "password");
 
             ApplicationUser admin =
-                UserManager.FindByName("Teacher@5starschoolforum.se");
+                UserManager.FindByName("Anna");
             UserManager.AddToRole(admin.Id, "Teacher");
             context.SaveChanges();
 
