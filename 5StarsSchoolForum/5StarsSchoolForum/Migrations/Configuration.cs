@@ -99,7 +99,7 @@ namespace _5StarsSchoolForum.Migrations
             var result = UserManager.Create(user, "password");
 
             ApplicationUser admin =
-                UserManager.FindByName("Anna");
+                UserManager.FindByName("Teacher@5starschoolforum.se");
             UserManager.AddToRole(admin.Id, "Teacher");
             context.SaveChanges();
 

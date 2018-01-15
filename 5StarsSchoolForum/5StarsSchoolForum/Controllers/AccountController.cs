@@ -137,22 +137,21 @@ namespace _5StarsSchoolForum.Controllers
             }
         }
 
-        //
+        //[Authorize(Roles = "Teacher")]
         // GET: /Account/Register
-        //[Authorize]
         [AllowAnonymous]
         public ActionResult Register()
         {
             //RegisterViewModel model = new RegisterViewModel();
             ////model.Role=new SelectList(db
-
+          
             ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("admin")).ToList(), "Name", "Name");
          //   ViewBag.Role = new SelectList(context.Categories.ToList(), "Name", "Name");
 
             return View();
         }
 
-        //
+        //[Authorize(Roles = "Teacher")]
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
