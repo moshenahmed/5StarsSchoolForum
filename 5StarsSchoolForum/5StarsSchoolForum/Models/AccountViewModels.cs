@@ -51,9 +51,9 @@ namespace _5StarsSchoolForum.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "UserName")]
+        [Display(Name = "Email_Id")]
         [EmailAddress]
-        public string UserName { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

@@ -10,7 +10,6 @@ using _5StarsSchoolForum.Models;
 
 namespace _5StarsSchoolForum.Controllers
 {
-    [Authorize]
     public class CategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -18,9 +17,30 @@ namespace _5StarsSchoolForum.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-
             return View(db.Categories.ToList());
         }
+
+        public ActionResult CategoryList()
+        {
+            var model = db.Categories.ToList();
+            return View("SelectCategories", model);
+        }
+
+        //// GET: Categories/Details/5
+        //public ActionResult Studentlist()
+
+        //{
+        //    var model = db.Users.Where(n => n.Role == "Student");
+        //    return View("Studentlist", model);
+        //}
+        //public ActionResult Teacherlist()
+
+        //{
+        //    var model = db.Users.Where(n => n.Role == "Teacher");
+        //    return View("Studentlist", model);
+        //}
+
+
 
         // GET: Categories/Details/5
         public ActionResult Details(int? id)
@@ -45,7 +65,7 @@ namespace _5StarsSchoolForum.Controllers
 
         // POST: Categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description")] Category category)
@@ -77,7 +97,7 @@ namespace _5StarsSchoolForum.Controllers
 
         // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description")] Category category)
