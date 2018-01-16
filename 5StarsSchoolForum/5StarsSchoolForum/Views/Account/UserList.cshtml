@@ -7,6 +7,9 @@
 <h2>UserList</h2>
 
 <p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
     @Html.ActionLink("Add a New User", "Account/Register")
 </p>
 <div class="row">
@@ -24,8 +27,11 @@
 <tr>
     <td>
         @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-      
+
         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
     </td>
 </tr>
-}
+
+
+
+

@@ -137,9 +137,9 @@ namespace _5StarsSchoolForum.Controllers
             }
         }
 
-        //[Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "teacher")]
         // GET: /Account/Register
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult Register()
         {
             //RegisterViewModel model = new RegisterViewModel();
@@ -151,16 +151,16 @@ namespace _5StarsSchoolForum.Controllers
             return View();
         }
 
-        //[Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "teacher")]
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName,FirstName=model.FirstName,LastName=model.LastName, Email = model.Email,DateOfBirth=model.DateOfBirth, Gender = model.Gender};
+                var user = new ApplicationUser { UserName = model.UserName,FirstName=model.FirstName,LastName=model.LastName, Email = model.Email,DateOfBirth=model.DateOfBirth, Gender = model.Gender,Role=model.Role};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -413,33 +413,33 @@ namespace _5StarsSchoolForum.Controllers
         //--Action method for getting userlistview--//
         public ActionResult UserList()
         {
+            //var userWithRoles = (from user in context.Users
+            //                     from userRole in user.Roles
+            //                     join role in context.Roles on userRole.RoleId equals
+            //                     role.Id
+            //                     select new UserListViewModel()
+            //                     {
+            //                         UserName = user.UserName,
+            //                         Email = user.Email,
+            //                         Role = role.Name
+            //                     }).ToList();
+
+
             var userWithRoles = (from user in context.Users
-                                 from userRole in user.Roles
-                                 join role in context.Roles on userRole.RoleId equals
-                                 role.Id
-                                 select new UserListViewModel()
+                                 select new
                                  {
                                      UserName = user.UserName,
                                      Email = user.Email,
-                                     Role = role.Name
-                                 }).ToList();
+                                     Role = (from userRole in user.Roles
+                                             join role in context.Roles on userRole.RoleId equals role.Id
+                                             select role.Name).ToList()
+                                 }).ToList().Select(p => new UserListViewModel()
+                                 {
+                                     UserName = p.UserName,
+                                     Email = p.Email,
+                                     Role = string.Join(",", p.Role)
 
-
-            //var userWithRoles = (from user in context.Users
-            //                     select new
-            //                     {
-            //                         UserName= user.UserName,
-            //                         Email = user.Email,
-            //                         Role = (from userRole in user.Roles
-            //                                 join role in context.Roles on userRole.RoleId equals role.Id
-            //                                 select role.Name).ToList()
-            //                     }).ToList().Select(p => new UserListViewModel()
-            //                     {
-            //                         UserName = p.UserName,
-            //                         Email = p.Email,
-            //                         Role = string.Join(",", p.Role)
-
-            //                     });
+                                 });
             return View(userWithRoles);
         }
 

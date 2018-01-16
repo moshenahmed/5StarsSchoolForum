@@ -31,9 +31,9 @@ namespace _5StarsSchoolForum.Models
         [Display(Name = "Gender")]
         public string Gender { get; set; }
 
-        //[Required]
-        //[Display(Name = "Select Role")]
-        //public string Role { get; set; }
+        [Required]
+        [Display(Name = "Select Role")]
+        public string Role { get; set; }
 
 
 
