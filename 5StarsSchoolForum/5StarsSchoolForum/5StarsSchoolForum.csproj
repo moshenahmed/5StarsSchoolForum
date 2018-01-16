@@ -260,6 +260,9 @@
     <Content Include="Views\Shared\_LayoutSidebar.cshtml" />
     <Content Include="Views\Categories\Studentlist.cshtml" />
     <Content Include="Views\Categories\SelectCategories.cshtml" />
+    <Content Include="Views\Shared\_LayoutTeacher.cshtml" />
+    <Content Include="Views\Home\IndexTeacher.cshtml" />
+    <Content Include="Views\Home\IndexStudent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

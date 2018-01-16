@@ -7,28 +7,29 @@
 <div class="jumbotron">
     @*<h1>Student List</h1>*@
     @*@{Html.RenderAction("Studentlist","Categories");}*@
-    <p class="lead">As a Teacher , You are Welcome, If you are not Please Logout!</p>
+    <p class="lead">Welcome to the student forum, Please login to start!</p>
     
 </div>
 
 <div class="row">
     <div class="col-md-4">
         <h2>
-            @Html.ActionLink("Students", "Studentlist", "Categories")
+            @*@Html.ActionLink("Students", "Studentlist", "Categories")*@
+            Students
         </h2>
         <p>
-            This is a List of Students in the school
+            As a student you have access to various categories assigned to you by your class teacher(s).
         </p>
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p> 
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <h2>Message Board</h2>
+        <p>As a student you can post a message and replies in a category, remember your teachers should assign you to a specific category for you to have access, Alright Good luck!</p>
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <h2>Teachers</h2>
+        <p>As teacher, You can create, delete, modify a category. Add a new user to a category and delete as well. A teacher has superpowers to delete a message with any reply in a specific category, so talk to your teachers well.</p>
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
