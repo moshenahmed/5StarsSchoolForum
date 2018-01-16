@@ -14,6 +14,7 @@ namespace _5StarsSchoolForum.Models
         [Required(AllowEmptyStrings=false,ErrorMessage="Category Name Required")]
         public string Name { get; set; }
         public string Description { get; set; }
+        public bool Checked { get; set; }
 
         public virtual ICollection<ApplicationUser> AttendingMembers { get; set; }
     }

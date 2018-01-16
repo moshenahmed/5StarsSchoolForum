@@ -19,6 +19,11 @@ namespace _5StarsSchoolForum.Controllers
         {
             return View(db.Categories.ToList());
         }
+        public ActionResult CategoryList()
+        {
+            var model = db.Categories.ToList();
+            return View("SelectCategories",model);
+        }
 
         public ActionResult CategoryList()
         {
@@ -43,6 +48,18 @@ namespace _5StarsSchoolForum.Controllers
 
 
         // GET: Categories/Details/5
+        public ActionResult Studentlist()
+
+        {
+            var model = db.Users.Where(n => n.Role=="Student");
+            return View("Studentlist", model);
+        }
+        public ActionResult Teacherlist()
+
+        {
+            var model = db.Users.Where(n => n.Role == "Teacher");
+            return View("Studentlist", model);
+        }
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -50,6 +67,8 @@ namespace _5StarsSchoolForum.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Category category = db.Categories.Find(id);
+            
+            
             if (category == null)
             {
                 return HttpNotFound();
