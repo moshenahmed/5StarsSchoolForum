@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace _5StarsSchoolForum.Models
 {
@@ -95,9 +97,16 @@ namespace _5StarsSchoolForum.Models
         [Display(Name = "Gender")]
         public string Gender { get; set; }
 
+        //[Required]
+        //[Display(Name = "Select Role")]
+        //public string Role { get; set; }
         [Required]
         [Display(Name = "Select Role")]
-        public string Role { get; set; }
+        public int RoleId { get; set; }
+
+
+        [ForeignKey("RoleId")]
+        public virtual IdentityRole IdentityRole { get; set; }
     }
 
     public class ResetPasswordViewModel

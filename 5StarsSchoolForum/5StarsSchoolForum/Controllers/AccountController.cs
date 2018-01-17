@@ -152,7 +152,7 @@ namespace _5StarsSchoolForum.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, Age = model.Age, Gender = model.Gender, Role = model.Role };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, Age = model.Age, Gender = model.Gender };
                 var result = await UserManager.CreateAsync(user, model.Password);
               
              

@@ -3,7 +3,7 @@ namespace _5StarsSchoolForum.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class init1 : DbMigration
     {
         public override void Up()
         {
@@ -14,6 +14,7 @@ namespace _5StarsSchoolForum.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Description = c.String(),
+                        Checked = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -24,6 +25,9 @@ namespace _5StarsSchoolForum.Migrations
                         Id = c.String(nullable: false, maxLength: 128),
                         FirstName = c.String(),
                         LastName = c.String(),
+                        Age = c.String(nullable: false),
+                        Gender = c.String(nullable: false),
+                        Role = c.String(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
