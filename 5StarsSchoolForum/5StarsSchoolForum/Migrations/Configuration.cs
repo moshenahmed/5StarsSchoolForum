@@ -12,7 +12,7 @@ namespace _5StarsSchoolForum.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
 
         }
 
@@ -88,18 +88,19 @@ namespace _5StarsSchoolForum.Migrations
             ApplicationUser user = new ApplicationUser()
             {
                 UserName = "Anna",
-                Email = "Teacher@5starschoolforum.se",
+                Email = "teacher@5starschoolforum.se",
                 FirstName = "Anna",
                 LastName = "Teacher",
-                Gender = "Female"
+                Gender = "Female",
+                Role="Teacher"
 
             };
 
             // Creating a password for the teacher user
-            var result = UserManager.Create(user, "password");
+            var result = UserManager.Create(user, "Password1/");
 
             ApplicationUser admin =
-                UserManager.FindByName("Teacher@5starschoolforum.se");
+                UserManager.FindByName("teacher@5starschoolforum.se");
             UserManager.AddToRole(admin.Id, "Teacher");
             context.SaveChanges();
 

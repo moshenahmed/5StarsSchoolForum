@@ -25,33 +25,17 @@ namespace _5StarsSchoolForum.Controllers
             return View("SelectCategories",model);
         }
 
-        public ActionResult CategoryList()
-        {
-            var model = db.Categories.ToList();
-            return View("SelectCategories", model);
-        }
-
-        //// GET: Categories/Details/5
-        //public ActionResult Studentlist()
-
+        //public ActionResult CategoryList()
         //{
-        //    var model = db.Users.Where(n => n.Role == "Student");
-        //    return View("Studentlist", model);
+        //    var model = db.Categories.ToList();
+        //    return View("SelectCategories", model);
         //}
-        //public ActionResult Teacherlist()
-
-        //{
-        //    var model = db.Users.Where(n => n.Role == "Teacher");
-        //    return View("Studentlist", model);
-        //}
-
-
 
         // GET: Categories/Details/5
         public ActionResult Studentlist()
 
         {
-            var model = db.Users.Where(n => n.Role=="Student");
+            var model = db.Users.Where(n => n.Role == "Student");
             return View("Studentlist", model);
         }
         public ActionResult Teacherlist()
@@ -60,6 +44,22 @@ namespace _5StarsSchoolForum.Controllers
             var model = db.Users.Where(n => n.Role == "Teacher");
             return View("Studentlist", model);
         }
+
+
+
+        //// GET: Categories/Details/5
+        //public ActionResult Studentlist()
+
+        //{
+        //    var model = db.Users.Where(n => n.Role=="Student");
+        //    return View("Studentlist", model);
+        //}
+        //public ActionResult Teacherlist()
+
+        //{
+        //    var model = db.Users.Where(n => n.Role == "Teacher");
+        //    return View("Studentlist", model);
+        //}
         public ActionResult Details(int? id)
         {
             if (id == null)
