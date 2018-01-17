@@ -1,8 +1,8 @@
 namespace _5StarsSchoolForum.Migrations
 {
+    using _5StarsSchoolForum.Models;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -13,99 +13,75 @@ namespace _5StarsSchoolForum.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-
         }
 
-        //// In this method we will create default User roles and Admin user for login   
-        //private void schoolRolesandUsers()
-        //{
-        //    ApplicationDbContext context = new ApplicationDbContext();
-
-        //    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-        //    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-
-        //    // In Startup iam creating first Admin Role and creating a default Admin User 
-        //    if (!roleManager.RoleExists("SeniorTeacher"))
-        //    {
-
-        //        // first we create Admin rool  
-        //        var role = new IdentityRole();
-        //        role.Name = "SeniorTeacher";
-        //        roleManager.Create(role);
-
-        //        //Here we create a Admin super user who will maintain the website   
-
-        //        var user = new ApplicationUser();
-        //        user.UserName = "Anna";
-        //        user.Email = "AnnaJames@hotmail.com";
-
-        //        string uPsswd = "S@123";
-
-        //        var result = UserManager.Create(user, uPsswd);
-
-        //        if (result.Succeeded)
-        //        {
-
-        //            var result1 = UserManager.AddToRole(user.Id, "Teacher");
-        //        }
-
-        //    }
-
-        //    // creating Creating Manager role  
-
-           
-
-           
-
-        //}
-
-        protected override void Seed(ApplicationDbContext context)
+        protected override void Seed(_5StarsSchoolForum.Models.ApplicationDbContext context)
         {
+            //if (!context.Roles.Any(t => t.Name == "teacher"))
+            //{
+            //    var roleStore = new RoleStore<IdentityRole>(context);
+            //    var roleManager = new RoleManager<IdentityRole>(roleStore);
+            //    roleManager.Create(new IdentityRole { Name = "teacher" });
+            //}
 
-
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-
-            //context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Teacher"));
-
-            if (!roleManager.RoleExists("Teacher"))
+            if (!context.Users.Any(r => r.UserName == "teacher@5starschoolforum.se"))
             {
-                var role = new IdentityRole();
-                role.Name = "Teacher";
-                roleManager.Create(role);
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
 
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+                
+
+                var user = new ApplicationUser()
+                {
+                    UserName = "userTeacher",
+                    Email = "teacher@5starschoolforum.se",
+                    FirstName = "Anna",
+                    LastName = "Teacher",
+                    Gender = "Female",
+                    Role = "Teacher"
+
+                };
+
+                
+                userManager.Create(user, "password");
+                roleManager.Create(new IdentityRole { Name = "teacher" });
+                userManager.AddToRole(user.Id, "teacher");
             }
 
-            if (!roleManager.RoleExists("Student"))
-            {
-                var role = new IdentityRole();
-                role.Name = "Student";
-                roleManager.Create(role);
 
+
+            if (!context.Users.Any(s => s.UserName == "student@5starschoolforum.se"))
+            {
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+
+
+                var user = new ApplicationUser()
+                {
+                    UserName = "userStudent",
+                    Email = "student@5starschoolforum.se",
+                    FirstName = "sai",
+                    LastName = "student",
+                    Gender = "Female",
+                    Role = "student"
+
+                };
+
+
+                userManager.Create(user, "password");
+                roleManager.Create(new IdentityRole { Name = "student" });
+                userManager.AddToRole(user.Id, "student");
             }
 
-            //creating a defaultuser
-            ApplicationUser user = new ApplicationUser()
-            {
-                UserName = "Anna",
-                Email = "teacher@5starschoolforum.se",
-                FirstName = "Anna",
-                LastName = "Teacher",
-                Gender = "Female",
-                Role="Teacher"
 
-            };
 
-            // Creating a password for the teacher user
-            var result = UserManager.Create(user, "Password1/");
-
-            ApplicationUser admin =
-                UserManager.FindByName("teacher@5starschoolforum.se");
-            UserManager.AddToRole(admin.Id, "Teacher");
             context.SaveChanges();
-
-
+            }
         }
     }
-}
 
