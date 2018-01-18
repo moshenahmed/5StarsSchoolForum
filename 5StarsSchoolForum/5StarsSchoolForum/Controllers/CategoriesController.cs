@@ -35,6 +35,10 @@ namespace _5StarsSchoolForum.Controllers
             var model = db.Users.Where(n => n.Role == "Teacher");
             return View("Studentlist", model);
         }
+       
+
+
+
         public ActionResult Details(int? id)
         {
             if (id == null)
