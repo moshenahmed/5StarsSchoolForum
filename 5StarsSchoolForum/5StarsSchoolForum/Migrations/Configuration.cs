@@ -47,6 +47,7 @@ namespace _5StarsSchoolForum.Migrations
                 
                 userManager.Create(user, "password");
                 roleManager.Create(new IdentityRole { Name = "teacher" });
+                context.SaveChanges();
                 userManager.AddToRole(user.Id, "teacher");
             }
 
@@ -74,7 +75,9 @@ namespace _5StarsSchoolForum.Migrations
 
 
                 userManager.Create(user, "password");
+                
                 roleManager.Create(new IdentityRole { Name = "student" });
+                context.SaveChanges();
                 userManager.AddToRole(user.Id, "student");
             }
 

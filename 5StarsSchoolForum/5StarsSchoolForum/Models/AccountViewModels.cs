@@ -50,10 +50,11 @@ namespace _5StarsSchoolForum.Models
 
     public class LoginViewModel
     {
+        //make the change as username from email
         [Required]
-        [Display(Name = "Email_Id")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "UserName")]
+        [UserName]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
