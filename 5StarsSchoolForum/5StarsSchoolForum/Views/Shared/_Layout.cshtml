@@ -6,7 +6,6 @@
     <title>@ViewBag.Title - 5 Stars School Forum</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -24,15 +23,18 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Student", "LoginStudent", "Home")</li>
-                   
-                    <li>@Html.ActionLink("Teacher", "Login", "Account")</li>
-                    @*<li>@Html.ActionLink("Categories", "Index", "Categories")</li>*@
-                    @*@if (Request.IsAuthenticated)
-                    {
-                        if(User.Identity.)
+                    @*<li>@Html.ActionLink("Student", "Login", "Account")</li>
 
-                    }*@
+                        <li>@Html.ActionLink("Teacher", "Login", "Account")</li>*@
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (User.Identity.Name == "Teacher")
+                        {
+                            <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+                        }
+
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -45,7 +47,6 @@
             <p>&copy; @DateTime.Now.Year - 5-Starts-School-Forum</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

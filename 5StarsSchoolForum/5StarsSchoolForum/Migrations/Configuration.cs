@@ -26,11 +26,28 @@ namespace _5StarsSchoolForum.Migrations
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Teacher"), new IdentityRole("Student"));
             context.SaveChanges();
 
-            //UserStore<ApplicationUser> userStore = new
-            //    UserStore<ApplicationUser>(context);
-            //UserManager<ApplicationUser> userManager =
-            //    new UserManager<ApplicationUser>(userStore);
-            //userManager.Create
+            UserStore<ApplicationUser> userStore = new
+                UserStore<ApplicationUser>(context);
+            UserManager<ApplicationUser> userManager =
+                new UserManager<ApplicationUser>(userStore);
+            ApplicationUser user = new ApplicationUser()
+            {
+                UserName= "studentadmin",
+                
+                Email="student@student.com",
+                Age="45",
+                Gender="Male",
+                
+                
+                
+                
+                
+            };
+           var result =  userManager.Create(user, "Student123/");
+            ApplicationUser Admin =
+                 userManager.FindByName("studentadmin");
+            userManager.AddToRole(Admin.Id, "Teacher");
+            context.SaveChanges();
 
 
 

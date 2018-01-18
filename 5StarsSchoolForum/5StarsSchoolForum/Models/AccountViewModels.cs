@@ -97,9 +97,6 @@ namespace _5StarsSchoolForum.Models
         [Display(Name = "Gender")]
         public string Gender { get; set; }
 
-        //[Required]
-        //[Display(Name = "Select Role")]
-        //public string Role { get; set; }
         [Required]
         [Display(Name = "Select Role")]
         public int RoleId { get; set; }
@@ -107,6 +104,13 @@ namespace _5StarsSchoolForum.Models
 
         [ForeignKey("RoleId")]
         public virtual IdentityRole IdentityRole { get; set; }
+
+
+
+
+
+
+
     }
 
     public class ResetPasswordViewModel

@@ -3,7 +3,7 @@ namespace _5StarsSchoolForum.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init1 : DbMigration
+    public partial class init4 : DbMigration
     {
         public override void Up()
         {
@@ -27,7 +27,6 @@ namespace _5StarsSchoolForum.Migrations
                         LastName = c.String(),
                         Age = c.String(nullable: false),
                         Gender = c.String(nullable: false),
-                        Role = c.String(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
