@@ -136,7 +136,7 @@ namespace _5StarsSchoolForum.Controllers
                     return View(model);
             }
         }
-
+        //[Authorize]
         [Authorize(Roles = "teacher")]
         // GET: /Account/Register
         //[AllowAnonymous]

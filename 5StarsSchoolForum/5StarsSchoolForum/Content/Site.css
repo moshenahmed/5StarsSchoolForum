@@ -29,3 +29,14 @@ textarea {
     background-color: #355088;
     border-color: #080808;
 }
+
+.navbar-brand {
+    float: left;
+    padding: 10px 10px;
+    font-size: 18px;
+    line-height: 20px;
+    /*background-image: url('s.jpg.jpg');
+    height: 72px;
+    width: 72px;*/
+    color:#000000;
+}
