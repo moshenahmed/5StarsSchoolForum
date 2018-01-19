@@ -32,21 +32,33 @@ namespace _5StarsSchoolForum.Migrations
                 new UserManager<ApplicationUser>(userStore);
             ApplicationUser user = new ApplicationUser()
             {
-                UserName= "studentadmin",
-                
-                Email="student@student.com",
-                Age="45",
-                Gender="Male",
-                
-                
-                
-                
-                
+                UserName = "Teacher@student.com",
+
+                Email = "Teacher@student.com",
+                Age = "45",
+                Gender = "Male",
+
             };
-           var result =  userManager.Create(user, "Student123/");
+            ApplicationUser user2 = new ApplicationUser()
+            {
+                UserName = "Student@student.com",
+
+                Email = "Student@student.com",
+                Age = "10",
+                Gender = "Male",
+
+            };
+            var result = userManager.Create(user, "Student123/");
+            var result2 = userManager.Create(user2, "Student123/");
+
             ApplicationUser Admin =
-                 userManager.FindByName("studentadmin");
+                 userManager.FindByName("Teacher@student.com");
             userManager.AddToRole(Admin.Id, "Teacher");
+            context.SaveChanges();
+
+            ApplicationUser Student =
+                userManager.FindByName("Student@student.com");
+            userManager.AddToRole(Student.Id, "Student");
             context.SaveChanges();
 
 

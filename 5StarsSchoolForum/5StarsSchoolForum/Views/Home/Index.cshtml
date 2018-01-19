@@ -7,10 +7,13 @@
 <div class="jumbotron">
     @*<h1>Student List</h1>*@
     @*@{Html.RenderAction("Studentlist","Categories");}*@
-    <p class="lead">Welcome to the student forum, Please login to start!</p>
+    <p class="lead">Welcome to the school forum, Please login to start!</p>
     
 </div>
-
+@if (Request.IsAuthenticated)
+{
+    if (User.IsInRole("Teacher"))
+    {
 <div class="row">
     <div class="col-md-4">
         <h2>
@@ -33,3 +36,19 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+    }
+
+    else
+    {
+    <div class="col-md-4">
+        <h2>
+            @*@Html.ActionLink("Students", "Studentlist", "Categories")*@
+           You are a Student!
+        </h2>
+        <p>
+            As a student you have access to various categories assigned to you by your class teacher(s).
+        </p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    }
+}

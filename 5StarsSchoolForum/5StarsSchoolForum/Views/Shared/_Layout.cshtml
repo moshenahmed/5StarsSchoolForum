@@ -29,7 +29,7 @@
 
                     @if (Request.IsAuthenticated)
                     {
-                        if (User.Identity.Name == "Teacher")
+                        if (User.IsInRole("Teacher"))
                         {
                             <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
                         }
