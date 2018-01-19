@@ -32,26 +32,27 @@
 
                     @if (Request.IsAuthenticated)
                     {
-                        if (User.Identity.Name == "Teacher")
+                        if (User.IsInRole("Teacher"))
                         {
                             <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+                            
+                            <li>@Html.ActionLink("UsersList", "UserList", "Account")</li>
+
                         }
-                    @if (User.Identity.IsAuthenticated)
-    {
-                @*<li>@Html.ActionLink("Student", "Index", "Home")</li>
+             @*<li>@Html.ActionLink("Student", "Index", "Home")</li>
 
     <li>@Html.ActionLink("Teacher", "Login", "Account")</li>*@
                 
-                <li>@Html.ActionLink("Register", "Register", "Account")</li>
+               
                    
-                <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
-                <li>@Html.ActionLink("UsersList", "UserList", "Account")</li>
+                @*<li>@Html.ActionLink("Categories", "Index", "Categories")</li>*@
+                
                 }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
-    </div>
+    
     <div class="container body-content">
         @RenderBody()
         <hr />

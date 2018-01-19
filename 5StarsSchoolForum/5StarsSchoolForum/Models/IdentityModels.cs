@@ -31,6 +31,10 @@ namespace _5StarsSchoolForum.Models
         [Display(Name = "Gender")]
         public string Gender { get; set; }
 
+        [Required]
+        [Display(Name = "Age")]
+        public string Age { get; set; }
+
         //[Required]
         //[Display(Name = "Select Role")]
         //public int RoleId { get; set; }
@@ -64,9 +68,9 @@ namespace _5StarsSchoolForum.Models
             return new ApplicationDbContext();
         }
 
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Message> Messages { get; set; }
-        public DbSet<Reply> Replies { get; set; }
+        //public DbSet<Category> Categories { get; set; }
+        //public DbSet<Message> Messages { get; set; }
+        //public DbSet<Reply> Replies { get; set; }
 
     }
 }

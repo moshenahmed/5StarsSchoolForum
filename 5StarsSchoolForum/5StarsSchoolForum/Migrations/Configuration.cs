@@ -28,62 +28,64 @@ namespace _5StarsSchoolForum.Migrations
             //    roleManager.Create(new IdentityRole { Name = "teacher" });
             //}
 
-            if (!context.Users.Any(r => r.UserName == "teacher@5starschoolforum.se"))
-            {
-                var roleStore = new RoleStore<IdentityRole>(context);
-                var roleManager = new RoleManager<IdentityRole>(roleStore);
+            //// SWAPNA look att it.
 
-                var userStore = new UserStore<ApplicationUser>(context);
-                var userManager = new UserManager<ApplicationUser>(userStore);
+            //if (!context.Users.Any(r => r.UserName == "teacher@5starschoolforum.se"))
+            //{
+            //    var roleStore = new RoleStore<IdentityRole>(context);
+            //    var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+            //    var userStore = new UserStore<ApplicationUser>(context);
+            //    var userManager = new UserManager<ApplicationUser>(userStore);
                 
 
-                var user = new ApplicationUser()
-                {
-                    UserName = "userTeacher",
-                    Email = "teacher@5starschoolforum.se",
-                    FirstName = "Anna",
-                    LastName = "Teacher",
-                    Gender = "Female",
-                    Role = "Teacher"
+                //var user = new ApplicationUser()
+                //{
+                //    UserName = "userTeacher",
+                //    Email = "teacher@5starschoolforum.se",
+                //    FirstName = "Anna",
+                //    LastName = "Teacher",
+                //    Gender = "Female",
+                //    Role = "Teacher"
 
-                };
+                //};
 
                 
-                userManager.Create(user, "password");
-                roleManager.Create(new IdentityRole { Name = "teacher" });
-                context.SaveChanges();
-                userManager.AddToRole(user.Id, "teacher");
-            }
+            //    userManager.Create(user, "password");
+            //    roleManager.Create(new IdentityRole { Name = "teacher" });
+            //    context.SaveChanges();
+            //    userManager.AddToRole(user.Id, "teacher");
+            //}
 
 
 
-            if (!context.Users.Any(s => s.UserName == "student@5starschoolforum.se"))
-            {
-                var roleStore = new RoleStore<IdentityRole>(context);
-                var roleManager = new RoleManager<IdentityRole>(roleStore);
+            //if (!context.Users.Any(s => s.UserName == "student@5starschoolforum.se"))
+            //{
+            //    var roleStore = new RoleStore<IdentityRole>(context);
+            //    var roleManager = new RoleManager<IdentityRole>(roleStore);
 
-                var userStore = new UserStore<ApplicationUser>(context);
-                var userManager = new UserManager<ApplicationUser>(userStore);
-
-
-                var user = new ApplicationUser()
-                {
-                    UserName = "userStudent",
-                    Email = "student@5starschoolforum.se",
-                    FirstName = "sai",
-                    LastName = "student",
-                    Gender = "Female",
-                    Role = "student"
-
-                };
+            //    var userStore = new UserStore<ApplicationUser>(context);
+            //    var userManager = new UserManager<ApplicationUser>(userStore);
 
 
-                userManager.Create(user, "password");
+            //    var user = new ApplicationUser()
+            //    {
+            //        UserName = "userStudent",
+            //        Email = "student@5starschoolforum.se",
+            //        FirstName = "sai",
+            //        LastName = "student",
+            //        Gender = "Female",
+            //        Role = "student"
+
+            //    };
+
+
+            //    userManager.Create(user, "password");
                 
-                roleManager.Create(new IdentityRole { Name = "student" });
-                context.SaveChanges();
-                userManager.AddToRole(user.Id, "student");
-            }
+            //    roleManager.Create(new IdentityRole { Name = "student" });
+            //    context.SaveChanges();
+            //    userManager.AddToRole(user.Id, "student");
+            //}
 
 
 
@@ -99,7 +101,7 @@ namespace _5StarsSchoolForum.Migrations
                 new UserManager<ApplicationUser>(userStore);
             ApplicationUser user = new ApplicationUser()
             {
-                UserName= "studentadmin",
+                UserName= "student@student.com",
                 
                 Email="student@student.com",
                 Age="45",
@@ -112,7 +114,7 @@ namespace _5StarsSchoolForum.Migrations
             };
            var result =  userManager.Create(user, "Student123/");
             ApplicationUser Admin =
-                 userManager.FindByName("studentadmin");
+                 userManager.FindByName("student@student.com");
             userManager.AddToRole(Admin.Id, "Teacher");
             context.SaveChanges();
 
