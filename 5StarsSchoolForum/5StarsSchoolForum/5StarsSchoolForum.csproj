@@ -173,12 +173,29 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201801191225057_Init.cs" />
     <Compile Include="Migrations\201801191225057_Init.Designer.cs">
       <DependentUpon>201801191225057_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801191338194_Init1.cs" />
+    <Compile Include="Migrations\201801191338194_Init1.Designer.cs">
+      <DependentUpon>201801191338194_Init1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801191407096_Init3.cs" />
+    <Compile Include="Migrations\201801191407096_Init3.Designer.cs">
+      <DependentUpon>201801191407096_Init3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801191426123_Init4.cs" />
+    <Compile Include="Migrations\201801191426123_Init4.Designer.cs">
+      <DependentUpon>201801191426123_Init4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801191433209_Init5.cs" />
+    <Compile Include="Migrations\201801191433209_Init5.Designer.cs">
+      <DependentUpon>201801191433209_Init5.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -259,6 +276,11 @@
     <Content Include="Views\Shared\_LayoutTeacher.cshtml" />
     <Content Include="Views\Home\IndexTeacher.cshtml" />
     <Content Include="Views\Home\IndexStudent.cshtml" />
+    <Content Include="Views\Messages\Index.cshtml" />
+    <Content Include="Views\Messages\Details.cshtml" />
+    <Content Include="Views\Messages\Create.cshtml" />
+    <Content Include="Views\Messages\Edit.cshtml" />
+    <Content Include="Views\Messages\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -274,6 +296,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801191225057_Init.resx">
       <DependentUpon>201801191225057_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801191338194_Init1.resx">
+      <DependentUpon>201801191338194_Init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801191407096_Init3.resx">
+      <DependentUpon>201801191407096_Init3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801191426123_Init4.resx">
+      <DependentUpon>201801191426123_Init4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801191433209_Init5.resx">
+      <DependentUpon>201801191433209_Init5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

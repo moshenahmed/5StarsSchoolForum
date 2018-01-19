@@ -26,9 +26,12 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p> 
     </div>
     <div class="col-md-4">
-        <h2>Message Board</h2>
-        <p>As a student you can post a message and replies in a category, remember your teachers should assign you to a specific category for you to have access, Alright Good luck!</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>
+            @Html.ActionLink("Message Board", "Index", "Messages")
+        </h2>
+            <p>As Teacher and a student can post a message and replies in a category, remember your teachers should assign you to a specific category for you to have access, Alright Good luck!</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+       
     </div>
     <div class="col-md-4">
         <h2>Teachers</h2>
