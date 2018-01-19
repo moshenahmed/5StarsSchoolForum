@@ -51,13 +51,13 @@ namespace _5StarsSchoolForum.Controllers
         public ActionResult Studentlist()
 
         {
-            var model = db.Users.Where(n => n.Role=="Student");
+            var model = db.Roles.Where(n => n.Name =="Student");
             return View("Studentlist", model);
         }
         public ActionResult Teacherlist()
 
         {
-            var model = db.Users.Where(n => n.Role == "Teacher");
+            var model = db.Roles.Where(n => n.Name == "Teacher");
             return View("Studentlist", model);
         }
         public ActionResult Details(int? id)

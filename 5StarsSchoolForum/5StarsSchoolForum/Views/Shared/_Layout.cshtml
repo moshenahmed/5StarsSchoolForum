@@ -7,26 +7,35 @@
     <title>@ViewBag.Title - 5 Stars School Forum</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
           
                 <div >
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("5 Stars School Forum", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("5 Stars School Forum", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("Student", "Login", "Account")</li>
+
+                        <li>@Html.ActionLink("Teacher", "Login", "Account")</li>*@
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (User.Identity.Name == "Teacher")
+                        {
+                            <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+                        }
                     @if (User.Identity.IsAuthenticated)
     {
                 @*<li>@Html.ActionLink("Student", "Index", "Home")</li>
@@ -34,7 +43,7 @@
     <li>@Html.ActionLink("Teacher", "Login", "Account")</li>*@
                 
                 <li>@Html.ActionLink("Register", "Register", "Account")</li>
-
+                   
                 <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
                 <li>@Html.ActionLink("UsersList", "UserList", "Account")</li>
                 }

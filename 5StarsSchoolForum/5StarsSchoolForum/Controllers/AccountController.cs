@@ -62,7 +62,7 @@ namespace _5StarsSchoolForum.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
+    
 
         //
         // POST: /Account/Login
@@ -162,22 +162,22 @@ namespace _5StarsSchoolForum.Controllers
             {
                 var user = new ApplicationUser { UserName = model.UserName,FirstName=model.FirstName,LastName=model.LastName, Email = model.Email,DateOfBirth=model.DateOfBirth, Gender = model.Gender,Role=model.Role};
                 var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
+                    if (result.Succeeded)
+                    {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     await this.UserManager.AddToRoleAsync(user.Id, model.Role);
                     return RedirectToAction("Index", "Account/UserList");
-                }
-
+                    }
+                
                 ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("admin")).ToList(), "Name", "Name");
              // ViewBag.Role = new SelectList(context.Categories.ToList(), "Name", "Name");
-
+                
                 AddErrors(result);
             }
 
@@ -442,13 +442,6 @@ namespace _5StarsSchoolForum.Controllers
                                  });
             return View(userWithRoles);
         }
-
-
-
-
-
-
-
 
         //
         // GET: /Account/ExternalLoginFailure

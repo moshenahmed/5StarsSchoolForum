@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -100,9 +101,9 @@ namespace _5StarsSchoolForum.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-       
 
-            [Required]
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email_Id")]
         public string Email { get; set; }
@@ -120,7 +121,17 @@ namespace _5StarsSchoolForum.Models
 
         [Required]
         [Display(Name = "Select Role")]
-        public string Role { get; set; }
+        public int RoleId { get; set; }
+
+
+        [ForeignKey("RoleId")]
+        public virtual IdentityRole IdentityRole { get; set; }
+
+
+
+
+
+
 
     }
 
@@ -158,7 +169,4 @@ namespace _5StarsSchoolForum.Models
         public string Email { get; set; }
         public string Role { get; set; }
     }
-
-
-
 }
