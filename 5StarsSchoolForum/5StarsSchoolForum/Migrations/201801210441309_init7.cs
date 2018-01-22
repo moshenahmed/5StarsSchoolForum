@@ -3,7 +3,7 @@ namespace _5StarsSchoolForum.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Init : DbMigration
+    public partial class init7 : DbMigration
     {
         public override void Up()
         {

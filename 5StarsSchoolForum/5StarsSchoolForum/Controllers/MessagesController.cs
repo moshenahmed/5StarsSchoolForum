@@ -15,9 +15,16 @@ namespace _5StarsSchoolForum.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Messages
-        public ActionResult Index()
+        public ActionResult Index(Reply reply)
         {
-           
+            //List<MessageReplyView> messagereply = new List<MessageReplyView>();
+            
+            if (reply.Message!= null)
+            {
+                var model = db.Messages.Where(n => n.Id == reply.Id).ToList();
+                return View(model);
+            }
+            
             return View(db.Messages.ToList());
         }
 
@@ -51,6 +58,7 @@ namespace _5StarsSchoolForum.Controllers
         {
             if (ModelState.IsValid)
             {
+                message.PostingDate = DateTime.Now;
                 db.Messages.Add(message);
                 db.SaveChanges();
                 return RedirectToAction("Index");
