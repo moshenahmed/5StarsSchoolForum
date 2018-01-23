@@ -270,6 +270,7 @@
     <Content Include="Views\Messages\Create.cshtml" />
     <Content Include="Views\Messages\Edit.cshtml" />
     <Content Include="Views\Messages\Delete.cshtml" />
+    <Content Include="Views\Categories\Teacherlist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<_5StarsSchoolForum.Models.ApplicationUser>
+
+@{
+	ViewBag.Title = "Teacher";
+}
+<h2>Below is the List of our Teachers</h2>
+<p>You can add them various Teachers If you want to... Good luck!</p>
+@*@foreach (var item in Model)
+	{
+
+			<div>
+				<ul>
+					<li> @item.UserName
+
+						@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+						@Html.ActionLink("Details", "Details", new { id = item.Id }) |
+						@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+					</li>
+
+
+					@*<hr />*@
+@*</ul>
+
+	</div>*@
+
+@*}*@
+<p>
+	@Html.ActionLink("Register a New student", "Register", "Account")
+</p>
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.UserName)
+		</th>
+		@*<th>
+				@Html.DisplayNameFor(model => model.Description)
+			</th>*@
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.UserName)
+			</td>
+			@*<td>
+					@Html.DisplayFor(modelItem => item.Description)
+				</td>*@
+			<td>
+				@*@Html.ActionLink("Assign me to a Category", "CategoryList", "Category", new { id = item.Id }) |
+				@Html.ActionLink("Details of me", "Details", new { id = item.Id }) |*@
+				@Html.ActionLink("Delete  me From a category", "Delete", new { id = item.Id })
+			</td>
+		</tr>
+	}
+
+</table>

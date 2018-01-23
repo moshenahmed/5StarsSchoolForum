@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_5StarsSchoolForum.Models.MessageReplyView>
+﻿@model IEnumerable<_5StarsSchoolForum.Models.Message>
 
 @{
 	ViewBag.Title = "Messages";
@@ -27,29 +27,30 @@
 {
 <div>
 	<div>
-		@Html.DisplayFor(modelItem => item.Message.Title)
+		@Html.DisplayFor(modelItem => item.Title)
 	</div>
 	<p>++++++++++++++++++</p>
 	<div>
 		<p>
-			@Html.DisplayFor(modelItem => item.Message.PostMessage)
+			@Html.DisplayFor(modelItem => item.PostMessage)
 		</p>
-		@Html.DisplayFor(modelItem => item.Message.PostingDate)
+		@Html.DisplayFor(modelItem => item.PostingDate)
 	</div>
-	@if (item.Message.Id == item.Reply.Id && item.Message.PostMessage == null)
-	{
-		@Html.DisplayFor(modelItem => item.Reply.Message)
-		<div>
-			@Html.DisplayFor(modelItem => item.Reply.PostingTime)
-		</div>
-	}
-	
-		
-		<div>
+	@*@if (item.Message.Id == item.Reply.Id && item.PostMessage == null)
+		{
+			@Html.DisplayFor(modelItem => item.Reply.Message)
+			<div>
+				@Html.DisplayFor(modelItem => item.Reply.PostingTime)
+			</div>
+		}*@
+
+
+	@*<div>
 			@Html.TextBoxFor(modelItem => item.Reply.Message, new { htmlAttributes = new { @class = "form-control" } })
 
-		</div>
-	</div>
+		</div>*@
+	@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+</div>
 
 	<br />
 
@@ -60,7 +61,7 @@
 			<td>
 				@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
 				@Html.ActionLink("Details", "Details", new { id=item.Id }) |
-				@Html.ActionLink("Delete", "Delete", new { id=item.Id })
+				
 			</td>
 		</tr>*@
 }

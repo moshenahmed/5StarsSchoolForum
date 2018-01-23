@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using _5StarsSchoolForum.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace _5StarsSchoolForum.Controllers
 {
@@ -24,22 +26,26 @@ namespace _5StarsSchoolForum.Controllers
         public ActionResult CategoryList()
         {
             var model = db.Categories.ToList();
-            return View("SelectCategories",model);
+            return View("SelectCategories", model);
         }
 
         // GET: Categories/Details/5
         public ActionResult Studentlist()
 
         {
-            var model = db.Roles.Where(n => n.Name =="Student");
+            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(db);
+            UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(userStore);
+            ApplicationUser user = 
+            userStore.Context
+           
             return View("Studentlist", model);
         }
         public ActionResult Teacherlist()
 
         {
             var model = db.Roles.Where(n => n.Name == "Teacher");
-            return View("Studentlist", model);
-        }
+            return View("Teacherlist", model);
+        }]=0988 
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -47,8 +53,8 @@ namespace _5StarsSchoolForum.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Category category = db.Categories.Find(id);
-            
-            
+
+
             if (category == null)
             {
                 return HttpNotFound();
