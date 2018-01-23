@@ -33,11 +33,12 @@ namespace _5StarsSchoolForum.Controllers
         public ActionResult Studentlist()
 
         {
-            UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(db);
-            UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(userStore);
-            ApplicationUser user = 
-            userStore.Context
-           
+            var model = db.Roles.Where(n => n.Name == "Teacher");
+            //UserStore<ApplicationUser> userStore = new UserStore<ApplicationUser>(db);
+            //UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(userStore);
+            //ApplicationUser user =
+            //userStore.Context;
+            var a = db.Users.ToList()[0].Roles.ToList()[0].RoleId == model.ToList()[0].Id;
             return View("Studentlist", model);
         }
         public ActionResult Teacherlist()
@@ -45,7 +46,7 @@ namespace _5StarsSchoolForum.Controllers
         {
             var model = db.Roles.Where(n => n.Name == "Teacher");
             return View("Teacherlist", model);
-        }]=0988 
+        }
         public ActionResult Details(int? id)
         {
             if (id == null)
