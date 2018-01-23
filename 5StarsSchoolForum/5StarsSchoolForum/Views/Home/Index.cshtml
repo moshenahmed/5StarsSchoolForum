@@ -41,8 +41,11 @@
 </div>
     }
 
-    else
+    else if (User.IsInRole("Student"))
     {
+
+        
+   
     <div class="col-md-4">
         <h2>
             @*@Html.ActionLink("Students", "Studentlist", "Categories")*@
@@ -54,4 +57,9 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
     }
+   
+
 }
+<div>
+    <div><h2>Developers version of the application</h2> </div> 
+</div>
