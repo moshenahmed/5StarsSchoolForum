@@ -13,6 +13,8 @@ namespace _5StarsSchoolForum.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        
+
         [Required]
         public string FirstName { get; set; }
 
@@ -45,7 +47,9 @@ namespace _5StarsSchoolForum.Models
             // Add custom user claims here
             return userIdentity;
         }
-        public virtual ICollection<Category> AttendedCategory { get; set; }
+        public virtual ICollection<Category> categories { get; set; }
+        public virtual ICollection<Message> messages { get; set; }
+        public virtual ICollection<Reply> replies { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
