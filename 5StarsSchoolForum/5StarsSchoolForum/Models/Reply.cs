@@ -10,10 +10,21 @@ namespace _5StarsSchoolForum.Models
     {
 
         public int Id { get; set; }
+
         public string ReplyMessage { get; set; }
+
         public DateTime PostingTime { get; set; }
-        public int MessageId { get; set; }
+
+        
+        //public int MessageId { get; set; }
+
+        
+        //public string UserId { get; set; }
+
         [ForeignKey("MessageId")]
-        public virtual Message Message { get; set; }
-    }
+        public virtual ICollection<Message> Messages { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual ICollection<ApplicationUser> AttendingMembers { get; set; }
+    } 
 }
