@@ -12,5 +12,7 @@ namespace _5StarsSchoolForum.Models
         public string Title { get; set; }
         public string PostMessage { get; set; }
         public DateTime PostingDate { get; set; }
+
+
     }
 }
