@@ -1,58 +1,39 @@
-﻿@model IEnumerable<_5StarsSchoolForum.Models.ApplicationUser>
+﻿@model IEnumerable<_5StarsSchoolForum.Models.UserViewModel>
 
 @{
-    ViewBag.Title = "Students";
+    ViewBag.Title = "Studentlist";
 }
-<h2>Below is the List of our Students</h2>
-<p>You can assign them various Categories If you want to... Good luck!</p>
-@*@foreach (var item in Model)
-{
-    
-        <div>
-            <ul>
-                <li> @item.UserName
-                
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </li>
-                   
-                
-                @*<hr />*@
-            @*</ul>
 
-        </div>*@
-    
-@*}*@
+<h2>Studentlist</h2>
+
 <p>
-    @Html.ActionLink("Register a New student", "Register", "Account")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.DisplayNameFor(model => model.Username)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Role)
+        </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem=> item.UserName)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>*@
-            <td>
-                @Html.ActionLink("Assign me to a Category", "CategoryList","Category", new { id = item.Id }) |
-                @Html.ActionLink("Details of me", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete  me From a category", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Role)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
 
 </table>
