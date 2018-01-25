@@ -24,3 +24,23 @@ textarea {
 }
 
 .TowLines{display:block}
+
+/*This is to change the background color and image*/
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #333333;
+    background-color: azure;
+    background-image: url('pen.jpg');
+    background-repeat: repeat-y;
+    background-position-x:right;
+    background-position-y:center;
+    background-attachment: fixed;
+    background-position: center;
+}
+.navbar-inverse {
+    background-color: #19195D;
+    border-color: #080808;
+}
+
