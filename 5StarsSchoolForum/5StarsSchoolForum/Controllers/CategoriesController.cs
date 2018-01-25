@@ -60,9 +60,9 @@ namespace _5StarsSchoolForum.Controllers
                          join role in db.Roles on userRole.RoleId equals
                          role.Id 
 
-                         select new UserViewModel()
+                         select new UserListViewModel()
                          {
-                             Username = user.UserName,
+                             UserName = user.UserName,
 
                              Role = role.Name
                                   }).ToList();

@@ -27,16 +27,17 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                 
                     @if (User.Identity.IsAuthenticated)
     {
                 @*<li>@Html.ActionLink("Student", "Index", "Home")</li>
 
     <li>@Html.ActionLink("Teacher", "Login", "Account")</li>*@
                 
-                <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                @*<li>@Html.ActionLink("Register", "Register", "Account")</li>*@
 
                 <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
-                <li>@Html.ActionLink("UsersList", "UserList", "Account")</li>
+                @*<li>@Html.ActionLink("UsersList", "UserList", "Account")</li>*@
                 }
                 </ul>
                 @Html.Partial("_LoginPartial")

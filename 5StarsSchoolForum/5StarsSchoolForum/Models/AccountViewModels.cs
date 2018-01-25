@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -52,9 +53,9 @@ namespace _5StarsSchoolForum.Models
     {
         //make the change as username from email
         [Required]
-        [Display(Name = "UserName")]
-        [UserName]
-        public string UserName { get; set; }
+        [Display(Name = "Email")]
+        [EmailAddress]
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -63,6 +64,7 @@ namespace _5StarsSchoolForum.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+      
     }
 
     public class RegisterViewModel
@@ -83,8 +85,8 @@ namespace _5StarsSchoolForum.Models
         [RegularExpression(@"^[a-zA-Z'' ']+$", ErrorMessage = "Special characters  & Numbers are not allowed")]
         public string LastName { get; set; }
 
-        [Display(Name = "Full Name")]
-        public string FullName { get { return FirstName + " " + LastName; } }
+        //[Display(Name = "Full Name")]
+        //public string FullName { get { return FirstName + " " + LastName; } }
 
 
 
@@ -121,6 +123,9 @@ namespace _5StarsSchoolForum.Models
         [Required]
         [Display(Name = "Select Role")]
         public string Role { get; set; }
+
+        [ForeignKey("RoleId")]
+        public virtual IdentityRole IdentityRole { get; set; }
 
     }
 
