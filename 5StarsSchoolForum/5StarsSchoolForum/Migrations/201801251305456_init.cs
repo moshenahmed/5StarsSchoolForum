@@ -17,7 +17,7 @@ namespace _5StarsSchoolForum.Migrations
                         Checked = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
+           
             CreateTable(
                 "dbo.AspNetUsers",
                 c => new
