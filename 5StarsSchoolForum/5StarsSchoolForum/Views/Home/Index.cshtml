@@ -1,38 +1,65 @@
 ﻿@model IEnumerable<_5StarsSchoolForum.Models.Category>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">           
-        </div>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    @*<h1>Student List</h1>*@
+    @*@{Html.RenderAction("Studentlist","Categories");}*@
+    <p class="lead">Welcome to the school forum, Please login to start!</p>
+    
+</div>
+@if (Request.IsAuthenticated)
+{
+    if (User.IsInRole("Teacher"))
+    {
+<div class="row">
+    <div class="col-md-4">
+        <h2>
+            @Html.ActionLink("Students", "Studentlist", "Categories")
+            
+        </h2>
+        <p>
+            As a student you have access to various categories assigned to you by your class teacher(s).
+        </p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p> 
     </div>
-    </nav>
-          @{ ViewBag.Title = "Home Page"; }
+    <div class="col-md-4">
+        <h2>
+            @Html.ActionLink("Message Board", "Index", "Messages")
+        </h2>
+            <p>As Teacher and a student can post a message and replies in a category, remember your teachers should assign you to a specific category for you to have access, Alright Good luck!</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+       
+    </div>
+    <div class="col-md-4">
+        <h2>Teachers</h2>
+        <p>As teacher, You can create, delete, modify a category. Add a new user to a category and delete as well. A teacher has superpowers to delete a message with any reply in a specific category, so talk to your teachers well.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>
+    }
 
-        <div class="jumbotron">
-            @*<h1>Student List</h1>*@
-            @*@{Html.RenderAction("Studentlist","Categories");}*@
-            <p class="lead">Welcome to the forum, Please login to start!</p>
+    else if (User.IsInRole("Student"))
+    {
 
-        </div>
+        
+   
+    <div class="col-md-4">
+        <h2>
+            @*@Html.ActionLink("Students", "Studentlist", "Categories")*@
+           You are a Student!
+        </h2>
+        <p>
+            As a student you have access to various categories assigned to you by your class teacher(s).
+        </p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    }
+   
 
-        <div class="row">
-            <div class="col-md-4">
-                <h2>
-                    @*@Html.ActionLink("Students", "Studentlist", "Categories")*@
-                    Students
-                </h2>
-                <p>
-                    As a student you have access to various categories assigned to you by your class teacher(s).
-                </p>
-                <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Message Board</h2>
-                <p>As a student you can post a message and replies in a category, remember your teachers should assign you to a specific category for you to have access, Alright Good luck!</p>
-                <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Teachers</h2>
-                <p>As teacher, You can create, delete, modify a category. Add a new user to a category and delete as well. A teacher has superpowers to delete a message with any reply in a specific category, so talk to your teachers well.</p>
-                <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-            </div>
-        </div>
+}
+<div>
+    <div><h2>Developers version of the application</h2> </div> 
+</div>

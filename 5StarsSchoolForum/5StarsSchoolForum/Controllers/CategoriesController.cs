@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using _5StarsSchoolForum.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace _5StarsSchoolForum.Controllers
 {
@@ -22,7 +24,7 @@ namespace _5StarsSchoolForum.Controllers
         public ActionResult CategoryList()
         {
             var model = db.Categories.ToList();
-            return View("SelectCategories",model);
+            return View("SelectCategories", model);
         }
 
         //public ActionResult CategoryList()
@@ -51,14 +53,27 @@ namespace _5StarsSchoolForum.Controllers
         public ActionResult Studentlist()
 
         {
-            var model = db.Users.Where(n => n.Role=="Student");
+
+            //var a = db.Users.ToList()[0].Roles.ToList()[0].RoleId == model.ToList()[0].Id;
+            var model = (from user in db.Users
+                         from userRole in user.Roles
+                         join role in db.Roles on userRole.RoleId equals
+                         role.Id 
+
+                         select new UserViewModel()
+                         {
+                             Username = user.UserName,
+
+                             Role = role.Name
+                                  }).ToList();
+
             return View("Studentlist", model);
         }
         public ActionResult Teacherlist()
 
         {
-            var model = db.Users.Where(n => n.Role == "Teacher");
-            return View("Studentlist", model);
+            var model = db.Roles.Where(n => n.Name == "Teacher");
+            return View("Teacherlist", model);
         }
         public ActionResult Details(int? id)
         {
@@ -67,8 +82,8 @@ namespace _5StarsSchoolForum.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Category category = db.Categories.Find(id);
-            
-            
+
+
             if (category == null)
             {
                 return HttpNotFound();

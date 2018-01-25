@@ -83,4 +83,11 @@ namespace _5StarsSchoolForum.Models
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
+
+    //public class MessageReplyView
+    //{
+        
+    //    public Message Message{ get; set; }
+    //    public Reply Reply { get; set; }
+    //}
 }

@@ -8,6 +8,7 @@ namespace _5StarsSchoolForum.Controllers
 {
     public class HomeController : Controller
     {
+        
         public ActionResult Index()
         {
             return View();
@@ -26,9 +27,10 @@ namespace _5StarsSchoolForum.Controllers
 
             return View();
         }
-        public ActionResult LoginStudent()
+        public ActionResult StudentList()
         {
             //ViewBag.ReturnUrl = returnUrl;
+            //var model = 
             return View("~/Views/Account/LoginStudent.cshtml");
         }
     }
