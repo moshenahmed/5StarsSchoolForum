@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -115,12 +123,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -168,17 +170,64 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Categories.cs" />
+    <Compile Include="Models\BasicJsonMessage.cs" />
+    <Compile Include="Models\CategorizedForumContainer.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\ClientSettings.cs" />
+    <Compile Include="Models\DataCollections.cs" />
+    <Compile Include="Models\DisplayProfile.cs" />
+    <Compile Include="Models\ErrorLogEntry.cs" />
+    <Compile Include="Models\ExpiredUserSession.cs" />
+    <Compile Include="Models\FeedEvent.cs" />
+    <Compile Include="Models\Forum.cs" />
+    <Compile Include="Models\ForumPermissionContext.cs" />
+    <Compile Include="Models\ForumTopicContainer.cs" />
+    <Compile Include="Models\Friend.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IPHistoryEvent.cs" />
+    <Compile Include="Models\IUserService.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Messages.cs" />
-    <Compile Include="Models\Replies.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\ModerationLogEntry.cs" />
+    <Compile Include="Models\NewPost.cs" />
+    <Compile Include="Models\PagedTopicContainer.cs" />
+    <Compile Include="Models\PagerContext.cs" />
+    <Compile Include="Models\PasswordResetContainer.cs" />
+    <Compile Include="Models\PermanentRoles.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\PostEdit.cs" />
+    <Compile Include="Models\PostWithChildren.cs" />
+    <Compile Include="Models\PrivateMessage.cs" />
+    <Compile Include="Models\PrivateMessagePost.cs" />
+    <Compile Include="Models\PrivateMessageUser.cs" />
+    <Compile Include="Models\PrivateMessageView.cs" />
+    <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\public class VotePostContainer.cs" />
+    <Compile Include="Models\QueuedEmailMessage.cs" />
+    <Compile Include="Models\ReadStatus.cs" />
+    <Compile Include="Models\Reply.cs" />
+    <Compile Include="Models\SearchWord.cs" />
+    <Compile Include="Models\SecurityLogEntry.cs" />
+    <Compile Include="Models\SetupVariables.cs" />
+    <Compile Include="Models\SignupData.cs" />
+    <Compile Include="Models\Topic.cs" />
+    <Compile Include="Models\TopicContainer.cs" />
+    <Compile Include="Models\TopicContainerForQA.cs" />
+    <Compile Include="Models\TopicUnsubscribeContainer.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserEdit.cs" />
+    <Compile Include="Models\UserEditPhoto.cs" />
+    <Compile Include="Models\UserEditProfile.cs" />
+    <Compile Include="Models\UserEditSecurity.cs" />
+    <Compile Include="Models\UserImage.cs" />
+    <Compile Include="Models\UserSearch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -237,6 +286,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,10 +5,11 @@ using System.Web;
 
 namespace _5StarsSchoolForum.Models
 {
-    public class Replies
+    public class FeedEvent
     {
-        public int Id { get; set; }
+        public int UserID { get; set; }
         public string Message { get; set; }
-        public DateTime PostingTime { get; set; }
+        public int Points { get; set; }
+        public DateTime TimeStamp { get; set; }
     }
 }

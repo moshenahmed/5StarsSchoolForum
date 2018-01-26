@@ -5,11 +5,11 @@ using System.Web;
 
 namespace _5StarsSchoolForum.Models
 {
-    public class Messages
+    public class BasicJsonMessage
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
+        public bool Result { get; set; }
         public string Message { get; set; }
-        public DateTime PostingDate { get; set; }
+        public object Data { get; set; }
+        public string Redirect { get; set; }
     }
 }

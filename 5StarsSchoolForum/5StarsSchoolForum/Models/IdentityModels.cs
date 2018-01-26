@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -12,7 +14,7 @@ namespace _5StarsSchoolForum.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get { return FirstName + " " + LastName; } }
-
+        public DateTime TimeOfRegistration { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -21,11 +23,14 @@ namespace _5StarsSchoolForum.Models
             // Add custom user claims here
             return userIdentity;
         }
-       // public virtual ICollection
+        public virtual ICollection<Category> AttendedCategories { get; set; }
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Category> Categories { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
