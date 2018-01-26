@@ -4,6 +4,7 @@ namespace _5StarsSchoolForum.Migrations
     using System.Data.Entity.Migrations;
     
     public partial class init5 : DbMigration
+    public partial class init6 : DbMigration
     {
         public override void Up()
         {
@@ -17,41 +18,8 @@ namespace _5StarsSchoolForum.Migrations
                         Checked = c.Boolean(nullable: false),
                         Messages_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Messages", t => t.Messages_Id)
-                .Index(t => t.Messages_Id);
-            
-            CreateTable(
-                "dbo.Messages",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        RepliesId = c.Int(nullable: false),
-                        Title = c.String(),
-                        PostMessage = c.String(),
-                        PostingDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
-                        Reply_Id = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Replies", t => t.Reply_Id)
-                .Index(t => t.Reply_Id);
-            
-            CreateTable(
-                "dbo.Replies",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        ReplyMessage = c.String(),
-                        PostingTime = c.DateTime(nullable: false),
-                        MessageId = c.Int(nullable: false),
-                        Message_Id = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Messages", t => t.MessageId, cascadeDelete: true)
-                .ForeignKey("dbo.Messages", t => t.Message_Id)
-                .Index(t => t.MessageId)
-                .Index(t => t.Message_Id);
-            
+                .PrimaryKey(t => t.Id);
+           
             CreateTable(
                 "dbo.AspNetUsers",
                 c => new
