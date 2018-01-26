@@ -149,4 +149,11 @@ namespace _5StarsSchoolForum.Models
         
         public string Role { get; set; }
     }
+    public class CategoryMessageReplyViewModel
+    {
+        public List<Message> MessagesList { get; set; }
+        public List<RegisterViewModel> studentlist { get; set; }
+        public List<Reply> Reply { get; set; }
+
+    }
 }
