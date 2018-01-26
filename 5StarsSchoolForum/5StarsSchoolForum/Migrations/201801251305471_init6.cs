@@ -3,7 +3,8 @@ namespace _5StarsSchoolForum.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class init5 : DbMigration
+    public partial class init6 : DbMigration
     {
         public override void Up()
         {
@@ -12,12 +13,13 @@ namespace _5StarsSchoolForum.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Description = c.String(),
+                        Usersid = c.Int(nullable: false),
+                        CategoryTitle = c.String(),
                         Checked = c.Boolean(nullable: false),
+                        Messages_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id);
-            
+           
             CreateTable(
                 "dbo.AspNetUsers",
                 c => new
@@ -81,30 +83,6 @@ namespace _5StarsSchoolForum.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.Messages",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Title = c.String(),
-                        PostMessage = c.String(),
-                        PostingDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Replies",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        ReplyMessage = c.String(),
-                        PostingTime = c.DateTime(nullable: false),
-                        MessageId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Messages", t => t.MessageId, cascadeDelete: true)
-                .Index(t => t.MessageId);
-            
-            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -132,29 +110,35 @@ namespace _5StarsSchoolForum.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Replies", "MessageId", "dbo.Messages");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.ApplicationUserCategories", "Category_Id", "dbo.Categories");
             DropForeignKey("dbo.ApplicationUserCategories", "ApplicationUser_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Categories", "Messages_Id", "dbo.Messages");
+            DropForeignKey("dbo.Messages", "Reply_Id", "dbo.Replies");
+            DropForeignKey("dbo.Replies", "Message_Id", "dbo.Messages");
+            DropForeignKey("dbo.Replies", "MessageId", "dbo.Messages");
             DropIndex("dbo.ApplicationUserCategories", new[] { "Category_Id" });
             DropIndex("dbo.ApplicationUserCategories", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Replies", new[] { "MessageId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.Replies", new[] { "Message_Id" });
+            DropIndex("dbo.Replies", new[] { "MessageId" });
+            DropIndex("dbo.Messages", new[] { "Reply_Id" });
+            DropIndex("dbo.Categories", new[] { "Messages_Id" });
             DropTable("dbo.ApplicationUserCategories");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Replies");
-            DropTable("dbo.Messages");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.Replies");
+            DropTable("dbo.Messages");
             DropTable("dbo.Categories");
         }
     }

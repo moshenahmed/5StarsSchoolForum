@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace _5StarsSchoolForum.Models
 {
-    public class Category
+    public class Category 
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public bool Checked { get; set; }
+        public  int Id { get; set; }
+        public int Usersid { get; set; }
+        public string CategoryTitle { get; set; }
+        public Message Messages { get; set; }
 
-        public virtual ICollection<ApplicationUser> AttendingMembers { get; set; }
-    }
+        public bool Checked { get; set; }
+        [ForeignKey("Usersid")]
+        public virtual ICollection<ApplicationUser> Users { get; set; }
+
+    }   
 }

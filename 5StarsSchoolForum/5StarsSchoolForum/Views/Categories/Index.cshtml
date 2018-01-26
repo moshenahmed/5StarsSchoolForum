@@ -12,21 +12,44 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.CategoryTitle)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Messages.Title)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Messages.PostMessage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Messages.PostingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Messages.Reply.ReplyMessage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Messages.Reply.PostingTime)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.CategoryTitle)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @Html.DisplayFor(modelItem => item.Messages.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Messages.PostMessage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Messages.PostingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Messages.Reply.ReplyMessage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Messages.Reply.PostingTime)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

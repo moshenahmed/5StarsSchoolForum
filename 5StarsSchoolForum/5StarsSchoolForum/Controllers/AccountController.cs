@@ -155,9 +155,10 @@ namespace _5StarsSchoolForum.Controllers
             {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, Age = model.Age, Gender = model.Gender };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                var result1 =  UserManager.AddToRole(user.Id, model.IdentityRole.Name);
 
 
-                if (result.Succeeded)
+                if (result.Succeeded && result1.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
@@ -166,14 +167,14 @@ namespace _5StarsSchoolForum.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    db.SaveChanges();
                     return RedirectToAction("Index", "Home");
                 }
 
 
                 AddErrors(result);
             }
-
+             
             // If we got this far, something failed, redisplay form
             return View(model);
         }
