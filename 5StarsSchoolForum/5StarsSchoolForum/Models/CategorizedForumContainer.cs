@@ -7,8 +7,7 @@ namespace _5StarsSchoolForum.Models
 {
     public class CategorizedForumContainer
     {
-       
-            public CategorizedForumContainer(IEnumerable<Category> categories, IEnumerable<Forum> forums)
+       public CategorizedForumContainer(IEnumerable<Category> categories, IEnumerable<Forum> forums)
             {
                 ReadStatusLookup = new Dictionary<int, ReadStatus>();
                 AllCategories = categories;
