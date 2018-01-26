@@ -15,5 +15,9 @@ namespace _5StarsSchoolForum.Models
         public int MessageId { get; set; }
         [ForeignKey("MessageId")]
         public virtual Message Message { get; set; }
+
+        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
+        public virtual ICollection<ApplicationUser> AttendingMembers { get; set; }
     }
 }

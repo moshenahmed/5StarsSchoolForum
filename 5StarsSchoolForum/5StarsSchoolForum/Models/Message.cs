@@ -17,7 +17,10 @@ namespace _5StarsSchoolForum.Models
 
         [Column(TypeName = "datetime2")]
         public DateTime PostingDate { get; set; }
-        
+
+
+
+        public virtual ICollection<ApplicationUser> AttendingMembers { get; set; }
         public ICollection<Reply> Replies { get; set; }
     }
 }
