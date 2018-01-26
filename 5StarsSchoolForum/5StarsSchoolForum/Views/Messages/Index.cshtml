@@ -50,6 +50,10 @@
 
 		</div>*@
 	@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+    @*@Html.ActionLink("Reply to Message", "Create","Reply")*@
+    @Html.ActionLink("Reply to Message", "Create","Reply", new { id = item.Id },null)
+
+
 </div>
 
 	<br />
