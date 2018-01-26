@@ -44,9 +44,11 @@ namespace _5StarsSchoolForum.Controllers
         }
 
         // GET: Messages/Create
-        public ActionResult Create()
+        public ActionResult Create(ApplicationUser  user)
         {
-            return View();
+            var usermessage = db.Messages.Any(r => r.Usersid.ToString() == user.Id);
+            
+            return View(usermessage.ToString().ToList());
         }
 
         // POST: Messages/Create

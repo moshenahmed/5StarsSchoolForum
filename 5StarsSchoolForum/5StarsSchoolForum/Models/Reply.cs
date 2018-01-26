@@ -6,7 +6,7 @@ using System.Web;
 
 namespace _5StarsSchoolForum.Models
 {
-    public class Reply
+    public class Reply 
     {
 
         public int Id { get; set; }

@@ -74,6 +74,7 @@ namespace _5StarsSchoolForum.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
+           
             return View();
         }
 
@@ -82,10 +83,13 @@ namespace _5StarsSchoolForum.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description")] Category category)
+        public ActionResult Create([Bind(Include = "Id,CategoryTitle")] Category category)
         {
+           
             if (ModelState.IsValid)
             {
+               
+
                 db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
