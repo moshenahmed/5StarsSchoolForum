@@ -31,7 +31,7 @@ namespace _5StarsSchoolForum.Migrations
 
                 var userStore = new UserStore<ApplicationUser>(context);
                 var userManager = new UserManager<ApplicationUser>(userStore);
-                
+
 
                 var user = new ApplicationUser()
                 {
@@ -44,9 +44,10 @@ namespace _5StarsSchoolForum.Migrations
 
                 };
 
-                
-                userManager.Create(user, "password");
+
+                userManager.Create(user, "Password10");
                 roleManager.Create(new IdentityRole { Name = "teacher" });
+                context.SaveChanges();
                 userManager.AddToRole(user.Id, "teacher");
             }
 
@@ -74,14 +75,15 @@ namespace _5StarsSchoolForum.Migrations
 
 
                 userManager.Create(user, "password");
+
                 roleManager.Create(new IdentityRole { Name = "student" });
+                context.SaveChanges();
                 userManager.AddToRole(user.Id, "student");
             }
 
 
 
             context.SaveChanges();
-            }
         }
     }
-
+}

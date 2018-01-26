@@ -13,11 +13,18 @@ namespace _5StarsSchoolForum.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        [Required]
-        public string FirstName { get; set; }
+        public string userId  { get; set; }
+        public string StudentId { get; set; }
+        public string TeacherId { get; set; }
 
         [Required]
+        [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
+        public string FirstName { get; set; }
+        
+        [Required]        
+        [StringLength(50)]
         public string LastName { get; set; }
+
         [Required]
         public string FullName { get { return FirstName + " " + LastName; } }
 
@@ -35,7 +42,9 @@ namespace _5StarsSchoolForum.Models
         [Display(Name = "Select Role")]
         public string Role { get; set; }
 
-
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime EnrollmentDate { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -45,25 +54,9 @@ namespace _5StarsSchoolForum.Models
             // Add custom user claims here
             return userIdentity;
         }
-        public virtual ICollection<Category> AttendedCategory { get; set; }
-    }
-
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
-        
-       
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
-
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Message> Messages { get; set; }
-        public DbSet<Reply> Replies { get; set; }
-
+        public virtual ICollection<Message> Messages { get; set; }
+        public virtual ICollection<Reply> Replies { get; set; }
+        //public Category CategoryId { get; set; }
+        public virtual ICollection<AttendedCategory> AttendedCategories { get; set; }
     }
 }

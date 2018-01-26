@@ -24,3 +24,8 @@ textarea {
 }
 
 .TowLines{display:block}
+
+.navbar-inverse {
+    background-color: #355088;
+    border-color: #080808;
+}

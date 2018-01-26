@@ -24,7 +24,7 @@ namespace _5StarsSchoolForum.Controllers
             context = new ApplicationDbContext();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -36,9 +36,9 @@ namespace _5StarsSchoolForum.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -78,7 +78,7 @@ namespace _5StarsSchoolForum.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -123,7 +123,7 @@ namespace _5StarsSchoolForum.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -144,9 +144,9 @@ namespace _5StarsSchoolForum.Controllers
         {
             //RegisterViewModel model = new RegisterViewModel();
             ////model.Role=new SelectList(db
-          
+
             ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("admin")).ToList(), "Name", "Name");
-         //   ViewBag.Role = new SelectList(context.Categories.ToList(), "Name", "Name");
+            //   ViewBag.Role = new SelectList(context.Categories.ToList(), "Name", "Name");
 
             return View();
         }
@@ -160,12 +160,12 @@ namespace _5StarsSchoolForum.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName,FirstName=model.FirstName,LastName=model.LastName, Email = model.Email,DateOfBirth=model.DateOfBirth, Gender = model.Gender,Role=model.Role};
+                var user = new ApplicationUser { UserName = model.UserName, FirstName = model.FirstName, LastName = model.LastName, Email = model.Email, DateOfBirth = model.DateOfBirth, Gender = model.Gender, Role = model.Role };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -176,7 +176,7 @@ namespace _5StarsSchoolForum.Controllers
                 }
 
                 ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("admin")).ToList(), "Name", "Name");
-             // ViewBag.Role = new SelectList(context.Categories.ToList(), "Name", "Name");
+                // ViewBag.Role = new SelectList(context.Categories.ToList(), "Name", "Name");
 
                 AddErrors(result);
             }

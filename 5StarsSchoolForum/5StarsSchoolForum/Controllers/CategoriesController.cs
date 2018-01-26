@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using _5StarsSchoolForum.Models;
 
@@ -12,9 +9,47 @@ namespace _5StarsSchoolForum.Controllers
 {
     public class CategoriesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+    private ApplicationDbContext db = new ApplicationDbContext();
+        /*  private readonly ApplicationDbContext _context; 
 
-        // GET: Categories
+      public CategoriesController()
+        {
+        _context=new ApplicationDbContext();
+        }
+
+          [Authorize]
+          public ActionResult Create()
+      {
+          var viewModel = new CategoryFormViewModel
+          {
+             Classes=_context.Classes.ToList();
+          }
+          return View(viewModel);
+      }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Create(CategoryFormViewModel viewModel)
+        {
+        var studentId=UserIdentity.GetUserId()
+        var student= _context.User.Single(u=>u.Id==studentId);
+        var genre= _context.Class.Single(g=>g.Id==viewModel.Class);
+        var category=new Category
+         {
+         Student=student,
+         DateTime=DateTime.Parse(string.Format("{0} {1}", viewModel.Date, viewModel.Time))
+         Class=class,
+         Name=viewModel.Name
+         }; 
+          _context.Categories.Add(category);
+           _context.SaveChanges();
+
+         return RedirectToAction("Index","Home");
+      }
+     */
+
+
+
         public ActionResult Index()
         {
             return View(db.Categories.ToList());
@@ -25,15 +60,9 @@ namespace _5StarsSchoolForum.Controllers
             return View("SelectCategories",model);
         }
 
-        //public ActionResult CategoryList()
-        //{
-        //    var model = db.Categories.ToList();
-        //    return View("SelectCategories", model);
-        //}
 
         //// GET: Categories/Details/5
         //public ActionResult Studentlist()
-
         //{
         //    var model = db.Users.Where(n => n.Role == "Student");
         //    return View("Studentlist", model);
