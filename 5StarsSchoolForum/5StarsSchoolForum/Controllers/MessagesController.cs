@@ -44,11 +44,11 @@ namespace _5StarsSchoolForum.Controllers
         }
 
         // GET: Messages/Create
-        public ActionResult Create(ApplicationUser  user)
+        public ActionResult Create()
         {
-            var usermessage = db.Messages.Any(r => r.Usersid.ToString() == user.Id);
             
-            return View(usermessage.ToString().ToList());
+            
+            return View();
         }
 
         // POST: Messages/Create
@@ -56,7 +56,7 @@ namespace _5StarsSchoolForum.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,PostMessage,PostingDate")] Message message)
+        public ActionResult Create([Bind(Include = "Id,Title,PostMessage,PostingDate,Usertag")] Message message)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace _5StarsSchoolForum.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(message).State = EntityState.Modified;
+                db.Entry(message).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

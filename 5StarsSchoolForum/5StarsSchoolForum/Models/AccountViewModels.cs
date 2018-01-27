@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -149,7 +150,24 @@ namespace _5StarsSchoolForum.Models
 
         public string Role { get; set; }
     }
-  
+    public class CategoryMessageViewModel
+    {
+        public int Id { get; set; }
+        public string CatTitle { get; set; }
 
-   
+        public string Title { get; set; }
+        public string PostMessage { get; set; }
+
+        //[DisplayName("Posting time")]
+
+        //[Column(TypeName = "datetime2")]
+        public DateTime PostingDate { get; set; }
+
+        public string MessageReply { get; set; }
+    }
+
+
+
+
+
 }

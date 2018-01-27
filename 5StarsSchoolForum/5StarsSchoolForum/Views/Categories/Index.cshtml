@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_5StarsSchoolForum.Models.Category>
+﻿@model IEnumerable<_5StarsSchoolForum.Models.CategoryMessageViewModel>
 
 @{
     ViewBag.Title = "Categories";
@@ -12,45 +12,45 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CategoryTitle)
+            @Html.DisplayNameFor(model => model.CatTitle)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Messages.Title)
+            @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Messages.PostMessage)
+            @Html.DisplayNameFor(model => model.PostMessage)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Messages.PostingDate)
+            @Html.DisplayNameFor(model => model.PostingDate)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Messages.Reply.ReplyMessage)
-        </th>
-        <th>
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.Messages.Reply.PostingTime)
-        </th>
+        </th>*@
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CategoryTitle)
+            @Html.DisplayFor(modelItem => item.CatTitle)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Messages.Title)
+            @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Messages.PostMessage)
+            @Html.DisplayFor(modelItem => item.PostMessage)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Messages.PostingDate)
+            @Html.DisplayFor(modelItem => item.PostingDate)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Messages.Reply.ReplyMessage)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Messages.Reply.PostingTime)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |

@@ -11,19 +11,22 @@ namespace _5StarsSchoolForum.Models
     {
 
         public  int Id { get; set; }
-        public int Usersid { get; set; }
-        public int RepliesId { get; set; }
+        //public int UsertagId { get; set; }
+        public int CategoryId { get; set; }
         public string Title { get; set; }
         public string PostMessage { get; set; }
-        public Reply Reply { get; set; }
+        
         [DisplayName("Posting time")]
 
         [Column(TypeName = "datetime2")]
         public DateTime PostingDate { get; set; }
 
-        public ICollection<Reply> Replies { get; set; }
-        [ForeignKey("UsersId")]
-        public ICollection<ApplicationUser> users { get; set; }
+        //[ForeignKey("RepliesId")]
+        public virtual ICollection<Reply> Replies { get; set; }
+        //[ForeignKey("UsersTagId")]
+        public virtual ICollection<ApplicationUser> UsersTag { get; set; }
+        [ForeignKey("CategoryId")]
+        public virtual Category Category { get; set; }
 
 
 

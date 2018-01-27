@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -20,8 +21,22 @@ namespace _5StarsSchoolForum.Controllers
         // GET: Categories
         public ActionResult Index()
         {
+            var model = (from cat in db.Categories
+                         from mes in cat.UserMessages
+                         join Message in db.Messages on mes.CategoryId equals
+                         Message.Id
 
-            return View(db.Categories.ToList());
+                         select new CategoryMessageViewModel()
+                         {
+                             CatTitle = cat.CategoryTitle,
+                             Title = mes.Title,
+                             PostMessage = mes.PostMessage,
+                             PostingDate = mes.PostingDate,
+                             //MessageReply=mes.Replies.
+
+
+                         }).ToList();
+            return View(model);
         }
         public ActionResult CategoryList()
         {
@@ -38,14 +53,14 @@ namespace _5StarsSchoolForum.Controllers
             var model = (from user in db.Users
                          from userRole in user.Roles
                          join role in db.Roles on userRole.RoleId equals
-                         role.Id 
+                         role.Id
 
                          select new UserViewModel()
                          {
                              Username = user.UserName,
 
                              Role = role.Name
-                                  }).ToList();
+                         }).ToList();
 
             return View("Studentlist", model);
         }
@@ -74,7 +89,7 @@ namespace _5StarsSchoolForum.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-           
+
             return View();
         }
 
@@ -83,20 +98,36 @@ namespace _5StarsSchoolForum.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CategoryTitle")] Category category)
+        public ActionResult Create(/*[Bind(Include = "Id,CategoryTitle,Messages.PostMessage")]*/ CategoryMessageViewModel model)
         {
-           
+
             if (ModelState.IsValid)
             {
-               
+                var category = new Category();
+                {
+                     category.CategoryTitle= model.CatTitle ;
 
+
+                };
                 db.Categories.Add(category);
+                
+                var mess = new Message();
+                 mess.Title= model.Title;
+                 mess.PostMessage= model.PostMessage ;
+                 mess.PostingDate= model.PostingDate;
+                db.Messages.Add(mess);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+
+            return View();
+
+
         }
+
+            
+     
 
         // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
@@ -122,7 +153,7 @@ namespace _5StarsSchoolForum.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
+                db.Entry(category).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
