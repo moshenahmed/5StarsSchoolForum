@@ -35,8 +35,10 @@ namespace _5StarsSchoolForum.Migrations
                 UserName = "Teacher@student.com",
 
                 Email = "Teacher@student.com",
-                Age = "45",
-                Gender = "Male",
+                FirstName = "Anna",
+                LastName = "Teacher",
+                Gender = "Female",
+                Role = "Teacher"
 
             };
             ApplicationUser user2 = new ApplicationUser()
@@ -44,8 +46,10 @@ namespace _5StarsSchoolForum.Migrations
                 UserName = "Student@student.com",
 
                 Email = "Student@student.com",
-                Age = "10",
+                FirstName = "James",
+                LastName = "Student",
                 Gender = "Male",
+                Role = "Student"
 
             };
             var result = userManager.Create(user, "Student123/");
@@ -60,7 +64,6 @@ namespace _5StarsSchoolForum.Migrations
                 userManager.FindByName("Student@student.com");
             userManager.AddToRole(Student.Id, "Student");
             context.SaveChanges();
-
 
 
         }

@@ -29,32 +29,32 @@ namespace _5StarsSchoolForum.Controllers
             return View("SelectCategories", model);
         }
 
-        // GET: Categories/Details/5
-        public ActionResult Studentlist()
+        //// GET: Categories/Details/5
+        //public ActionResult Studentlist()
 
-        {
+        //{
 
-            //var a = db.Users.ToList()[0].Roles.ToList()[0].RoleId == model.ToList()[0].Id;
-            var model = (from user in db.Users
-                         from userRole in user.Roles
-                         join role in db.Roles on userRole.RoleId equals
-                         role.Id 
+        //    //var a = db.Users.ToList()[0].Roles.ToList()[0].RoleId == model.ToList()[0].Id;
+        //    var model = (from user in db.Users
+        //                 from userRole in user.Roles
+        //                 join role in db.Roles on userRole.RoleId equals
+        //                 role.Id 
 
-                         select new UserViewModel()
-                         {
-                             Username = user.UserName,
+        //                 select new UserListViewModel()
+        //                 {
+        //                     FullName = user.FullName,
 
-                             Role = role.Name
-                                  }).ToList();
+        //                     Role = role.Name
+        //                          }).ToList();
 
-            return View("Studentlist", model);
-        }
-        public ActionResult Teacherlist()
+        //    return View("Studentlist", model);
+        //}
+        //public ActionResult Teacherlist()
 
-        {
-            var model = db.Roles.Where(n => n.Name == "Teacher");
-            return View("Teacherlist", model);
-        }
+        //{
+        //    var model = db.Roles.Where(n => n.Name == "Teacher");
+        //    return View("Teacherlist", model);
+        //}
         public ActionResult Details(int? id)
         {
             if (id == null)

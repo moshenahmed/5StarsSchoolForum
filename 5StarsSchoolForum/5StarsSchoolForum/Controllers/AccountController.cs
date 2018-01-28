@@ -15,12 +15,38 @@ namespace _5StarsSchoolForum.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        ApplicationDbContext context;
+
+        public ActionResult Index(string searchBy, string search)
         {
+            var usernams = from s in context.Users select s;
+
+            //if (searchBy == "Teacher")
+            //{
+            //    usernams = usernams.Where(x => x.ToString.User == search || search == null);
+            //}
+            //else if (searchBy == "Role")
+            //{
+            //    usernams = usernams.Where(x => x.Role == search || search == null);
+            //}
+            //else
+            //{
+            //    usernams = usernams.Where(x => x.Email.StartsWith(search) || search == null);
+            //}
+            return View(usernams);
+        }
+
+
+    
+
+
+
+    public AccountController()
+        {
+            context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -61,7 +87,6 @@ namespace _5StarsSchoolForum.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
 
         //
         // POST: /Account/Login
@@ -138,27 +163,32 @@ namespace _5StarsSchoolForum.Controllers
 
         //
         // GET: /Account/Register
+        //[Authorize]
         [AllowAnonymous]
         public ActionResult Register()
         {
+            //RegisterViewModel model = new RegisterViewModel();
+            //model.Role = new SelectList(db.roles
+
+            ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("admin")).ToList(), "Name", "Name");
+
+
             return View();
         }
 
         //
         // POST: /Account/Register
         [HttpPost]
+        //[Authorize]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, Age = model.Age, Gender = model.Gender };
+                var user = new ApplicationUser { UserName = model.Email, FirstName = model.FirstName, LastName = model.LastName, Email = model.Email, DateOfBirth = model.DateOfBirth, Gender = model.Gender,Role=model.Role };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                var result1 =  UserManager.AddToRole(user.Id, model.IdentityRole.Name);
-
-
-                if (result.Succeeded && result1.Succeeded)
+                if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
@@ -167,9 +197,12 @@ namespace _5StarsSchoolForum.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "Home");
+                    await this.UserManager.AddToRoleAsync(user.Id, model.Role);
+                    return RedirectToAction("Index", "Account/UserList");
                 }
+
+                ViewBag.Name = new SelectList(context.Roles.Where(r => !r.Name.Contains("admin")).ToList(), "Name", "Name");
+
 
 
                 AddErrors(result);
@@ -401,6 +434,56 @@ namespace _5StarsSchoolForum.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
+
+
+        //--Action method for getting userlistview--//
+        public ActionResult UserList()
+        {
+            //var userWithRoles = (from user in context.Users
+            //                     from userRole in user.Roles
+            //                     join role in context.Roles on userRole.RoleId equals
+            //                     role.Id
+            //                     select new UserListViewModel()
+            //                     {
+            //                         UserName = user.UserName,
+            //                         Email = user.Email,
+            //                         Role=role.Name
+            //                     }).ToList();
+
+
+            var userWithRoles = (from user in context.Users
+                                 select new
+                                 {
+                                     UserName = user.UserName,
+                                     Email = user.Email,
+                                     Role = (from userRole in user.Roles
+                                             join role in context.Roles on userRole.RoleId equals role.Id
+                                             select role.Name).ToList()
+                                 }).ToList().Select(p => new UserListViewModel()
+                                 {
+                                     Username = p.UserName,
+                                     Email = p.Email,
+                                     Role = string.Join(",", p.Role)
+
+                                 });
+
+
+
+
+
+
+
+
+            return View(userWithRoles);
+
+
+
+
+
+
+        }
+
+
 
         //
         // GET: /Account/ExternalLoginFailure

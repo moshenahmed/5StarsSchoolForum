@@ -25,16 +25,19 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @*<li>@Html.ActionLink("Student", "Login", "Account")</li>
 
-                        <li>@Html.ActionLink("Teacher", "Login", "Account")</li>*@
+        <li>@Html.ActionLink("Teacher", "Login", "Account")</li>*@
+                    
+
 
                     @if (Request.IsAuthenticated)
-                    {
-                        if (User.IsInRole("Teacher"))
-                        {
-                            <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
-                        }
+    {
+        if (User.IsInRole("Teacher"))
+        {
+                <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+                <li>@Html.ActionLink("UsersList", "UserList", "Account")</li>
+}
 
-                    }
+}
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

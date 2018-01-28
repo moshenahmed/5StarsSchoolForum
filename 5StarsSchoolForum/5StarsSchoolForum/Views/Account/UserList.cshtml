@@ -1,0 +1,60 @@
+﻿@model IEnumerable<_5StarsSchoolForum.Models.UserListViewModel>
+
+@{
+    ViewBag.Title = "UserList";
+}
+
+@*<h2>Here is the Registered UsersList</h2>*@
+
+
+@*<p>
+    @Html.ActionLink("Add a New User", "Account/Register")
+</p>*@
+
+@using (Html.BeginForm())
+{
+
+    @*@Html.RadioButton("RegNum","1",true);@Html.Label("Registration Number")*@
+    @*@Html.RadioButton("searchBy", "UserName", true)<text>UserName</text>
+    @Html.RadioButton("searchBy", "Role")<text>Role</text>*@
+
+
+
+    @Html.TextBox("search", null, new { @class = "form-control", placeholder = "Search for..." })<input type="submit" value="Search" class="btn btn-success" />
+
+
+
+
+}
+<div class="row">
+    <h2>--List Of Registered Users--</h2>
+
+    <table class="table table-bordered">
+
+        <tr>
+            <th> UserName</th>
+            <th>Email_Id</th>
+            <th>Role</th>
+        </tr>
+        @foreach (var user in Model)
+        {
+
+            <tr>
+
+                <td>    @user.Username</td>
+                <td>  @user.Email </td>
+                <td> @user.Role </td>
+
+            </tr>
+
+        }
+    </table>
+
+</div>
+<tr>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+    </td>
+</tr>

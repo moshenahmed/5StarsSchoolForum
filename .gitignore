@@ -286,3 +286,9 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/5StarsSchoolForum/5StarsSchoolForum/Migrations/201801272149127_init.cs
+/5StarsSchoolForum/5StarsSchoolForum/Migrations/201801272149127_init.resx
+/5StarsSchoolForum/5StarsSchoolForum/Migrations/201801272149127_init.Designer.cs
+/5StarsSchoolForum/5StarsSchoolForum/Migrations/201801272314578_search.cs
+/5StarsSchoolForum/5StarsSchoolForum/Migrations/201801272314578_search.Designer.cs
+/5StarsSchoolForum/5StarsSchoolForum/Migrations/201801272314578_search.resx

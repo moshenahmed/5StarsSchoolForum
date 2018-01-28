@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -70,6 +71,23 @@ namespace _5StarsSchoolForum.Models
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
+        [Required]
+        [Display(Name = "First Name")]
+        [MinLength(2)]
+        [RegularExpression(@"^[a-zA-Z'' ']+$", ErrorMessage = "Special characters  & Numbers are not allowed")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        [MinLength(2)]
+        [RegularExpression(@"^[a-zA-Z'' ']+$", ErrorMessage = "Special characters  & Numbers are not allowed")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Full Name")]
+        public string FullName { get { return FirstName + " " + LastName; } }
+
+
+
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -90,8 +108,11 @@ namespace _5StarsSchoolForum.Models
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "Enter Age")]
-        public string Age { get; set; }
+        [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
+        [Column(TypeName = "datetime2")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime DateOfBirth { get; set; }
 
         [Required]
         [Display(Name = "Gender")]
@@ -99,8 +120,7 @@ namespace _5StarsSchoolForum.Models
 
         [Required]
         [Display(Name = "Select Role")]
-        public int RoleId { get; set; }
-
+        public string Role { get; set; }
 
         [ForeignKey("RoleId")]
         public virtual IdentityRole IdentityRole { get; set; }
@@ -142,11 +162,16 @@ namespace _5StarsSchoolForum.Models
         public string Email { get; set; }
     }
 
-    public class UserViewModel
+    public class UserListViewModel
     {
         public int Id { get; set; }
+        [Display(Name = "UserName")]
         public string Username { get; set; }
-        
+        [Display(Name = "Email_Id")]
+        public string Email { get; set; }
+        //public string FullName{ get; set; } 
+
+            [Display(Name = "UserRole")]
         public string Role { get; set; }
     }
 }
