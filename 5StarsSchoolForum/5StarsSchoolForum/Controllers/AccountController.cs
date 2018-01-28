@@ -435,7 +435,7 @@ namespace _5StarsSchoolForum.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        
         //--Action method for getting userlistview--//
         public ActionResult UserList()
         {
@@ -454,14 +454,14 @@ namespace _5StarsSchoolForum.Controllers
             var userWithRoles = (from user in context.Users
                                  select new
                                  {
-                                     UserName = user.UserName,
+                                     //UserName = user.UserName,
                                      Email = user.Email,
                                      Role = (from userRole in user.Roles
                                              join role in context.Roles on userRole.RoleId equals role.Id
                                              select role.Name).ToList()
                                  }).ToList().Select(p => new UserListViewModel()
                                  {
-                                     Username = p.UserName,
+                                     //Username = p.UserName,
                                      Email = p.Email,
                                      Role = string.Join(",", p.Role)
 

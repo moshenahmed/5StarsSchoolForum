@@ -5,32 +5,38 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace _5StarsSchoolForum.Models
 {
-    public class Message
+    public class CategoryMessViewModel
     {
-
         public int Id { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public int MessageId { get; set; }
+
+       
+
+        [Required]
+        [DisplayName("Category_Name")]
+        public string Name { get; set; }
+
         [Required]
         public string Title { get; set; }
-        [Required]
-        [DisplayName("MessageToPost")]
+        
         public string PostMessage { get; set; }
-     
+
+        [Required]
         public String PostedBy { get; set; }
-      
+        [Required]
         [DisplayName("PostedDateTime")]
         [Column(TypeName = "datetime2")]
         public DateTime PostingDate { get; set; }
 
-        public string UserId { get; set; }
-        public int CategoryId { get; set; }
+        
 
-        [ForeignKey("UserId")]
-        public virtual ApplicationUser User { get; set; }
-        public ICollection<Reply> Replies { get; set; }
-        [ForeignKey("CategoryId")]
-        public virtual Category Category { get; set; }
+
     }
 }

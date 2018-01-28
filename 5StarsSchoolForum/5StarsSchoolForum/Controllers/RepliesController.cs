@@ -7,21 +7,33 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using _5StarsSchoolForum.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace _5StarsSchoolForum.Controllers
 {
-    public class ReplyController : Controller
+    public class RepliesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Reply
-        public ActionResult Index()
+        // GET: Replies
+        public ActionResult Index(int? id)
         {
-            var replies = db.Replies.Include(r => r.Message);
-            return View(replies.ToList());
+            var replies = db.Replies.Where(m=>m.MessageId==id);
+            List<MesRepViewModel> mr = new List<MesRepViewModel>();
+            foreach(Reply R in replies )
+            {
+                MesRepViewModel mesRepViewModel = new MesRepViewModel();
+                mesRepViewModel.ReplyId = R.Id;
+                mesRepViewModel.ReplyFrom = R.ReplyFrom;
+                mesRepViewModel.ReplyMessage = R.ReplyMessage;
+                mesRepViewModel.PostingDate = R.PostingTime;
+                mr.Add(mesRepViewModel);
+            }
+            return View(mr);
         }
 
-        // GET: Reply/Details/5
+        // GET: Replies/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,34 +48,51 @@ namespace _5StarsSchoolForum.Controllers
             return View(reply);
         }
 
-        // GET: Reply/Create
-        public ActionResult Create()
+        // GET: Replies/Create
+        public ActionResult Create(int? id)
         {
-            ViewBag.MessageId = new SelectList(db.Messages, "Id", "Title");
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Message message = db.Messages.Find(id);
+            if (message == null)
+            {
+                return HttpNotFound();
+            }
+
             return View();
         }
 
-        // POST: Reply/Create
+        // POST: Replies/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,MessageId,PostingTime,ReplyMessage")] Reply reply)
+        public ActionResult Create([Bind(Include = "Id,ReplyMessage,ReplyFrom,PostingTime,MessageId")] Reply reply, int? id)
         {
+
             if (ModelState.IsValid)
             {
+                var UManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                ApplicationUser appuser = UManager.FindById(User.Identity.GetUserId());
+                reply.UserId = appuser.Id;
+                reply.ReplyFrom = appuser.Email;
+                reply.ReplyMessage = appuser.Id;
                 reply.PostingTime = DateTime.Now;
+                Message m = db.Messages.Find(id);
+                reply.MessageId = m.Id;
                 db.Replies.Add(reply);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Replies", new { id = reply.Id });
             }
 
-            ViewBag.MessageId = new SelectList(db.Messages, "Id", "Title", reply.MessageId);
+            //ViewBag.MessageId = new SelectList(db.Messages, "Id", "Title", reply.MessageId);
             return View(reply);
-        }
 
-        // GET: Reply/Edit/5
-        public ActionResult Edit(int? id)
+        }
+            // GET: Replies/Edit/5
+            public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -78,12 +107,12 @@ namespace _5StarsSchoolForum.Controllers
             return View(reply);
         }
 
-        // POST: Reply/Edit/5
+        // POST: Replies/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,MessageId,PostingTime,ReplyMessage")] Reply reply)
+        public ActionResult Edit([Bind(Include = "Id,ReplyMessage,ReplyFrom,PostingTime,MessageId")] Reply reply)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +124,7 @@ namespace _5StarsSchoolForum.Controllers
             return View(reply);
         }
 
-        // GET: Reply/Delete/5
+        // GET: Replies/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -110,7 +139,7 @@ namespace _5StarsSchoolForum.Controllers
             return View(reply);
         }
 
-        //POST: Reply/Delete/5
+        // POST: Replies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

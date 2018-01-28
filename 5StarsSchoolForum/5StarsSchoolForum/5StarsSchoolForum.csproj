@@ -173,27 +173,21 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
-    <Compile Include="Controllers\ReplyController.cs" />
+    <Compile Include="Controllers\RepliesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801272149127_init.cs" />
-    <Compile Include="Migrations\201801272149127_init.Designer.cs">
-      <DependentUpon>201801272149127_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801272314578_search.cs" />
-    <Compile Include="Migrations\201801272314578_search.Designer.cs">
-      <DependentUpon>201801272314578_search.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801280831299_init1.cs" />
-    <Compile Include="Migrations\201801280831299_init1.Designer.cs">
-      <DependentUpon>201801280831299_init1.cs</DependentUpon>
+    <Compile Include="Migrations\201801282215337_init.cs" />
+    <Compile Include="Migrations\201801282215337_init.Designer.cs">
+      <DependentUpon>201801282215337_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\CategoryMessViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MesRepViewModel.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Reply.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -268,19 +262,19 @@
     <Content Include="Views\Shared\_LayoutTeacher.cshtml" />
     <Content Include="Views\Home\IndexTeacher.cshtml" />
     <Content Include="Views\Home\IndexStudent.cshtml" />
-    <Content Include="Views\Messages\Index.cshtml" />
-    <Content Include="Views\Messages\Details.cshtml" />
-    <Content Include="Views\Messages\Create.cshtml" />
-    <Content Include="Views\Messages\Edit.cshtml" />
-    <Content Include="Views\Messages\Delete.cshtml" />
     <Content Include="Views\Categories\Teacherlist.cshtml" />
     <Content Include="Views\Categories\Studentlist.cshtml" />
-    <Content Include="Views\Reply\Create.cshtml" />
-    <Content Include="Views\Reply\Delete.cshtml" />
-    <Content Include="Views\Reply\Details.cshtml" />
-    <Content Include="Views\Reply\Edit.cshtml" />
-    <Content Include="Views\Reply\Index.cshtml" />
     <Content Include="Views\Account\UserList.cshtml" />
+    <Content Include="Views\Messages\Create.cshtml" />
+    <Content Include="Views\Messages\Delete.cshtml" />
+    <Content Include="Views\Messages\Details.cshtml" />
+    <Content Include="Views\Messages\Edit.cshtml" />
+    <Content Include="Views\Messages\Index.cshtml" />
+    <Content Include="Views\Replies\Create.cshtml" />
+    <Content Include="Views\Replies\Delete.cshtml" />
+    <Content Include="Views\Replies\Details.cshtml" />
+    <Content Include="Views\Replies\Edit.cshtml" />
+    <Content Include="Views\Replies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -294,14 +288,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801272149127_init.resx">
-      <DependentUpon>201801272149127_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801272314578_search.resx">
-      <DependentUpon>201801272314578_search.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801280831299_init1.resx">
-      <DependentUpon>201801280831299_init1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801282215337_init.resx">
+      <DependentUpon>201801282215337_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

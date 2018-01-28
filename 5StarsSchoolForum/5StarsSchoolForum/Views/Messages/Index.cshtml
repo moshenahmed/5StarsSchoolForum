@@ -1,73 +1,71 @@
-﻿@model IEnumerable<_5StarsSchoolForum.Models.Message>
+﻿@model IEnumerable<_5StarsSchoolForum.Models.CategoryMessViewModel>
 
 @{
-	ViewBag.Title = "Messages";
+    ViewBag.Title = "Index";
 }
 
-<h2>Messages</h2>
+<h2>Index</h2>
 
 <p>
-	@Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
-@*<table class="table">
-	<tr>
-		<th>
-			@Html.DisplayNameFor(model => model.Title)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.PostMessage)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.PostingDate)
-		</th>
-		<th></th>
-	</tr>*@
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MessageId)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostMessage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostingDate)
+        </th>
+        <th></th>
+    </tr>
 
-@foreach (var item in Model)
-{
-<div>
-	<div>
-		@Html.DisplayFor(modelItem => item.Title)
-	</div>
-	<p>++++++++++++++++++</p>
-	<div>
-		<p>
-			@Html.DisplayFor(modelItem => item.PostMessage)
-		</p>
-		@Html.DisplayFor(modelItem => item.PostingDate)
-	</div>
-	@*@if (item.Message.Id == item.Reply.Id && item.PostMessage == null)
-		{
-			@Html.DisplayFor(modelItem => item.Reply.Message)
-			<div>
-				@Html.DisplayFor(modelItem => item.Reply.PostingTime)
-			</div>
-		}*@
-
-
-	@*<div>
-			@Html.TextBoxFor(modelItem => item.Reply.Message, new { htmlAttributes = new { @class = "form-control" } })
-
-		</div>*@
-	@Html.ActionLink("Delete", "Delete", new { id = item.Id })
-    @*@Html.ActionLink("Reply to Message", "Create","Reply")*@
-    @Html.ActionLink("Reply to Message", "Create","Reply", new { id = item.Id },null)
-
-
-</div>
-
-	<br />
-
-@*</div>*@
-	@*<td>
-				@Html.DisplayFor(modelItem => item.PostingDate)
-			</td>
-			<td>
-				@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-				@Html.ActionLink("Details", "Details", new { id=item.Id }) |
-				
-			</td>
-		</tr>*@
+@foreach (var item in Model) {
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.CategoryId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MessageId)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostMessage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostingDate)
+        </td>
+        <td>
+            @Html.ActionLink("Reply", "Create", "Replies", new { id = item.MessageId }, null) |
+            @Html.ActionLink("View Replies", "Index", "Replies", new { id = item.MessageId }, null) |
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
 }
 
-@*</table>*@
+</table>

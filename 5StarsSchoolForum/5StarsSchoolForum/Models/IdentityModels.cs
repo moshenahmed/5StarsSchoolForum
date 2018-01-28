@@ -47,9 +47,9 @@ namespace _5StarsSchoolForum.Models
             // Add custom user claims here
             return userIdentity;
         }
-        public virtual ICollection<Category> categories { get; set; }
-        public virtual ICollection<Message> messages { get; set; }
-        public virtual ICollection<Reply> replies { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
+        public virtual ICollection<Reply> Replies { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -69,6 +69,6 @@ namespace _5StarsSchoolForum.Models
         public DbSet<Message> Messages { get; set; }
         public DbSet<Reply> Replies { get; set; }
 
-
+        
     }
 }
