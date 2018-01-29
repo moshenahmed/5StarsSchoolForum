@@ -15,17 +15,14 @@ namespace _5StarsSchoolForum.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Messages
-        public ActionResult Index(Reply reply)
+        public ActionResult Index(int id)
         {
             //List<MessageReplyView> messagereply = new List<MessageReplyView>();
-            
-            if (reply.Message!= null)
-            {
-                var model = db.Messages.Where(n => n.Id == reply.Id).ToList();
-                return View(model);
-            }
-            
-            return View(db.Messages.ToList());
+
+            Message message = db.Messages.Find(id);
+            var reply = new Reply();
+            var model = message.Replies.ToList();
+            return View(model);
         }
 
         // GET: Messages/Details/5

@@ -160,7 +160,7 @@ namespace _5StarsSchoolForum.Models
 
         //[DisplayName("Posting time")]
 
-        //[Column(TypeName = "datetime2")]
+        [Column(TypeName = "datetime2")]
         public DateTime PostingDate { get; set; }
 
         public string MessageReply { get; set; }

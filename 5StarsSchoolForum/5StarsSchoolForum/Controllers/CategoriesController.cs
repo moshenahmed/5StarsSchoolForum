@@ -115,14 +115,16 @@ namespace _5StarsSchoolForum.Controllers
                 var mess = new Message();
                  mess.Title= model.Title;
                  mess.PostMessage= model.PostMessage ;
-                 mess.PostingDate= model.PostingDate;
+                mess.PostingDate = DateTime.Now;
+                model.PostingDate = mess.PostingDate;
                 db.Messages.Add(mess);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+
             }
 
 
-            return View();
+            return View(model);
 
 
         }
@@ -187,37 +189,47 @@ namespace _5StarsSchoolForum.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Reply()
+        public ActionResult CreateReply(int? id)
         {
-            var model = (from m in db.Messages
-                         from mr in db.Replies
-                         join reply in db.Replies on mr.MessageId equals
-                         reply.Id
+            //var model = (from m in db.Messages
+            //             from mr in db.Replies
+            //             join reply in db.Replies on mr.MessageId equals
+            //             reply.Id
 
-                         select new Reply()
-                         {
-                             ReplyMessage = mr.ReplyMessage,
+            //             select new Reply()
+            //             {
+            //                 ReplyMessage = mr.ReplyMessage,
 
-                             PostingTime = mr.PostingTime
-                         }).ToList();
-            return View("Reply", model);
+            //                 PostingTime = mr.PostingTime
+            //             }).ToList();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+           Reply reply = db.Replies.Find(id);
+            if (reply == null)
+            {
+                return HttpNotFound();
+            }
+            return View(reply);
+            //return View("Reply", model);
         }
         [HttpPost]
         public ActionResult CreateReply(int id)
         {
            
-            {
+            
                 var rep = new Reply();
                 var cat = db.Categories.Find(id);
                 var mes = db.Messages.Where(x => x.Id == cat.Id).ToString();
-
+               
 
                 rep.PostingTime = DateTime.Now;
                 rep.MessageId = int.Parse(mes);
 
                 db.Replies.Add(rep);
                 db.SaveChanges();
-            }
+            
             return View("Reply");
            
         }
