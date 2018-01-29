@@ -83,7 +83,8 @@ namespace _5StarsSchoolForum.Controllers
             {
                 return HttpNotFound();
             }
-            return View(category);
+            var model = db.Categories.Where(v => v.Id == category.Id).ToList();
+            return View(model);
         }
 
         // GET: Categories/Create
@@ -184,6 +185,41 @@ namespace _5StarsSchoolForum.Controllers
             db.Categories.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Reply()
+        {
+            var model = (from m in db.Messages
+                         from mr in db.Replies
+                         join reply in db.Replies on mr.MessageId equals
+                         reply.Id
+
+                         select new Reply()
+                         {
+                             ReplyMessage = mr.ReplyMessage,
+
+                             PostingTime = mr.PostingTime
+                         }).ToList();
+            return View("Reply", model);
+        }
+        [HttpPost]
+        public ActionResult CreateReply(int id)
+        {
+           
+            {
+                var rep = new Reply();
+                var cat = db.Categories.Find(id);
+                var mes = db.Messages.Where(x => x.Id == cat.Id).ToString();
+
+
+                rep.PostingTime = DateTime.Now;
+                rep.MessageId = int.Parse(mes);
+
+                db.Replies.Add(rep);
+                db.SaveChanges();
+            }
+            return View("Reply");
+           
         }
 
         protected override void Dispose(bool disposing)

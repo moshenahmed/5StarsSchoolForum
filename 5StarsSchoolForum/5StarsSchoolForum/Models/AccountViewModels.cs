@@ -166,6 +166,25 @@ namespace _5StarsSchoolForum.Models
         public string MessageReply { get; set; }
     }
 
+    public class MessageReplyViewModel
+    {
+        public string ReplyMessage { get; set; }
+        public DateTime PostingTime { get; set; }
+
+    }
+
+    public class CatMessageReplyViewModel
+    {
+        public string categorytitle { get; set; }
+        public string MessagePost { get; set; }
+        public string ReplyMessage { get; set; }
+        
+
+        public DateTime PostingTime { get; set; }
+
+    }
+
+
 
 
 
