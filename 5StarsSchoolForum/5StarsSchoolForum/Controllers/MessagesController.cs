@@ -149,6 +149,13 @@ namespace _5StarsSchoolForum.Controllers
             return RedirectToAction("Index");
         }
 
+        //public ActionResult ML()
+        //{
+        //  var model = (from m in db.Messages from r in db.Replies join reply in m)
+        //    var c=db.
+        //    return View();
+        //}
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

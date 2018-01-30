@@ -17,6 +17,8 @@ namespace _5StarsSchoolForum.Models
         public string Description { get; set; }
         public bool Checked { get; set; }
 
+        //public string UserId { get; set; }
+
         public virtual ICollection<ApplicationUser> AttendingMembers { get; set; }
     }
 }

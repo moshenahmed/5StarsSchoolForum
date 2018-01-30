@@ -26,35 +26,71 @@ namespace _5StarsSchoolForum.Controllers
         public ActionResult CategoryList()
         {
             var model = db.Categories.ToList();
-            return View("SelectCategories", model);
+            return View("CategoryLists", model);
         }
 
-        //// GET: Categories/Details/5
-        //public ActionResult Studentlist()
+        // GET: Categories/Details/5
+        public ActionResult Studentlist()
 
-        //{
+        {
 
-        //    //var a = db.Users.ToList()[0].Roles.ToList()[0].RoleId == model.ToList()[0].Id;
-        //    var model = (from user in db.Users
-        //                 from userRole in user.Roles
-        //                 join role in db.Roles on userRole.RoleId equals
-        //                 role.Id 
+            //var a = db.Users.ToList()[0].Roles.ToList()[0].RoleId == model.ToList()[0].Id;
+            var model = (from user in db.Users
+                         from userRole in user.Roles
+                         join role in db.Roles on userRole.RoleId equals
+                         role.Id
 
-        //                 select new UserListViewModel()
-        //                 {
-        //                     FullName = user.FullName,
+                         select new UserListViewModel()
+                         {
+                             Email = user.Email,
 
-        //                     Role = role.Name
-        //                          }).ToList();
+                             Role = role.Name
+                         }).Where(x => x.Role == "Student").ToList();
 
-        //    return View("Studentlist", model);
-        //}
+            return View("Studentlist", model);
+        }
         //public ActionResult Teacherlist()
 
         //{
         //    var model = db.Roles.Where(n => n.Name == "Teacher");
         //    return View("Teacherlist", model);
         //}
+
+        public ActionResult Assign(int? id)
+        {
+
+
+            //var model = (from user in db.Users
+            //             from usercat in user.Categories
+            //             join cat in db.Categories on usercat.Id equals
+            //             cat.Id
+
+            //             select new Category()
+            //             {
+
+
+            //             }).ToList();
+            //var model = db.Categories.ToList();
+            var model1 = db.Categories.Find(id);
+
+            var c = new Category();
+            c.Checked = true;
+            db.SaveChanges();
+            //var model = .
+
+
+            return View(c);
+
+          
+
+
+
+
+
+
+
+        }
+
         public ActionResult Details(int? id)
         {
             if (id == null)

@@ -28,7 +28,7 @@ namespace _5StarsSchoolForum.Controllers
                 mesRepViewModel.ReplyId = R.Id;
                 mesRepViewModel.Title =ms.Title;
                 mesRepViewModel.PostedBy = ms.PostedBy;
-                mesRepViewModel.ReplyFrom = R.User.Email;
+                mesRepViewModel.ReplyFrom = R.ReplyFrom;
                 mesRepViewModel.ReplyMessage = R.ReplyMessage;
                 mesRepViewModel.PostingDate = ms.PostingDate;
                 mesRepViewModel.PostingTime = R.PostingTime;

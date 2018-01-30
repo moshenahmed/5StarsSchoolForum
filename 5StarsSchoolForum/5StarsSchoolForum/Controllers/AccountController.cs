@@ -23,13 +23,14 @@ namespace _5StarsSchoolForum.Controllers
         // GET
         public ActionResult Index(string q)
         {
-            var persons = from u in context.Users select u;
+            //var persons = from u in context.Users select u;
             if (!string.IsNullOrWhiteSpace(q))
             {
-                persons = persons.Where(p => p.Email.Contains(q));
-            }
+             var  persons = context.Users.Where(p => p.Email.Contains(q)).ToList();
+            
             return View(persons);
-
+            }
+            return View();
         }
 
 
@@ -182,7 +183,7 @@ namespace _5StarsSchoolForum.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

@@ -18,11 +18,7 @@ namespace _5StarsSchoolForum.Migrations
 
         protected override void Seed(_5StarsSchoolForum.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
+          
             context.Roles.AddOrUpdate(x => x.Name, new IdentityRole("Teacher"), new IdentityRole("Student"));
             context.SaveChanges();
 
