@@ -17,8 +17,6 @@ namespace _5StarsSchoolForum.Models
 
         public int MessageId { get; set; }
 
-       
-
         [Required]
         [DisplayName("Category_Name")]
         public string Name { get; set; }

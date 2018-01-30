@@ -20,27 +20,19 @@ namespace _5StarsSchoolForum.Controllers
 
         ApplicationDbContext context;
 
-        public ActionResult Index(string searchBy, string search)
+        // GET
+        public ActionResult Index(string q)
         {
-            var usernams = from s in context.Users select s;
+            var persons = from u in context.Users select u;
+            if (!string.IsNullOrWhiteSpace(q))
+            {
+                persons = persons.Where(p => p.Email.Contains(q));
+            }
+            return View(persons);
 
-            //if (searchBy == "Teacher")
-            //{
-            //    usernams = usernams.Where(x => x.ToString.User == search || search == null);
-            //}
-            //else if (searchBy == "Role")
-            //{
-            //    usernams = usernams.Where(x => x.Role == search || search == null);
-            //}
-            //else
-            //{
-            //    usernams = usernams.Where(x => x.Email.StartsWith(search) || search == null);
-            //}
-            return View(usernams);
         }
 
 
-    
 
 
 
@@ -180,7 +172,7 @@ namespace _5StarsSchoolForum.Controllers
         // POST: /Account/Register
         [HttpPost]
         //[Authorize]
-        [AllowAnonymous]
+        [Authorize(Roles = "Teacher")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {

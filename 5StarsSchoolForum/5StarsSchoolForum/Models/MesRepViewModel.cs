@@ -13,11 +13,13 @@ namespace _5StarsSchoolForum.Models
         public int Id { get; set; }
 
         public int ReplyId { get; set; }
+        public int MessageId { get; set; }
+
+        [DisplayName("MessageTitle")]
+        public int Title { get; set; }
      
         public String PostedBy { get; set; }
        
-        [DisplayName("MessageToPost")]
-        public string PostMessage { get; set; }
         [DisplayName("PostedDateTime")]
         [Column(TypeName = "datetime2")]
         public DateTime PostingDate { get; set; }
@@ -25,9 +27,10 @@ namespace _5StarsSchoolForum.Models
         public string ReplyFrom { get; set; }
     
         public string ReplyMessage { get; set; }
-        [DisplayName("Reply_Date_Time")]
+
+        [DisplayName("ReplyDateTime")]
         [Column(TypeName = "datetime2")]
-        public DateTime ReplyDateTime { get; set; }
+        public DateTime PostingTime { get; set; }
 
        
       

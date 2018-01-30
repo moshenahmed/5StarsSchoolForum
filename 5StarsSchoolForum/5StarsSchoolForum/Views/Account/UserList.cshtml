@@ -20,7 +20,7 @@
 
 
 
-    @Html.TextBox("search", null, new { @class = "form-control", placeholder = "Search for..." })<input type="submit" value="Search" class="btn btn-success" />
+    @Html.TextBox("q", null, new { @class = "form-control", placeholder = "Search with Role..." })<input type="submit" value="Search" class="btn btn-success" />
 
 
 
@@ -52,9 +52,9 @@
 
 </div>
 <tr>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+    @*<td>
+        @Html.ActionLink("Edit", "Edit",new { /* id=item.PrimaryKey */ }) |
 
         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-    </td>
+    </td>*@
 </tr>
