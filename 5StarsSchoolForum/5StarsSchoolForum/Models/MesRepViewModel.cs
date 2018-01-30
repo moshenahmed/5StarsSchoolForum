@@ -16,7 +16,7 @@ namespace _5StarsSchoolForum.Models
         public int MessageId { get; set; }
 
         [DisplayName("MessageTitle")]
-        public int Title { get; set; }
+        public string Title { get; set; }
      
         public String PostedBy { get; set; }
        

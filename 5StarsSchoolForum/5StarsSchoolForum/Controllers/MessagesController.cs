@@ -19,19 +19,20 @@ namespace _5StarsSchoolForum.Controllers
         // GET: Messages
         public ActionResult Index(int? id)
         {
-            var messages = db.Messages.Where(c => c.CategoryId == id);
-            //Category c = db.Categories.Find(id);
+           
+          
             List<CategoryMessViewModel> cm = new List<CategoryMessViewModel>();
-            foreach (Message m in messages)
-            {
+            Category c = db.Categories.Find(id);
+            foreach (Message mg in db.Messages.Where(m => m.CategoryId == id))
+                {
                 CategoryMessViewModel categoryMessViewModel = new CategoryMessViewModel();
-              
-                categoryMessViewModel.MessageId= m.Id;
-                //categoryMessViewModel.Name = c.Name;
-                categoryMessViewModel.Title = m.Title;
-                categoryMessViewModel.PostMessage = m.PostMessage;
-                categoryMessViewModel.PostedBy = m.PostedBy;
-                categoryMessViewModel.PostingDate = m.PostingDate;
+
+                categoryMessViewModel.MessageId = mg.Id;
+                categoryMessViewModel.Name = c.Name;
+                categoryMessViewModel.Title = mg.Title;
+                categoryMessViewModel.PostMessage = mg.PostMessage;
+                categoryMessViewModel.PostedBy = mg.PostedBy;
+                categoryMessViewModel.PostingDate = mg.PostingDate;
                 cm.Add(categoryMessViewModel);
             }
             return View(cm);
@@ -86,7 +87,7 @@ namespace _5StarsSchoolForum.Controllers
             message.CategoryId = c.Id;
             db.Messages.Add(message);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Messages", new { id = message.Id });
+                return RedirectToAction("Index", "Categories");
             
          }
 

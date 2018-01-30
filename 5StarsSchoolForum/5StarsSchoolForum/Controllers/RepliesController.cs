@@ -19,17 +19,18 @@ namespace _5StarsSchoolForum.Controllers
         // GET: Replies
         public ActionResult Index(int? id)
         {
-            var replies = db.Replies.Where(m => m.MessageId == id);
-            // var m=db.Messages;
-            List<MesRepViewModel> mr = new List<MesRepViewModel>();
-            foreach (Reply R in replies)
+            //var replies =;
+           List<MesRepViewModel> mr = new List<MesRepViewModel>();
+            Message ms= db.Messages.Find(id);
+            foreach (Reply R in db.Replies.Where(m => m.MessageId == id))
             {
                 MesRepViewModel mesRepViewModel = new MesRepViewModel();
                 mesRepViewModel.ReplyId = R.Id;
-                
-                mesRepViewModel.ReplyFrom = R.ReplyFrom;
+                mesRepViewModel.Title =ms.Title;
+                mesRepViewModel.PostedBy = ms.PostedBy;
+                mesRepViewModel.ReplyFrom = R.User.Email;
                 mesRepViewModel.ReplyMessage = R.ReplyMessage;
-                
+                mesRepViewModel.PostingDate = ms.PostingDate;
                 mesRepViewModel.PostingTime = R.PostingTime;
                 mr.Add(mesRepViewModel);
             }
@@ -79,15 +80,16 @@ namespace _5StarsSchoolForum.Controllers
            
                 var UManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
                 ApplicationUser appuser = UManager.FindById(User.Identity.GetUserId());
+            string test = User.Identity.GetUserId();
                 reply.UserId = appuser.Id;
                 reply.ReplyFrom = appuser.Email;
-            reply.ReplyMessage = appuser.Id;
+            //reply.ReplyMessage = appuser;
             reply.PostingTime = DateTime.Now;
                 Message m = db.Messages.Find(id);
                 reply.MessageId = m.Id;
                 db.Replies.Add(reply);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Replies", new { id = reply.Id });
+                return RedirectToAction("Index", "Categories");
             
 
             //return View(reply);
