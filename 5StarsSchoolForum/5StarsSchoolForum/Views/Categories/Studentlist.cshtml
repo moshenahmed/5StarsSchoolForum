@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<_5StarsSchoolForum.Models.UserViewModel>
 
 @{
-    ViewBag.Title = "Studentlist";
+    ViewBag.Title = "Userlist";
 }
 
 <h2>Studentlist</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add new user", "Create")
 </p>
 <table class="table">
     <tr>
@@ -28,11 +28,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.Role)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
+		<td>
+			@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+			@Html.ActionLink("Details", "Details", new { id = item.Id }) |
+			@Html.ActionLink("Delete user", "Delete", new { id = item.Id })|
+			@Html.ActionLink("Assign Category", "CategoryList", new { id = item.Id })
+
+
+		</td>
     </tr>
 }
 

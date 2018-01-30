@@ -11,22 +11,30 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.CategoryTitle)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.CategoryTitle)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.UserMessages)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.UserMessages)
         </dd>
 
     </dl>
+</div>
+<div class="col-md-4">
+    <h2>
+        @Html.ActionLink("Message Board", "Index", "Messages")
+    </h2>
+    <p>As Teacher and a student can post a message and replies in a category, remember your teachers should assign you to a specific category for you to have access, Alright Good luck!</p>
+    <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
