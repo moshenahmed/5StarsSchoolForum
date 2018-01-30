@@ -40,8 +40,23 @@ namespace _5StarsSchoolForum.Controllers
         }
         public ActionResult CategoryList()
         {
+            //var model = (from user in db.Users
+            //             from usercat in user.AttendedCategory
+            //             join cat in db.Categories on usercat.Usersid equals
+            //             cat.Id
+
+            //             select new UserCategoryAssigned()
+            //             {
+            //                 Catid = cat.Id,
+            //                 UserId = user.Id,
+            //                 //Assigned = true
+
+
+            //             }).ToList();
+            //db.SaveChanges();
             var model = db.Categories.ToList();
-            return View("SelectCategories", model);
+            //return View("SelectCategories", model);
+            return View(model);
         }
 
         // GET: Categories/Details/5
@@ -60,14 +75,25 @@ namespace _5StarsSchoolForum.Controllers
                              Username = user.UserName,
 
                              Role = role.Name
-                         }).ToList();
+                         }).Where(x => x.Role == "Student").ToList();
 
             return View("Studentlist", model);
         }
         public ActionResult Teacherlist()
 
         {
-            var model = db.Roles.Where(n => n.Name == "Teacher");
+            var model = (from user in db.Users
+                         from userRole in user.Roles
+                         join role in db.Roles on userRole.RoleId equals
+                         role.Id
+
+                         select new UserViewModel()
+                         {
+                             Username = user.UserName,
+
+                             Role = role.Name
+                         }).ToList();
+
             return View("Teacherlist", model);
         }
         public ActionResult Details(int? id)
@@ -106,15 +132,15 @@ namespace _5StarsSchoolForum.Controllers
             {
                 var category = new Category();
                 {
-                     category.CategoryTitle= model.CatTitle ;
+                    category.CategoryTitle = model.CatTitle;
 
 
                 };
                 db.Categories.Add(category);
-                
+
                 var mess = new Message();
-                 mess.Title= model.Title;
-                 mess.PostMessage= model.PostMessage ;
+                mess.Title = model.Title;
+                mess.PostMessage = model.PostMessage;
                 mess.PostingDate = DateTime.Now;
                 model.PostingDate = mess.PostingDate;
                 db.Messages.Add(mess);
@@ -129,8 +155,8 @@ namespace _5StarsSchoolForum.Controllers
 
         }
 
-            
-     
+
+
 
         // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
@@ -206,7 +232,7 @@ namespace _5StarsSchoolForum.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-           Reply reply = db.Replies.Find(id);
+            Reply reply = db.Replies.Find(id);
             if (reply == null)
             {
                 return HttpNotFound();
@@ -217,21 +243,51 @@ namespace _5StarsSchoolForum.Controllers
         [HttpPost]
         public ActionResult CreateReply(int id)
         {
-           
-            
-                var rep = new Reply();
-                var cat = db.Categories.Find(id);
-                var mes = db.Messages.Where(x => x.Id == cat.Id).ToString();
-               
 
-                rep.PostingTime = DateTime.Now;
-                rep.MessageId = int.Parse(mes);
 
-                db.Replies.Add(rep);
-                db.SaveChanges();
-            
+            var rep = new Reply();
+            var cat = db.Categories.Find(id);
+            var mes = db.Messages.Where(x => x.Id == cat.Id).ToString();
+
+
+            rep.PostingTime = DateTime.Now;
+            rep.MessageId = int.Parse(mes);
+
+            db.Replies.Add(rep);
+            db.SaveChanges();
+
             return View("Reply");
-           
+
+        }
+    
+        
+        public ActionResult Assign(Category cate)
+        {
+
+
+            //var model = (from user in db.Users
+            //             from usercat in user.AttendedCategory
+            //             join cat in db.Categories on usercat.Usersid equals
+            //             cat.Id
+
+            //             select new Category()
+            //             {
+
+            //                 Assigned = true
+
+
+            //             }).ToList();
+            //var model = db.Categories.ToList();
+            var model = db.Categories.Where(y=>y.Usersid==cate.Usersid);
+            
+            cate.Assigned = true;
+            
+          
+            //db.Categories.Add(cate);
+            db.SaveChanges();
+
+
+            return View(model);
         }
 
         protected override void Dispose(bool disposing)

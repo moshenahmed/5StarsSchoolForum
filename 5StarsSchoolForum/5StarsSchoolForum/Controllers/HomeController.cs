@@ -27,11 +27,8 @@ namespace _5StarsSchoolForum.Controllers
 
             return View();
         }
-        public ActionResult StudentList()
-        {
-            //ViewBag.ReturnUrl = returnUrl;
-            //var model = 
-            return View("~/Views/Account/LoginStudent.cshtml");
-        }
-    }
+
+       
+       
+    } 
 }

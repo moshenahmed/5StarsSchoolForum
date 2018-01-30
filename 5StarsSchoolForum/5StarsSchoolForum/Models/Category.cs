@@ -14,7 +14,7 @@ namespace _5StarsSchoolForum.Models
         public string CategoryTitle { get; set; }
         //public Message Messages { get; set; }
 
-        public bool Checked { get; set; }
+        public bool Assigned { get; set; }
         [ForeignKey("Usersid")]
         public virtual ICollection<ApplicationUser> Users { get; set; }
         //[ForeignKey("UserMessagesid")]
