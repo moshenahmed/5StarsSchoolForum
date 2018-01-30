@@ -13,6 +13,7 @@ namespace _5StarsSchoolForum.Models
 
         public int Id { get; set; }
         [Required]
+        [DisplayName("MessageTitle")]
         public string Title { get; set; }
         [Required]
         [DisplayName("MessageToPost")]

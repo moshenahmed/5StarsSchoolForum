@@ -24,6 +24,7 @@ namespace _5StarsSchoolForum.Models
         public string Name { get; set; }
 
         [Required]
+        [DisplayName("MessageTitle")]
         public string Title { get; set; }
         
         public string PostMessage { get; set; }

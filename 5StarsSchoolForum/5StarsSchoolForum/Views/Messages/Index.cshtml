@@ -11,12 +11,10 @@
 </p>
 <table class="table">
     <tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </th>
+       
         <th>
             @Html.DisplayNameFor(model => model.MessageId)
-        </th>*@
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -37,12 +35,10 @@
 
 @foreach (var item in Model) {
     <tr>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.MessageId)
-        </td>*@
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
@@ -61,9 +57,9 @@
         <td>
             @Html.ActionLink("Reply", "Create", "Replies", new { id = item.MessageId }, null) |
             @Html.ActionLink("View Replies", "Index", "Replies", new { id = item.MessageId }, null) |
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
         </td>
     </tr>
 }

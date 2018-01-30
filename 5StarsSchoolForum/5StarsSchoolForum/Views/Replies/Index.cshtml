@@ -1,24 +1,36 @@
-﻿@model IEnumerable<_5StarsSchoolForum.Models.Reply>
+﻿@model IEnumerable<_5StarsSchoolForum.Models.MesRepViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>--List Of Replies to the Messages--</h2>
 
-@*<p>
+    <h2>--List Of Replies to the Messages--</h2>
+
+
+<p>
     @Html.ActionLink("Create New", "Create")
-</p>*@
+</p>
 <table class="table">
     <tr>
+        
         <th>
-            @Html.DisplayNameFor(model => model.Message.Title)
+            @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ReplyMessage)
+            @Html.DisplayNameFor(model => model.PostedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostMessage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostingDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ReplyFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReplyMessage)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PostingTime)
@@ -26,27 +38,36 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Message.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReplyMessage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReplyFrom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostingTime)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostMessage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReplyFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReplyMessage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostingTime)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>*@
+    </tr>
+}
 
 </table>

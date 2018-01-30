@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -13,7 +14,11 @@ namespace _5StarsSchoolForum.Models
         public int Id { get; set; }
 
         public int ReplyId { get; set; }
-     
+        public int MessageId { get; set; }
+        [Required]
+        [DisplayName("MessageTitle")]
+        public string Title { get; set; }
+
         public String PostedBy { get; set; }
        
         [DisplayName("MessageToPost")]
@@ -27,7 +32,7 @@ namespace _5StarsSchoolForum.Models
         public string ReplyMessage { get; set; }
         [DisplayName("Reply_Date_Time")]
         [Column(TypeName = "datetime2")]
-        public DateTime ReplyDateTime { get; set; }
+        public DateTime PostingTime { get; set; }
 
        
       
