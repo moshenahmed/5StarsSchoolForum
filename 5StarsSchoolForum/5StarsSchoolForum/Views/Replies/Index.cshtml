@@ -59,12 +59,13 @@
         <td>
             @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
             @Html.ActionLink("Details", "Details", new { id = item.ReplyId }) |
-            if (User.IsInRole("Teacher"))
-            {
-            @Html.ActionLink("Delete", "Delete", new { id = item.ReplyId })
-            }
+          
         </td>
     </tr>
+    if (User.IsInRole("Teacher"))
+    {
+        @Html.ActionLink("Delete", "Delete", new { id = item.ReplyId })
+    }
 }
 
 </table>
