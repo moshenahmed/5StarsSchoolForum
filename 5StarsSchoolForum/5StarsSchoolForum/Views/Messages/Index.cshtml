@@ -4,17 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>--List Of Messages In This Category--</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
        
-        <th>
-            @Html.DisplayNameFor(model => model.MessageId)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -36,9 +32,7 @@
 @foreach (var item in Model) {
     <tr>
         
-        <td>
-            @Html.DisplayFor(modelItem => item.MessageId)
-        </td>
+      
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
@@ -55,11 +49,16 @@
             @Html.DisplayFor(modelItem => item.PostingDate)
         </td>
         <td>
-            @Html.ActionLink("Reply", "Create", "Replies", new { id = item.MessageId }, null) |
-            @Html.ActionLink("View Replies", "Index", "Replies", new { id = item.MessageId }, null) |
-            @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+            || @Html.ActionLink("Reply", "Create", "Replies", new { id = item.MessageId }, null) ||
+            @Html.ActionLink("View Replies", "Index", "Replies", new { id = item.MessageId }, null)
+            ||
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.MessageId }) ||*@
+            @*@Html.ActionLink("Details", "Details", new { id = item.MessageId }) ||*@
+
+            if (User.IsInRole("Teacher"))
+            {
+            @Html.ActionLink("Delete", "Delete", new { id = item.MessageId })||
+            }
         </td>
     </tr>
 }

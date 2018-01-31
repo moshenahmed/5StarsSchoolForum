@@ -23,10 +23,8 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    @*<li>@Html.ActionLink("Student", "Login", "Account")</li>
+                  
 
-        <li>@Html.ActionLink("Teacher", "Login", "Account")</li>*@
-                    
 
 
                     @if (Request.IsAuthenticated)
@@ -36,6 +34,11 @@
                 <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
                 <li>@Html.ActionLink("UsersList", "UserList", "Account")</li>
 }
+else if (User.IsInRole("Student"))
+{
+                <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+}
+
 
 }
                 </ul>

@@ -190,7 +190,7 @@ namespace _5StarsSchoolForum.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -439,51 +439,27 @@ namespace _5StarsSchoolForum.Controllers
         //--Action method for getting userlistview--//
         public ActionResult UserList()
         {
-            //var userWithRoles = (from user in context.Users
-            //                     from userRole in user.Roles
-            //                     join role in context.Roles on userRole.RoleId equals
-            //                     role.Id
-            //                     select new UserListViewModel()
-            //                     {
-            //                         UserName = user.UserName,
-            //                         Email = user.Email,
-            //                         Role=role.Name
-            //                     }).ToList();
-
-
+            
             var userWithRoles = (from user in context.Users
                                  select new
                                  {
-                                     //UserName = user.UserName,
+                                    
                                      Email = user.Email,
                                      Role = (from userRole in user.Roles
                                              join role in context.Roles on userRole.RoleId equals role.Id
                                              select role.Name).ToList()
                                  }).ToList().Select(p => new UserListViewModel()
                                  {
-                                     //Username = p.UserName,
+                                  
                                      Email = p.Email,
                                      Role = string.Join(",", p.Role)
 
                                  });
-
-
-
-
-
-
-
+            
 
             return View(userWithRoles);
 
-
-
-
-
-
         }
-
-
 
         //
         // GET: /Account/ExternalLoginFailure

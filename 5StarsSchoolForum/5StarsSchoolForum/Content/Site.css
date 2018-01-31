@@ -31,11 +31,12 @@ body {
     font-size: 14px;
     line-height: 1.428571429;
     color: #333333;
-    background-color: azure;
-    background-image: url('pen.jpg');
+    background-color: #43a4ed;
+    background-image: url('b-im.jpg');
+    /*background-image: url('school forum -background2 image.jpg');*/
     background-repeat: repeat-y;
-    background-position-x:right;
-    background-position-y:center;
+    background-position-x: right;
+    background-position-y: center;
     background-attachment: fixed;
     background-position: center;
 }

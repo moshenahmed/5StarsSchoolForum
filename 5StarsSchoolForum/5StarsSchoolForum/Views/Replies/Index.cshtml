@@ -8,9 +8,7 @@
     <h2>--List Of Replies to the Messages--</h2>
 
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         
@@ -20,9 +18,7 @@
         <th>
             @Html.DisplayNameFor(model => model.PostedBy)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PostMessage)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.PostingDate)
         </th>
@@ -47,9 +43,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.PostedBy)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostMessage)
-        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.PostingDate)
         </td>
@@ -62,11 +56,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.PostingTime)
         </td>
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>*@
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
+            @Html.ActionLink("Details", "Details", new { id = item.ReplyId }) |
+            if (User.IsInRole("Teacher"))
+            {
+            @Html.ActionLink("Delete", "Delete", new { id = item.ReplyId })
+            }
+        </td>
     </tr>
 }
 

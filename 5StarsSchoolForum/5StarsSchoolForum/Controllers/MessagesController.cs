@@ -113,10 +113,10 @@ namespace _5StarsSchoolForum.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(message).Property(p => p.PostingDate).IsModified = false;
+                //db.Entry(message).Property(p => p.PostingDate).IsModified = false;
                 db.Entry(message).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Categories");
             }
             return View(message);
         }

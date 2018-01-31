@@ -5,69 +5,49 @@
 }
 
 <div class="jumbotron">
-    @*<h1>Student List</h1>*@
-    @*@{Html.RenderAction("Studentlist","Categories");}*@
-    <p class="lead">Welcome to the school forum, Please login to start!</p>
+    <div class="col-lg-12">
+        <h1 class="alert-warning"><i>Welcome to the 5*School Forum</i></h1>
+        <h2><u> What you Need to Know About the 5*SchoolForum </u></h2>
+    </div>
+    <div class="col-xs-12">
+        <strong><u>1. User Names:</u></strong> The user name you choose when you register to post comments to the ISR Open Forum will be publicly displayed beside each post you make to the forum. If anonymity is important to you please carefully consider your choice of a user name. User names cannot be changed. Your choice is permanent. PROPER NAMES & EMAIL ADDRESSES ARE NOT ACCEPTABLE AS USER NAMES.
+    </div>
+
+    <div class="col-xs-12">
+        <strong> <u> 2. If you are an 5*SchoolForumMember:</u></strong> Your log in to the MEMBER AREA of the web site will not, for privacy reasons,you can log into this FORUM.
+    </div>
+
+    <div class="col-xs-12">
+
+        <strong> <u> 3. You do not need to register :</u></strong> To read articles on the Forum. Posting requires that you are a registered forum user. To register, You need to sendmail to Teacher.
+
+        <div class="col-xs-12">
+
+            <strong>
+                <u>  5. Do not post or request evaluation type comments about schools to this forum:</u>
+            </strong>  If this is your intent this is the wrong forum for you and we suggest you visit the Member Forum – available to  Members(Available Soon) – which is expressly for exchanging review-type information about schools. Posting such comments to this forum will result in an immediate ban without notice. Please help us avoid legal issues. See Forum Terms of Conduct and Posting Rules for the  Forum, below. If in doubt, don’t post.
+        </div>
+
+    </div>
+    <p class="lead">These are our Forum Terms of Conduct & Posting Rules. Please login to start!(If you are a Member already )</p>
 
 </div>
 @if (Request.IsAuthenticated)
 {
     if (User.IsInRole("Teacher"))
     {
-        <div class="row">
-            <div class="col-md-4">
-                <h2>
-                    @Html.ActionLink("Students", "Studentlist", "Categories")
+        <p>  --Welcome--</p>
 
-                </h2>
-                <p>
-                    As a student you have access to various categories assigned to you by your class teacher(s).
-                </p>
-                <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>
-                    @Html.ActionLink("Message Board", "Index", "Messages")
-                </h2>
-                <p>As Teacher and a student can post a message and replies in a category, remember your teachers should assign you to a specific category for you to have access, Alright Good luck!</p>
-                <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-
-            </div>
-            <div class="col-md-4">
-                <h2>Teachers</h2>
-                <p>As teacher, You can create, delete, modify a category. Add a new user to a category and delete as well. A teacher has superpowers to delete a message with any reply in a specific category, so talk to your teachers well.</p>
-                @*<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>*@
-            </div>
-        </div>
     }
 
     else if (User.IsInRole("Student"))
     {
 
+        <p>  --Welcome--</p>
 
-
-        <div class="col-md-4">
-            <h2>
-                @*@Html.ActionLink("Students", "Studentlist", "Categories")*@
-                You are a Student!
-            </h2>
-            <p>
-                As a student you have access to various categories assigned to you by your class teacher(s).
-            </p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>
-                @Html.ActionLink("Message Board", "Create", "Messages")
-            </h2>
-            <p>As Teacher and a student can post a message and replies in a category, remember your teachers should assign you to a specific category for you to have access, Alright Good luck!</p>
-            @*<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>*@
-
-        </div>
     }
 
 
 }
 <div>
-    <div><h2>Developers version of the application</h2> </div>
 </div>

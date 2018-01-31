@@ -116,7 +116,7 @@ namespace _5StarsSchoolForum.Controllers
             {
                 db.Entry(reply).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Categories");
             }
             ViewBag.MessageId = new SelectList(db.Messages, "Id", "Title", reply.MessageId);
             return View(reply);
