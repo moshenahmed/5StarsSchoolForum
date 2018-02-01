@@ -68,6 +68,7 @@ namespace _5StarsSchoolForum.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
+
             CreateTable(
                 "dbo.Messages",
                 c => new
