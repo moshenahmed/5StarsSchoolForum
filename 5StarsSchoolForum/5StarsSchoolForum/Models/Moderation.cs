@@ -7,6 +7,7 @@ namespace _5StarsSchoolForum.Models
 {
     public class Moderation
     {
+
         public int ModerationId { get; set; }
     //    public int DateTime TimeStamp { get; set; }
 
