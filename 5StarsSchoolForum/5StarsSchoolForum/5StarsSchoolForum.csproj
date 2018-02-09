@@ -177,9 +177,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801300051204_init3.cs" />
-    <Compile Include="Migrations\201801300051204_init3.Designer.cs">
-      <DependentUpon>201801300051204_init3.cs</DependentUpon>
+    <Compile Include="Migrations\201802021354587_init.cs" />
+    <Compile Include="Migrations\201802021354587_init.Designer.cs">
+      <DependentUpon>201802021354587_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802021534298_init7.cs" />
+    <Compile Include="Migrations\201802021534298_init7.Designer.cs">
+      <DependentUpon>201802021534298_init7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802021550474_init71.cs" />
+    <Compile Include="Migrations\201802021550474_init71.Designer.cs">
+      <DependentUpon>201802021550474_init71.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802032245363_init8.cs" />
+    <Compile Include="Migrations\201802032245363_init8.Designer.cs">
+      <DependentUpon>201802032245363_init8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802042213349_init6.cs" />
+    <Compile Include="Migrations\201802042213349_init6.Designer.cs">
+      <DependentUpon>201802042213349_init6.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -255,7 +271,7 @@
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Account\LoginStudent.cshtml" />
     <Content Include="Views\Shared\_LayoutStudent.cshtml" />
-    <Content Include="Views\Shared\_LayoutSidebar.cshtml" />
+    <Content Include="Views\Shared\_LayoutVisitor.cshtml" />
     <Content Include="Views\Categories\Assign.cshtml" />
     <Content Include="Views\Shared\_LayoutTeacher.cshtml" />
     <Content Include="Views\Home\IndexTeacher.cshtml" />
@@ -272,6 +288,8 @@
     <Content Include="Views\Categories\Reply.cshtml" />
     <Content Include="Views\Categories\CreateReply.cshtml" />
     <Content Include="Views\Categories\CategoryList.cshtml" />
+    <Content Include="Views\Messages\CreateReply.cshtml" />
+    <Content Include="Views\Messages\ReplyView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -285,8 +303,20 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801300051204_init3.resx">
-      <DependentUpon>201801300051204_init3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802021354587_init.resx">
+      <DependentUpon>201802021354587_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802021534298_init7.resx">
+      <DependentUpon>201802021534298_init7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802021550474_init71.resx">
+      <DependentUpon>201802021550474_init71.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802032245363_init8.resx">
+      <DependentUpon>201802032245363_init8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802042213349_init6.resx">
+      <DependentUpon>201802042213349_init6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

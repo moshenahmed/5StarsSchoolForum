@@ -9,13 +9,13 @@ namespace _5StarsSchoolForum.Models
     public class Category 
     {
         public  int Id { get; set; }
-        public int Usersid { get; set; }
-        //public int UserMessagesId { get; set; }
+        
+        
         public string CategoryTitle { get; set; }
-        //public Message Messages { get; set; }
+        
 
-        public bool Assigned { get; set; }
-        [ForeignKey("Usersid")]
+        
+        
         public virtual ICollection<ApplicationUser> Users { get; set; }
         //[ForeignKey("UserMessagesid")]
         public virtual ICollection<Message> UserMessages { get; set; }

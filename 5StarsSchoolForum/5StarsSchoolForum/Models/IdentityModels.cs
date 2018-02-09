@@ -39,7 +39,8 @@ namespace _5StarsSchoolForum.Models
             return userIdentity;
         }
         public virtual ICollection<Category> AttendedCategory { get; set; }
-       
+        public virtual ICollection<Message> PostedMessages { get; set; }
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -57,8 +58,6 @@ namespace _5StarsSchoolForum.Models
             return new ApplicationDbContext();
         }
 
-      
-
-
+        public System.Data.Entity.DbSet<_5StarsSchoolForum.Models.MessageReplyViewModel> MessageReplyViewModels { get; set; }
     }
 }

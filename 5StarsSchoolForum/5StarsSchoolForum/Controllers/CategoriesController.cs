@@ -32,6 +32,7 @@ namespace _5StarsSchoolForum.Controllers
                              Title = mes.Title,
                              PostMessage = mes.PostMessage,
                              PostingDate = mes.PostingDate,
+                             Usertag= mes.user
                              //MessageReply=mes.Replies.
 
 
@@ -40,21 +41,21 @@ namespace _5StarsSchoolForum.Controllers
         }
         public ActionResult CategoryList()
         {
-            //var model = (from user in db.Users
-            //             from usercat in user.AttendedCategory
-            //             join cat in db.Categories on usercat.Usersid equals
-            //             cat.Id
+            var model = (from user in db.Users
+                         from usercat in user.AttendedCategory
+                         join cat in db.Categories on usercat.Id equals
+                         cat.Id
 
-            //             select new UserCategoryAssigned()
-            //             {
-            //                 Catid = cat.Id,
-            //                 UserId = user.Id,
-            //                 //Assigned = true
+                         select new UserCategoryAssigned()
+                         {
+                             Catid = cat.Id,
+                             UserId = user.Id,
+                             //Assigned = true
 
 
-            //             }).ToList();
+                         }).ToList();
             //db.SaveChanges();
-            var model = db.Categories.ToList();
+            //var model = db.Categories.ToList();
             //return View("SelectCategories", model);
             return View(model);
         }
@@ -137,12 +138,17 @@ namespace _5StarsSchoolForum.Controllers
 
                 };
                 db.Categories.Add(category);
-
+                
                 var mess = new Message();
                 mess.Title = model.Title;
                 mess.PostMessage = model.PostMessage;
                 mess.PostingDate = DateTime.Now;
                 model.PostingDate = mess.PostingDate;
+                
+                model.Usertag = User.Identity.Name;
+                mess.user = model.Usertag;
+                //mess.UsersTag.Id = id;
+                //mess.UsersTag.UserName = model.Usertag;
                 db.Messages.Add(mess);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -232,12 +238,12 @@ namespace _5StarsSchoolForum.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Reply reply = db.Replies.Find(id);
-            if (reply == null)
+            
+            if (id == null)
             {
                 return HttpNotFound();
             }
-            return View(reply);
+            return View();
             //return View("Reply", model);
         }
         [HttpPost]
@@ -259,12 +265,25 @@ namespace _5StarsSchoolForum.Controllers
             return View("Reply");
 
         }
-    
+        //public ActionResult Assign(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Category category = db.Categories.Find(id);
+        //    if (category == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(category);
+        //}
+
         
-        public ActionResult Assign(Category cate)
+            public ActionResult Assign(int id)
         {
 
-
+            var model = db.Users.Find(id).Id;
             //var model = (from user in db.Users
             //             from usercat in user.AttendedCategory
             //             join cat in db.Categories on usercat.Usersid equals
@@ -278,9 +297,10 @@ namespace _5StarsSchoolForum.Controllers
 
             //             }).ToList();
             //var model = db.Categories.ToList();
-            var model = db.Categories.Where(y=>y.Usersid==cate.Usersid);
             
-            cate.Assigned = true;
+
+            
+           
             
           
             //db.Categories.Add(cate);

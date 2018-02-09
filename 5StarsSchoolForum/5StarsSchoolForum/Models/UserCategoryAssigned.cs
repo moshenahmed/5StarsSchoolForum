@@ -10,7 +10,7 @@ namespace _5StarsSchoolForum.Models
         public int Catid { get; set; }
         public string UserId { get; set; }
         public bool Assigned { get; set; }
-        public virtual ICollection<Category> Category { get; set; }
-        public virtual ICollection<ApplicationUser> Users { get; set; }
+        //public virtual ICollection<Category> Category { get; set; }
+        //public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }

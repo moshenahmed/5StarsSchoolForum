@@ -7,18 +7,18 @@ namespace _5StarsSchoolForum.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class init3 : IMigrationMetadata
+    public sealed partial class init8 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init3));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init8));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801300051204_init3"; }
+            get { return "201802032245363_init8"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return null; }
+            get { return Resources.GetString("Source"); }
         }
         
         string IMigrationMetadata.Target

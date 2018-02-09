@@ -20,11 +20,12 @@ namespace _5StarsSchoolForum.Models
 
         [Column(TypeName = "datetime2")]
         public DateTime PostingDate { get; set; }
+        public string user { get; set; }
 
         //[ForeignKey("RepliesId")]
         public virtual ICollection<Reply> Replies { get; set; }
         //[ForeignKey("UsersTagId")]
-        public virtual ICollection<ApplicationUser> UsersTag { get; set; }
+        public virtual ApplicationUser UsersTag { get; set; }
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 

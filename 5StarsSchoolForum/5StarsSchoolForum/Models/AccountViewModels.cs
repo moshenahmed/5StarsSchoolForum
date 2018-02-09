@@ -162,22 +162,24 @@ namespace _5StarsSchoolForum.Models
 
         [Column(TypeName = "datetime2")]
         public DateTime PostingDate { get; set; }
+        public string Usertag { get; set; }
 
         public string MessageReply { get; set; }
     }
 
+    //public class MessageReplyViewModel
+    //{
+    //    public string ReplyMessage { get; set; }
+    //    public DateTime PostingTime { get; set; }
+
+    //}
+
     public class MessageReplyViewModel
     {
-        public string ReplyMessage { get; set; }
-        public DateTime PostingTime { get; set; }
-
-    }
-
-    public class CatMessageReplyViewModel
-    {
-        public string categorytitle { get; set; }
-        public string MessagePost { get; set; }
-        public string ReplyMessage { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public string MessagePosted { get; set; }
+        public string ReplyToMessage { get; set; }
         
 
         public DateTime PostingTime { get; set; }

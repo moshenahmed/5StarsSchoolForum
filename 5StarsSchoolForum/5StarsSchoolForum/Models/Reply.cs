@@ -10,7 +10,7 @@ namespace _5StarsSchoolForum.Models
     {
 
         public int Id { get; set; }
-        //public int UsersTagId { get; set; }
+        public int UsersTagId { get; set; }
         public int MessageId { get; set; }
         public string ReplyMessage { get; set; }
         public DateTime PostingTime { get; set; }

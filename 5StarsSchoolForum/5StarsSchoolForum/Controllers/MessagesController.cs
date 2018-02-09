@@ -4,9 +4,13 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using _5StarsSchoolForum.Models;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
+
 
 namespace _5StarsSchoolForum.Controllers
 {
@@ -20,8 +24,8 @@ namespace _5StarsSchoolForum.Controllers
             //List<MessageReplyView> messagereply = new List<MessageReplyView>();
 
             Message message = db.Messages.Find(id);
-            var reply = new Reply();
-            var model = message.Replies.ToList();
+
+            var model = db.Replies.Where(v => v.MessageId == message.Id).ToList();
             return View(model);
         }
 
@@ -43,8 +47,8 @@ namespace _5StarsSchoolForum.Controllers
         // GET: Messages/Create
         public ActionResult Create()
         {
-            
-            
+
+
             return View();
         }
 
@@ -55,9 +59,12 @@ namespace _5StarsSchoolForum.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,PostMessage,PostingDate,Usertag")] Message message)
         {
+
             if (ModelState.IsValid)
             {
+
                 message.PostingDate = DateTime.Now;
+
                 db.Messages.Add(message);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -121,6 +128,35 @@ namespace _5StarsSchoolForum.Controllers
             db.Messages.Remove(message);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public ActionResult CreateReply()
+        {
+            return View();
+        }
+        [HttpPost]
+            public ActionResult CreateReply(MessageReplyViewModel reply, int id)
+        {
+            var mess = new Message();
+            var rep = new Reply();
+
+
+            var model = db.Messages.Where(v => v.Id==id).Select(f=>f.PostMessage).ToString();
+
+            reply.MessagePosted = model;
+            reply.PostingTime = DateTime.Now;
+            rep.ReplyMessage = reply.ReplyToMessage;
+            rep.PostingTime = reply.PostingTime;
+            //reply.MessagePosted = model;
+            //rep.MessageId = id;
+            //rep.ReplyMessage = reply.ReplyToMessage;
+            //reply.PostingTime = DateTime.Now;
+            //rep. PostingTime = reply.PostingTime;
+            db.Replies.Add(rep);
+            db.SaveChanges();
+
+
+
+            return View(reply);
         }
 
         protected override void Dispose(bool disposing)

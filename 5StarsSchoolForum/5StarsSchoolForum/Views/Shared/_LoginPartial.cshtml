@@ -16,10 +16,10 @@
         }
 
 
-    <ul class="nav navbar-nav navbar-right">
-        @*<li>@Html.ActionLink("Register new User", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+    @*<ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register new User", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    </ul>*@
     }
     else if (User.IsInRole("Teacher"))
     {
@@ -46,9 +46,13 @@
 
     }
 }
-<ul class="nav navbar-nav navbar-right">
-    @*<li>@Html.ActionLink("Register new User", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
-    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-</ul>
+			@*<div>
+
+
+				<ul class="nav navbar-nav navbar-right">
+				<li>@Html.ActionLink("Register new User", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+					<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+				</ul>
+			</div>*@
 
 

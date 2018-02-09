@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_5StarsSchoolForum.Models.Category>
+﻿@model IEnumerable<_5StarsSchoolForum.Models.UserCategoryAssigned>
 
 @{
 	ViewBag.Title = "Index";
@@ -15,7 +15,7 @@
 				@Html.DisplayNameFor(model => model.Name)
 			</th>*@
 		<th>
-			@Html.DisplayNameFor(model => model.CategoryTitle)
+			@Html.DisplayNameFor(model => model.Catid)
 		</th>
 		
 	</tr>
@@ -26,10 +26,11 @@
 		<tr>
 			<td>
 				@Html.CheckBoxFor(modelItem => item.Assigned, new { onclick = "return true" })
+				@Html.DisplayFor(modelItem => item.Catid)
 			</td>
-			<td>
+			@*<td>
 				@Html.DisplayFor(modelItem => item.CategoryTitle)
-			</td>
+			</td>*@
 			@*<td>
 					@Html.DisplayFor(modelItem => item.Description)
 				</td>*@
