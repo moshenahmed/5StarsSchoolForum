@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_5StarsSchoolForum.Models.CategoryMessageReplyViewModel>
+﻿@model _5StarsSchoolForum.Models.CategoryMessageReplyViewModel
 
 @{
 	/**/
@@ -13,34 +13,33 @@
 
 	<dl class="dl-horizontal">
 		@*<dt>
-			@Html.DisplayNameFor(model => model.CategoryTitle)
-		</dt>*@
+				@Html.DisplayNameFor(model => model.CategoryTitle)
+			</dt>*@
 
 		@*<dd>
-			@Html.DisplayFor(model => model.CategoryTitle)
-		</dd>
+				@Html.DisplayFor(model => model.CategoryTitle)
+			</dd>
 
-		<dt>
-			@Html.DisplayNameFor(model => model.UserMessages)
-		</dt>
+			<dt>
+				@Html.DisplayNameFor(model => model.UserMessages)
+			</dt>
 
-		<dd>
-			@Html.DisplayFor(model => model.UserMessages)
-		</dd>*@
-	
+			<dd>
+				@Html.DisplayFor(model => model.UserMessages)
+			</dd>*@
 
 
-@foreach (var item in Model)
-{
 
-		<dd>@Html.DisplayFor(modelItem => item.Category)</dd>
+
+
+		<dd>@Html.DisplayFor(model => model.Category)</dd>
 		<dd>**************************************************</dd>
 
-		<dd>@Html.DisplayFor(modelItem => item.Messages)</dd>
+		<dd>@Html.DisplayFor(model => model.Messages)</dd>
 
 
 
-}
+
 
 	</dl>
 

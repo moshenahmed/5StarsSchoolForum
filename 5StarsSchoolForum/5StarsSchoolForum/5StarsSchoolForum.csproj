@@ -290,6 +290,7 @@
     <Content Include="Views\Categories\CategoryList.cshtml" />
     <Content Include="Views\Messages\CreateReply.cshtml" />
     <Content Include="Views\Messages\ReplyView.cshtml" />
+    <Content Include="Views\Categories\CategoryMessageReplyViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

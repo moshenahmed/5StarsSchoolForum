@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using _5StarsSchoolForum.Models;
+using System;
 using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using _5StarsSchoolForum.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace _5StarsSchoolForum.Controllers
 {
@@ -41,22 +35,24 @@ namespace _5StarsSchoolForum.Controllers
         }
         public ActionResult CategoryList()
         {
-            var model = (from user in db.Users
-                         from usercat in user.AttendedCategory
-                         join cat in db.Categories on usercat.Id equals
-                         cat.Id
+            //var model = (from user in db.Users
+            //             from usercat in user.AttendedCategory
+            //             join cat in db.Categories on usercat.Id equals
+            //             cat.Id
 
-                         select new UserCategoryAssigned()
-                         {
-                             Catid = cat.Id,
-                             UserId = user.Id,
-                             //Assigned = true
+            //             select new UserCategoryAssigned()
+            //             {
+            //                 Catid = cat.Id,
+            //                 UserId = user.Id,
+            //                 //Assigned = true
 
 
-                         }).ToList();
+            //             }).ToList();
             //db.SaveChanges();
             //var model = db.Categories.ToList();
             //return View("SelectCategories", model);
+
+            var model = db.Categories.ToList();
             return View(model);
         }
 
@@ -110,7 +106,19 @@ namespace _5StarsSchoolForum.Controllers
             {
                 return HttpNotFound();
             }
-            var model = db.Categories.Where(v => v.Id == category.Id).ToList();
+           var cat = db.Categories.Where(v => v.Id == category.Id).Select(n=>n.CategoryTitle).ToList().ToString();
+            var mes = db.Messages.Where(m => m.CategoryId == category.Id).Select(n => n.PostMessage).ToList().ToString();
+            var model = (from cate in db.Categories
+                         
+                         join n in db.Messages on cate.Id equals n.CategoryId
+                         where cate.Id == category.Id
+                         select new CategoryMessageReplyViewModel()
+                         {
+                             Category=cate.CategoryTitle,
+                             Messages=n.PostMessage,
+                             
+
+                         }).ToList();
             return View(model);
         }
 
@@ -184,13 +192,13 @@ namespace _5StarsSchoolForum.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Category category)
+        public ActionResult Edit([Bind(Include = "Id,CategoryTitle")] Category category)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(category).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("CategoryList");
             }
             return View(category);
         }

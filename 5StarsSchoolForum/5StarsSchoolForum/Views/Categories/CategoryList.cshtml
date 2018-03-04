@@ -1,10 +1,10 @@
-﻿@model IEnumerable<_5StarsSchoolForum.Models.UserCategoryAssigned>
+﻿@model IEnumerable<_5StarsSchoolForum.Models.Category>
 
 @{
-	ViewBag.Title = "Index";
+	ViewBag.Title = "Categories";
 }
 
-<h2>Index</h2>
+<h2>Categories</h2>
 
 @*<p>
 		@Html.ActionLink("Create New", "Create")
@@ -15,7 +15,7 @@
 				@Html.DisplayNameFor(model => model.Name)
 			</th>*@
 		<th>
-			@Html.DisplayNameFor(model => model.Catid)
+			@Html.DisplayNameFor(model => model.CategoryTitle)
 		</th>
 		
 	</tr>
@@ -25,8 +25,8 @@
 
 		<tr>
 			<td>
-				@Html.CheckBoxFor(modelItem => item.Assigned, new { onclick = "return true" })
-				@Html.DisplayFor(modelItem => item.Catid)
+				@*@Html.CheckBoxFor(modelItem => item.Assigned, new { onclick = "return true" })*@
+				@Html.ActionLink(item.CategoryTitle, "Details", new { id = item.Id }, null)
 			</td>
 			@*<td>
 				@Html.DisplayFor(modelItem => item.CategoryTitle)
@@ -34,15 +34,15 @@
 			@*<td>
 					@Html.DisplayFor(modelItem => item.Description)
 				</td>*@
-			@*<td>
+			<td>
 					@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
 					@Html.ActionLink("Details", "Details", new { id = item.Id }) |
 					@Html.ActionLink("Delete", "Delete", new { id = item.Id })
-				</td>*@
+				</td>
 
 		</tr>
 	}
 
 </table>
 
-<input id="Submit1" type="submit" value="Add Access" onclick="location.href ='@Url.Action("Assign","Categories")'" />
+@*<input id="Submit1" type="submit" value="Add Access" onclick="location.href ='@Url.Action("Assign","Categories")'" />*@
