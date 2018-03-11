@@ -3,7 +3,7 @@ namespace _5StarsSchoolForum.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init : DbMigration
+    public partial class init1 : DbMigration
     {
         public override void Up()
         {
@@ -22,22 +22,23 @@ namespace _5StarsSchoolForum.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         CategoryId = c.Int(nullable: false),
-                        Title = c.String(),
                         PostMessage = c.String(),
-                        PostingDate = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
-                        UsersTag_Id = c.String(maxLength: 128),
+                        PostingDate = c.DateTime(nullable: false),
+                        User = c.String(),
+                        ApplicationUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UsersTag_Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
                 .Index(t => t.CategoryId)
-                .Index(t => t.UsersTag_Id);
+                .Index(t => t.ApplicationUser_Id);
             
             CreateTable(
                 "dbo.Replies",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        UsersTagId = c.Int(nullable: false),
                         MessageId = c.Int(nullable: false),
                         ReplyMessage = c.String(),
                         PostingTime = c.DateTime(nullable: false),
@@ -112,6 +113,17 @@ namespace _5StarsSchoolForum.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
+                "dbo.MessageReplyViewModels",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        MessagePosted = c.String(),
+                        ReplyToMessage = c.String(),
+                        PostingTime = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -141,7 +153,7 @@ namespace _5StarsSchoolForum.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.AspNetUsers", "Reply_Id", "dbo.Replies");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Messages", "UsersTag_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Messages", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.ApplicationUserCategories", "Category_Id", "dbo.Categories");
@@ -158,10 +170,11 @@ namespace _5StarsSchoolForum.Migrations
             DropIndex("dbo.AspNetUsers", new[] { "Reply_Id" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Replies", new[] { "MessageId" });
-            DropIndex("dbo.Messages", new[] { "UsersTag_Id" });
+            DropIndex("dbo.Messages", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.Messages", new[] { "CategoryId" });
             DropTable("dbo.ApplicationUserCategories");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.MessageReplyViewModels");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");

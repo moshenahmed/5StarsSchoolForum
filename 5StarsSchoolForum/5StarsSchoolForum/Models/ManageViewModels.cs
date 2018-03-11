@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -86,9 +87,11 @@ namespace _5StarsSchoolForum.Models
 
     public class CategoryMessageReplyViewModel
     {
-
+       
         public string Category { get; set; }
         public string Messages  { get; set; }
         public string Replies { get; set; }
+        public DateTime Postingdate { get; set; }
+        public string User { get; set; }
     }
 }

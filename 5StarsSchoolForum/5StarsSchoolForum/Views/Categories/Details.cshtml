@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_5StarsSchoolForum.Models.CategoryMessageReplyViewModel>
+﻿@model IEnumerable<_5StarsSchoolForum.Models.Category>
 
 @{
 	/**/
@@ -6,43 +6,17 @@
 	ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div>
-	<h4>Category</h4>
-
-	<dl class="dl-horizontal">
-		@*<dt>
-			@Html.DisplayNameFor(model => model.CategoryTitle)
-		</dt>*@
-
-		@*<dd>
-			@Html.DisplayFor(model => model.CategoryTitle)
-		</dd>
-
-		<dt>
-			@Html.DisplayNameFor(model => model.UserMessages)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.UserMessages)
-		</dd>*@
 	
+		@foreach (var item in Model)
+		{
 
+		<h4>Topic : : @Html.DisplayFor(modelItem => item.CategoryTitle)</h4>
 
-@foreach (var item in Model)
-{
-
-		<dd>@Html.DisplayFor(modelItem => item.Category)</dd>
-		<dd>**************************************************</dd>
-
-		<dd>@Html.DisplayFor(modelItem => item.Messages)</dd>
-
-
-
-}
-
-	</dl>
+		<p>Messages Posted</p>
+		<p>*************************************************************</p>
+		@Html.Action("Index","Messages")
+		}
 
 
 

@@ -23,10 +23,10 @@ namespace _5StarsSchoolForum.Controllers
                          select new CategoryMessageViewModel()
                          {
                              CatTitle = cat.CategoryTitle,
-                             Title = mes.Title,
+                             
                              PostMessage = mes.PostMessage,
                              PostingDate = mes.PostingDate,
-                             Usertag= mes.user
+                             Usertag= mes.User
                              //MessageReply=mes.Replies.
 
 
@@ -106,19 +106,8 @@ namespace _5StarsSchoolForum.Controllers
             {
                 return HttpNotFound();
             }
-           var cat = db.Categories.Where(v => v.Id == category.Id).Select(n=>n.CategoryTitle).ToList().ToString();
-            var mes = db.Messages.Where(m => m.CategoryId == category.Id).Select(n => n.PostMessage).ToList().ToString();
-            var model = (from cate in db.Categories
-                         
-                         join n in db.Messages on cate.Id equals n.CategoryId
-                         where cate.Id == category.Id
-                         select new CategoryMessageReplyViewModel()
-                         {
-                             Category=cate.CategoryTitle,
-                             Messages=n.PostMessage,
-                             
 
-                         }).ToList();
+            var model = db.Categories.Where(n => n.Id == id).ToList();
             return View(model);
         }
 
@@ -134,32 +123,32 @@ namespace _5StarsSchoolForum.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(/*[Bind(Include = "Id,CategoryTitle,Messages.PostMessage")]*/ CategoryMessageViewModel model)
+        public ActionResult Create([Bind(Include = "Id,CategoryTitle")] Category model)
         {
 
             if (ModelState.IsValid)
             {
                 var category = new Category();
-                {
-                    category.CategoryTitle = model.CatTitle;
+                
+                    category.CategoryTitle = model.CategoryTitle;
 
 
-                };
+                
                 db.Categories.Add(category);
                 
-                var mess = new Message();
-                mess.Title = model.Title;
-                mess.PostMessage = model.PostMessage;
-                mess.PostingDate = DateTime.Now;
-                model.PostingDate = mess.PostingDate;
+                //var mess = new Message();
                 
-                model.Usertag = User.Identity.Name;
-                mess.user = model.Usertag;
-                //mess.UsersTag.Id = id;
-                //mess.UsersTag.UserName = model.Usertag;
-                db.Messages.Add(mess);
+                //mess.PostMessage = model.PostMessage;
+                //mess.PostingDate = DateTime.Now;
+                //model.PostingDate = mess.PostingDate;
+                
+                //model.Usertag = User.Identity.Name;
+                //mess.user = model.Usertag;
+                ////mess.UsersTag.Id = id;
+                ////mess.UsersTag.UserName = model.Usertag;
+                //db.Messages.Add(mess);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("CategoryList");
 
             }
 

@@ -177,25 +177,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802021354587_init.cs" />
-    <Compile Include="Migrations\201802021354587_init.Designer.cs">
-      <DependentUpon>201802021354587_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802021534298_init7.cs" />
-    <Compile Include="Migrations\201802021534298_init7.Designer.cs">
-      <DependentUpon>201802021534298_init7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802021550474_init71.cs" />
-    <Compile Include="Migrations\201802021550474_init71.Designer.cs">
-      <DependentUpon>201802021550474_init71.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802032245363_init8.cs" />
-    <Compile Include="Migrations\201802032245363_init8.Designer.cs">
-      <DependentUpon>201802032245363_init8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802042213349_init6.cs" />
-    <Compile Include="Migrations\201802042213349_init6.Designer.cs">
-      <DependentUpon>201802042213349_init6.cs</DependentUpon>
+    <Compile Include="Migrations\201803071245009_init1.cs" />
+    <Compile Include="Migrations\201803071245009_init1.Designer.cs">
+      <DependentUpon>201803071245009_init1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -291,6 +275,7 @@
     <Content Include="Views\Messages\CreateReply.cshtml" />
     <Content Include="Views\Messages\ReplyView.cshtml" />
     <Content Include="Views\Categories\CategoryMessageReplyViewModel.cshtml" />
+    <Content Include="Views\Messages\IndexPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -304,20 +289,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802021354587_init.resx">
-      <DependentUpon>201802021354587_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802021534298_init7.resx">
-      <DependentUpon>201802021534298_init7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802021550474_init71.resx">
-      <DependentUpon>201802021550474_init71.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802032245363_init8.resx">
-      <DependentUpon>201802032245363_init8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802042213349_init6.resx">
-      <DependentUpon>201802042213349_init6.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803071245009_init1.resx">
+      <DependentUpon>201803071245009_init1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

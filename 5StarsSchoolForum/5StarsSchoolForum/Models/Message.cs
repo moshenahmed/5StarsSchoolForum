@@ -7,27 +7,25 @@ using System.Web;
 
 namespace _5StarsSchoolForum.Models
 {
-    public class Message 
+    public class Message
     {
 
-        public  int Id { get; set; }
+        public int Id { get; set; }
         //public int UsertagId { get; set; }
         public int CategoryId { get; set; }
-        public string Title { get; set; }
-        public string PostMessage { get; set; }
-        
-        [DisplayName("Posting time")]
 
-        [Column(TypeName = "datetime2")]
+        public string PostMessage { get; set; }
+
         public DateTime PostingDate { get; set; }
-        public string user { get; set; }
+        public string User { get; set; }
 
         //[ForeignKey("RepliesId")]
         public virtual ICollection<Reply> Replies { get; set; }
-        //[ForeignKey("UsersTagId")]
-        public virtual ApplicationUser UsersTag { get; set; }
+      
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
+        //[ForeignKey("UserTagId")]
+        public virtual ApplicationUser UserTag { get; set; }
 
 
 

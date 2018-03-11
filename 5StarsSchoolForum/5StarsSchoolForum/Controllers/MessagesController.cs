@@ -19,14 +19,15 @@ namespace _5StarsSchoolForum.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Messages
-        public ActionResult Index(int id)
+        public ActionResult Index(int? id)
+
         {
             //List<MessageReplyView> messagereply = new List<MessageReplyView>();
+            
+            var model = db.Messages.Where(x=>x.CategoryId==id).ToList();
 
-            Message message = db.Messages.Find(id);
-
-            var model = db.Replies.Where(v => v.MessageId == message.Id).ToList();
-            return View(model);
+            
+            return PartialView( "IndexPartial", model);
         }
 
         // GET: Messages/Details/5
@@ -45,7 +46,7 @@ namespace _5StarsSchoolForum.Controllers
         }
 
         // GET: Messages/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
 
 
@@ -57,20 +58,31 @@ namespace _5StarsSchoolForum.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,PostMessage,PostingDate,Usertag")] Message message)
+        public ActionResult Create([Bind(Include = "Id,CategoryId,PostMessage,PostingDate,user")] int id, Message m )
         {
-
+            m.PostingDate = DateTime.Now;
+            m.User = User.Identity.Name;
+            m.CategoryId = id;
+            
             if (ModelState.IsValid)
             {
-
-                message.PostingDate = DateTime.Now;
-
-                db.Messages.Add(message);
+                var model = (from cate in db.Categories
+                             where cate.Id == id
+                             select new Message()
+                             {
+                                 CategoryId=m.CategoryId,
+                                 PostingDate = m.PostingDate,
+                                 
+                                 PostMessage  =  m.PostMessage,
+                                 
+                                 User = m.User
+                             });
+                db.Messages.Add(m);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Categories",new { id = Url.RequestContext.RouteData.Values["id"] });
             }
 
-            return View(message);
+            return View();
         }
 
         // GET: Messages/Edit/5
