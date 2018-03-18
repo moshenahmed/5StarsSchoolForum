@@ -174,6 +174,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\RepliesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -274,8 +275,13 @@
     <Content Include="Views\Categories\CategoryList.cshtml" />
     <Content Include="Views\Messages\CreateReply.cshtml" />
     <Content Include="Views\Messages\ReplyView.cshtml" />
-    <Content Include="Views\Categories\CategoryMessageReplyViewModel.cshtml" />
+    <Content Include="Views\Replies\MessageRepliesViewModel.cshtml" />
     <Content Include="Views\Messages\IndexPartial.cshtml" />
+    <Content Include="Views\Replies\Create.cshtml" />
+    <Content Include="Views\Replies\Delete.cshtml" />
+    <Content Include="Views\Replies\Details.cshtml" />
+    <Content Include="Views\Replies\Edit.cshtml" />
+    <Content Include="Views\Replies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

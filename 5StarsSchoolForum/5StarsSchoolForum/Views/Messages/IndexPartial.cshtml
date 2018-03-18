@@ -22,18 +22,20 @@
 <div>
 	
 	<div>
+		<h4>@Html.DisplayFor(modelItem => item.PostMessage)</h4>
+	</div>
+	
+	<div>
 		<p>@Html.DisplayFor(modelItem => item.User)</p>
 	</div>
 	<div>
 		@Html.DisplayFor(modelItem => item.PostingDate)
 	</div>
 	
-	<div>
-		<p>@Html.DisplayFor(modelItem => item.PostMessage)</p>
-	</div>
+	
 
 	<div>
-		@Html.ActionLink("Reply", "Reply", new { id = item.Id })|@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+		@Html.ActionLink("Reply","Create", "Replies", new { id = item.Id}, null)|@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |@Html.ActionLink("Delete", "Delete", new { id = item.Id })
 
 
 	</div>

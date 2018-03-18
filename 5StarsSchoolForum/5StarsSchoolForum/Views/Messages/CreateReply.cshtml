@@ -1,18 +1,17 @@
-﻿@model _5StarsSchoolForum.Models.MessageReplyViewModel
+﻿@model _5StarsSchoolForum.Models.Reply
 
 @{
     ViewBag.Title = "CreateReply";
 }
 
-<h2>CreateReply</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-		<h4>@Html.DisplayFor(model => model.MessagePosted)</h4>
+		@*<h4>@Html.DisplayFor(model => model.MessagePosted)</h4>*@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*<div class="form-group">
@@ -24,10 +23,10 @@
         </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ReplyToMessage, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ReplyMessage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ReplyToMessage, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ReplyToMessage, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ReplyMessage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ReplyMessage, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -41,16 +40,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Reply" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+

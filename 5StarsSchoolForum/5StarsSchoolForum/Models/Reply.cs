@@ -10,13 +10,13 @@ namespace _5StarsSchoolForum.Models
     {
 
         public int Id { get; set; }
-        public int UsersTagId { get; set; }
+        public string User { get; set; }
         public int MessageId { get; set; }
         public string ReplyMessage { get; set; }
         public DateTime PostingTime { get; set; }
         [ForeignKey("MessageId")]
         public virtual Message Message { get; set; }
         //[ForeignKey("UsersTagId")]
-        public ICollection<ApplicationUser> UsersTag { get; set; }
+        public virtual ICollection<ApplicationUser> UsersTag { get; set; }
     }
 }

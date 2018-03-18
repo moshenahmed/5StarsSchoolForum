@@ -85,13 +85,19 @@ namespace _5StarsSchoolForum.Models
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
 
-    public class CategoryMessageReplyViewModel
+    public class MessageRepliesViewModel
     {
-       
-        public string Category { get; set; }
-        public string Messages  { get; set; }
-        public string Replies { get; set; }
-        public DateTime Postingdate { get; set; }
-        public string User { get; set; }
+
+
+        //    public string Postmessage { get; set; }
+        //    public string Replies { get; set; }
+        //    public DateTime Postingdate { get; set; }
+        //    public string User { get; set; }
+        //    public string UserReply { get; set; }
+        //    public DateTime ReplyPostingdate { get; set; }
+
+        public IEnumerable<Message> mes { get; set; }
+        public IEnumerable<Reply> rep { get; set; }
+        public string reply { get; set; }
     }
 }

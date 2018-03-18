@@ -1,0 +1,58 @@
+﻿@model _5StarsSchoolForum.Models.Reply
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Reply</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Message.PostMessage)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Message.PostMessage)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Users)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Users)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ReplyMessage)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ReplyMessage)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PostingTime)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PostingTime)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

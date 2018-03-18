@@ -29,7 +29,12 @@ namespace _5StarsSchoolForum.Controllers
             
             return PartialView( "IndexPartial", model);
         }
-
+        public ActionResult Back(int id)
+        {
+            var model = db.Messages.FirstOrDefault(k => k.Id == id).CategoryId;
+            return RedirectToAction("Details", "Categories",model);
+        } 
+         
         // GET: Messages/Details/5
         public ActionResult Details(int? id)
         {
@@ -137,38 +142,48 @@ namespace _5StarsSchoolForum.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Message message = db.Messages.Find(id);
+            Reply reply = db.Replies.Find(id);
             db.Messages.Remove(message);
+            if (reply != null)
+            {
+                db.Replies.Remove(reply);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Replies", new { id = Url.RequestContext.RouteData.Values["id"]});
+
         }
-        public ActionResult CreateReply()
+        public ActionResult CreateReply(int? id)
         {
-            return View();
+
+            var model = new MessageRepliesViewModel();
+
+            model.mes = db.Messages.Where(m => m.Id == id).ToList();
+            model.rep = db.Replies.Where(g => g.MessageId == id).ToList();
+                         
+            return View("MessageRepliesViewModel",model );
         }
         [HttpPost]
-            public ActionResult CreateReply(MessageReplyViewModel reply, int id)
+            public ActionResult CreateReply(int id, Reply Reply)
         {
-            var mess = new Message();
-            var rep = new Reply();
-
-
-            var model = db.Messages.Where(v => v.Id==id).Select(f=>f.PostMessage).ToString();
-
-            reply.MessagePosted = model;
-            reply.PostingTime = DateTime.Now;
-            rep.ReplyMessage = reply.ReplyToMessage;
-            rep.PostingTime = reply.PostingTime;
-            //reply.MessagePosted = model;
-            //rep.MessageId = id;
-            //rep.ReplyMessage = reply.ReplyToMessage;
-            //reply.PostingTime = DateTime.Now;
-            //rep. PostingTime = reply.PostingTime;
-            db.Replies.Add(rep);
+            Reply.PostingTime = DateTime.Now;
+            Reply.User = User.Identity.Name;
+            Reply.MessageId = id;
+            var r = new Reply();
+            r.MessageId = Reply.MessageId;
+            r.PostingTime = Reply.PostingTime;
+            r.ReplyMessage = Reply.ReplyMessage;
+            r.User = Reply.User;
+            db.Replies.Add(r);
             db.SaveChanges();
 
+            var model = new MessageRepliesViewModel();
 
+            model.mes = db.Messages.Where(m => m.Id == id).ToList();
+            model.rep = db.Replies.Where(g => g.MessageId == id).ToList();
 
-            return View(reply);
+            return View("MessageRepliesViewModel", model);
         }
 
         protected override void Dispose(bool disposing)
