@@ -27,6 +27,7 @@
 		<h4><il>@c.ReplyMessage</il></h4>
 		<il>@c.PostingTime</il>
 		<il>@c.User</il>
+		<il>@Html.ActionLink("Edit", "Edit", "Replies", new { id = c.Id })	| @Html.ActionLink("Delete", "Delete", "Replies", new { id = c.Id })</il>
 
 
 
@@ -37,22 +38,22 @@
 	<br />
 
 	@using (Html.BeginForm())
-	{
-		@Html.AntiForgeryToken()
+{
+@Html.AntiForgeryToken()
 
-		<div class="form-group">
-			@*@Html.LabelFor(model => model.ReplyMessage, htmlAttributes: new { @class = "control-label col-md-2" })*@
-			<div class="col-md-10">
-				@Html.EditorFor(model => model.reply, new { htmlAttributes = new { @class = "form-control" } })
+<div class="form-group">
+	@*@Html.LabelFor(model => model.ReplyMessage, htmlAttributes: new { @class = "control-label col-md-2" })*@
+	<div class="col-md-10">
+		@Html.EditorFor(model => model.reply, new { htmlAttributes = new { @class = "form-control" } })
 
-			</div>
-			<br />
-			<div class="col-md-offset-2 col-md-10">
-				<input type="submit" value="Reply" class="btn btn-default" />
-			</div>
-		</div>
+	</div>
+	<br />
+	<div class="col-md-offset-2 col-md-10">
+		<input type="submit" value="Reply" class="btn btn-default" />
+	</div>
+</div>
 
-	}
+}
 
 </div>
 @section Scripts {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5StarsSchoolForum.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,7 +9,7 @@ namespace _5StarsSchoolForum.Controllers
 {
     public class HomeController : Controller
     {
-        
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
             return View();
@@ -27,7 +28,16 @@ namespace _5StarsSchoolForum.Controllers
 
             return View();
         }
-
+public ActionResult Assign()
+        {
+            var model = (from c in db.Categories select new AssignCategoryView
+            {
+                Category=c.CategoryTitle,
+                Assign=false
+                
+            }).ToList();
+            return View("AssignCategoryView", model);
+        }
        
        
     } 

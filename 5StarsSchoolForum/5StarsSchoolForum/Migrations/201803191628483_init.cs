@@ -3,7 +3,7 @@ namespace _5StarsSchoolForum.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init1 : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
@@ -25,20 +25,20 @@ namespace _5StarsSchoolForum.Migrations
                         PostMessage = c.String(),
                         PostingDate = c.DateTime(nullable: false),
                         User = c.String(),
-                        ApplicationUser_Id = c.String(maxLength: 128),
+                        UserTag_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserTag_Id)
                 .Index(t => t.CategoryId)
-                .Index(t => t.ApplicationUser_Id);
+                .Index(t => t.UserTag_Id);
             
             CreateTable(
                 "dbo.Replies",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UsersTagId = c.Int(nullable: false),
+                        User = c.String(),
                         MessageId = c.Int(nullable: false),
                         ReplyMessage = c.String(),
                         PostingTime = c.DateTime(nullable: false),
@@ -134,6 +134,21 @@ namespace _5StarsSchoolForum.Migrations
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
+                "dbo.UserCategoryAssigneds",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CategoryId = c.Int(nullable: false),
+                        Assigned = c.Boolean(nullable: false),
+                        UserTag_Id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserTag_Id)
+                .Index(t => t.CategoryId)
+                .Index(t => t.UserTag_Id);
+            
+            CreateTable(
                 "dbo.ApplicationUserCategories",
                 c => new
                     {
@@ -150,10 +165,12 @@ namespace _5StarsSchoolForum.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.UserCategoryAssigneds", "UserTag_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.UserCategoryAssigneds", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.AspNetUsers", "Reply_Id", "dbo.Replies");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Messages", "ApplicationUser_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Messages", "UserTag_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.ApplicationUserCategories", "Category_Id", "dbo.Categories");
@@ -162,6 +179,8 @@ namespace _5StarsSchoolForum.Migrations
             DropForeignKey("dbo.Messages", "CategoryId", "dbo.Categories");
             DropIndex("dbo.ApplicationUserCategories", new[] { "Category_Id" });
             DropIndex("dbo.ApplicationUserCategories", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.UserCategoryAssigneds", new[] { "UserTag_Id" });
+            DropIndex("dbo.UserCategoryAssigneds", new[] { "CategoryId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
@@ -170,9 +189,10 @@ namespace _5StarsSchoolForum.Migrations
             DropIndex("dbo.AspNetUsers", new[] { "Reply_Id" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Replies", new[] { "MessageId" });
-            DropIndex("dbo.Messages", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.Messages", new[] { "UserTag_Id" });
             DropIndex("dbo.Messages", new[] { "CategoryId" });
             DropTable("dbo.ApplicationUserCategories");
+            DropTable("dbo.UserCategoryAssigneds");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.MessageReplyViewModels");
             DropTable("dbo.AspNetUserRoles");

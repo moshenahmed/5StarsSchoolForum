@@ -140,7 +140,7 @@ namespace _5StarsSchoolForum.Controllers
             Reply reply = db.Replies.Find(id);
             db.Replies.Remove(reply);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Create", new { id = Url.RequestContext.RouteData.Values["id"] });
         }
 
         protected override void Dispose(bool disposing)

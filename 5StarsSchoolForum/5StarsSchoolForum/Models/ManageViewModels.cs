@@ -88,16 +88,15 @@ namespace _5StarsSchoolForum.Models
     public class MessageRepliesViewModel
     {
 
-
-        //    public string Postmessage { get; set; }
-        //    public string Replies { get; set; }
-        //    public DateTime Postingdate { get; set; }
-        //    public string User { get; set; }
-        //    public string UserReply { get; set; }
-        //    public DateTime ReplyPostingdate { get; set; }
-
         public IEnumerable<Message> mes { get; set; }
         public IEnumerable<Reply> rep { get; set; }
         public string reply { get; set; }
+    }
+
+    public class AssignCategoryView
+    {
+        public string Category { get; set; }
+        public bool Assign { get; set; }
+
     }
 }

@@ -53,6 +53,7 @@ namespace _5StarsSchoolForum.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Reply> Replies { get; set; }
+        public DbSet<UserCategoryAssigned> UserCategoryAssignees { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
