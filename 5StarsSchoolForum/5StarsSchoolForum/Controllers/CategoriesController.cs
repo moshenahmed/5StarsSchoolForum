@@ -19,39 +19,18 @@ namespace _5StarsSchoolForum.Controllers
                          from mes in cat.UserMessages
                          join Message in db.Messages on mes.CategoryId equals
                          Message.Id
-
                          select new CategoryMessageViewModel()
                          {
-                             CatTitle = cat.CategoryTitle,
-                             
+                             CatTitle = cat.CategoryTitle,                             
                              PostMessage = mes.PostMessage,
                              PostingDate = mes.PostingDate,
                              Usertag= mes.User
-                             //MessageReply=mes.Replies.
-
-
                          }).ToList();
+
             return View(model);
         }
         public ActionResult CategoryList()
         {
-            //var model = (from user in db.Users
-            //             from usercat in user.AttendedCategory
-            //             join cat in db.Categories on usercat.Id equals
-            //             cat.Id
-
-            //             select new UserCategoryAssigned()
-            //             {
-            //                 Catid = cat.Id,
-            //                 UserId = user.Id,
-            //                 //Assigned = true
-
-
-            //             }).ToList();
-            //db.SaveChanges();
-            //var model = db.Categories.ToList();
-            //return View("SelectCategories", model);
-
             var model = db.Categories.ToList();
             return View(model);
         }
@@ -60,8 +39,6 @@ namespace _5StarsSchoolForum.Controllers
         public ActionResult Studentlist()
 
         {
-
-            //var a = db.Users.ToList()[0].Roles.ToList()[0].RoleId == model.ToList()[0].Id;
             var model = (from user in db.Users
                          from userRole in user.Roles
                          join role in db.Roles on userRole.RoleId equals
@@ -69,10 +46,10 @@ namespace _5StarsSchoolForum.Controllers
 
                          select new UserViewModel()
                          {
-                             Username = user.UserName,
+                             User = user,
 
-                             Role = role.Name
-                         }).Where(x => x.Role == "Student").ToList();
+                             Roles = role
+                         }).Where(x => x.Roles.Name == "Student").ToList();
 
             return View("Studentlist", model);
         }
@@ -86,9 +63,9 @@ namespace _5StarsSchoolForum.Controllers
 
                          select new UserViewModel()
                          {
-                             Username = user.UserName,
+                             User = user,
 
-                             Role = role.Name
+                             Roles = role
                          }).ToList();
 
             return View("Teacherlist", model);
@@ -129,37 +106,17 @@ namespace _5StarsSchoolForum.Controllers
             if (ModelState.IsValid)
             {
                 var category = new Category();
-                
-                    category.CategoryTitle = model.CategoryTitle;
 
-
+                category.CategoryTitle = model.CategoryTitle;
                 
                 db.Categories.Add(category);
-                
-                //var mess = new Message();
-                
-                //mess.PostMessage = model.PostMessage;
-                //mess.PostingDate = DateTime.Now;
-                //model.PostingDate = mess.PostingDate;
-                
-                //model.Usertag = User.Identity.Name;
-                //mess.user = model.Usertag;
-                ////mess.UsersTag.Id = id;
-                ////mess.UsersTag.UserName = model.Usertag;
-                //db.Messages.Add(mess);
                 db.SaveChanges();
-                return RedirectToAction("CategoryList");
 
+                return RedirectToAction("CategoryList");
             }
 
-
             return View(model);
-
-
         }
-
-
-
 
         // GET: Categories/Edit/5
         public ActionResult Edit(int? id)
@@ -220,17 +177,6 @@ namespace _5StarsSchoolForum.Controllers
 
         public ActionResult CreateReply(int? id)
         {
-            //var model = (from m in db.Messages
-            //             from mr in db.Replies
-            //             join reply in db.Replies on mr.MessageId equals
-            //             reply.Id
-
-            //             select new Reply()
-            //             {
-            //                 ReplyMessage = mr.ReplyMessage,
-
-            //                 PostingTime = mr.PostingTime
-            //             }).ToList();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -262,45 +208,11 @@ namespace _5StarsSchoolForum.Controllers
             return View("Reply");
 
         }
-        //public ActionResult Assign(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Category category = db.Categories.Find(id);
-        //    if (category == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(category);
-        //}
-
         
             public ActionResult Assign(int id)
         {
 
             var model = db.Users.Find(id).Id;
-            //var model = (from user in db.Users
-            //             from usercat in user.AttendedCategory
-            //             join cat in db.Categories on usercat.Usersid equals
-            //             cat.Id
-
-            //             select new Category()
-            //             {
-
-            //                 Assigned = true
-
-
-            //             }).ToList();
-            //var model = db.Categories.ToList();
-            
-
-            
-           
-            
-          
-            //db.Categories.Add(cate);
             db.SaveChanges();
 
 

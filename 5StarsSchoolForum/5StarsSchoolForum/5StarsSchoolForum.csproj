@@ -283,9 +283,12 @@
     <Content Include="Views\Replies\Edit.cshtml" />
     <Content Include="Views\Replies\Index.cshtml" />
     <Content Include="Views\Home\AssignCategoryView.cshtml" />
+    <Content Include="Views\Home\AssignedCategoryView.cshtml" />
+    <Content Include="Views\Home\UserAssignedCategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Tests\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -314,7 +317,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59614</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

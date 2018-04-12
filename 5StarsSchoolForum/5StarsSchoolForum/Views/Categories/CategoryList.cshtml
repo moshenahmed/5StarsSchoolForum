@@ -28,12 +28,6 @@
 				@*@Html.CheckBoxFor(modelItem => item.Assigned, new { onclick = "return true" })*@
 				@Html.ActionLink(item.CategoryTitle, "Details", new { id = item.Id }, null)
 			</td>
-			@*<td>
-				@Html.DisplayFor(modelItem => item.CategoryTitle)
-			</td>*@
-			@*<td>
-					@Html.DisplayFor(modelItem => item.Description)
-				</td>*@
 			<td>
 					@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
 					@Html.ActionLink("Details", "Details", new { id = item.Id }) |

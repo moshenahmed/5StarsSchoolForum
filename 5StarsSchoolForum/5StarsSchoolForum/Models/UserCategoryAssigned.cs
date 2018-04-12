@@ -10,12 +10,15 @@ namespace _5StarsSchoolForum.Models
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }
+
+        public int UserTagId { get; set; }
        
         public bool Assigned { get; set; }
 
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
-        
-        public virtual ApplicationUser UserTag { get; set; }
+
+      
+        public  virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

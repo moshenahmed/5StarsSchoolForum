@@ -1,0 +1,30 @@
+﻿@model IEnumerable<_5StarsSchoolForum.Models.CategoryListViewModel>
+
+@{
+    ViewBag.Title = "UserAssignedCategories";
+}
+
+<h2>The Student Has Access to the Below Categories.</h2>
+
+<br/>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryAssigned)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryAssigned)
+                </td>
+                <td>@Html.ActionLink("Unassign", "Unassign","Home", new { cat = item.CategoryAssigned, id = Url.RequestContext.RouteData.Values["id"] }, null)</td>
+            </tr>
+
+        }
+
+    </table>

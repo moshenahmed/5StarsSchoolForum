@@ -96,7 +96,22 @@ namespace _5StarsSchoolForum.Models
     public class AssignCategoryView
     {
         public string Category { get; set; }
+
         public bool Assign { get; set; }
 
+        public string User { get; set; }
+
+    }
+
+    public class AssignedCategoryView
+    {
+        public string Category { get; set; }
+
+        public string Usertag { get; set; }
+    }
+
+    public class CategoryListViewModel
+    {
+        public string CategoryAssigned { get; set; }
     }
 }

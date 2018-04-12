@@ -1,0 +1,18 @@
+﻿@model _5StarsSchoolForum.Models.AssignedCategoryView
+
+@{
+    ViewBag.Title = "AssignedCategoryView";
+}
+<br/>
+
+
+<div>
+    <label>Category</label>
+    <p>@Html.DisplayFor(model => model.Category)</p>
+    <br />
+    <label>Has been assigned to</label>
+    <p>@Html.DisplayFor(model => Model.Usertag)</p>
+</div>
+
+
+
