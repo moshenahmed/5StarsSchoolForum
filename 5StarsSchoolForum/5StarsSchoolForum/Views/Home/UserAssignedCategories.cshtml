@@ -7,24 +7,52 @@
 <h2>The Student Has Access to the Below Categories.</h2>
 
 <br/>
-
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryAssigned)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+@if (Request.IsAuthenticated)
+{
+    if (User.IsInRole("Teacher"))
+    {
+        <table class="table">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryAssigned)
-                </td>
-                <td>@Html.ActionLink("Unassign", "Unassign","Home", new { cat = item.CategoryAssigned, id = Url.RequestContext.RouteData.Values["id"] }, null)</td>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryAssigned)
+                </th>
+                <th></th>
             </tr>
 
-        }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryAssigned)
+                    </td>
+                    <td>@Html.ActionLink("Unassign", "Unassign", "Home", new {cat = item.CategoryAssigned, id = Url.RequestContext.RouteData.Values["id"]}, null)</td>
+                </tr>
 
-    </table>
+            }
+
+        </table>
+    }
+
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryAssigned)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryAssigned)
+                    </td>
+                </tr>
+
+            }
+
+        </table>
+    }
+}

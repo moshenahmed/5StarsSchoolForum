@@ -3,48 +3,70 @@
 @{
 	ViewBag.Title = "AssignCategoryView";
 }
-
-<h2>Available Categories</h2>
-
-@using (Html.BeginForm())
-
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+@if (Request.IsAuthenticated)
 {
-    @Html.AntiForgeryToken()
+    if (User.IsInRole("Teacher"))
+    {
+        <h2>Available Categories</h2>
 
-    <div class="form-horizontal">
+using (Html.BeginForm())
+
+ {
+     @Html.AntiForgeryToken()
+
+     <div class="form-horizontal">
+         <table class="table">
+             <tr>
+                 <th>
+                     @Html.DisplayNameFor(model => model.Category)
+                 </th>
+             </tr>
+
+             @foreach (var item in Model)
+             {
+                 <tr>
+                     <td>
+                         <input type="checkbox" name="category" value="@item.Category">
+                         <label>@Html.DisplayFor(modelItem => item.Category)</label>
+                     </td>
+                 </tr>
+             }
+
+         </table>
+         <br/>
+         <div class="form-group">
+             <div class="col-md-offset-2 col-md-10">
+                 <input type="submit" value="Assigning" class="btn btn-default"/>
+             </div>
+         </div>
+     </div>
+ }
+
+
+    }
+
+    else
+    {
+        <div class="form-horizontal">
         <table class="table">
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Category)
                 </th>
-                <th>
-
-                </th>
-
-                <th></th>
             </tr>
 
             @foreach (var item in Model)
             {
                 <tr>
                     <td>
-                        <input type="checkbox" name="category" value="@item.Category">
                         <label>@Html.DisplayFor(modelItem => item.Category)</label>
                     </td>
                 </tr>
             }
-
         </table>
-        <br/>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Assigning" class="btn btn-default"/>
-            </div>
         </div>
-    </div>
+    }        
 }
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-
