@@ -37,15 +37,26 @@ namespace _5StarsSchoolForum.Controllers
 
         [HttpGet]
         public ActionResult Assign(string id)
-        {            
-                var category = db.UserCategoryAssignees.First(x => x.ApplicationUser.Id == id);
-                var model = from c in db.Categories
-                    where c.Id != category.CategoryId
-                    select new AssignCategoryView
-                    {
-                        Category = c.CategoryTitle
-                    };
-                return View("AssignCategoryView", model);
+        {
+            var studentCount = db.UserCategoryAssignees.Count(x => x.ApplicationUser.Id == id);
+            if (studentCount > 0)
+            {
+                var categoriesAssigned = db.UserCategoryAssignees
+                    .Where(x => x.ApplicationUser.Id == id && x.Assigned == true)
+                    .Select(v => v.CategoryId).ToList();
+                var categories = db.Categories.Select(x => x.Id).ToList();
+                var unassignedCategories = categories.Except(categoriesAssigned).ToList();               
+                    var model = from c in db.Categories
+                        join k in unassignedCategories on c.Id equals k                        
+                        select new AssignCategoryView
+                        {
+                            Category = c.CategoryTitle
+                        };
+                    return View("AssignCategoryView", model);                                  
+            }
+
+            return View("AssignCategoryView", from c in db.Categories
+                select new AssignCategoryView {Category = c.CategoryTitle});
         }
 
         [HttpPost]
