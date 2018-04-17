@@ -54,17 +54,14 @@ namespace _5StarsSchoolForum.Controllers
             return View("Studentlist", model);
         }
         public ActionResult Teacherlist()
-
         {
             var model = (from user in db.Users
                          from userRole in user.Roles
                          join role in db.Roles on userRole.RoleId equals
                          role.Id
-
                          select new UserViewModel()
                          {
                              User = user,
-
                              Roles = role
                          }).ToList();
 
@@ -77,8 +74,6 @@ namespace _5StarsSchoolForum.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Category category = db.Categories.Find(id);
-
-
             if (category == null)
             {
                 return HttpNotFound();
@@ -91,7 +86,6 @@ namespace _5StarsSchoolForum.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-
             return View();
         }
 
@@ -169,10 +163,31 @@ namespace _5StarsSchoolForum.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
+            var category = db.Categories.Find(id);
+            var messageCount = db.Messages.Count(x => x.CategoryId == id);
+            if (messageCount > 0)
+            {
+                var messages = db.Messages.Where(x => x.CategoryId == id)
+                    .Select(v => v.Id).ToList();
+                foreach (var messageId in messages)
+                {                 
+                    var replyCount = db.Replies.Count(x => x.MessageId == messageId);
+                    if (replyCount > 0)
+                    {
+                        var replies = db.Replies.Where(x => x.MessageId == messageId)
+                            .Select(v => v.Id).ToList();
+                        foreach (var replyId in replies)
+                        {
+                            db.Replies.Remove(db.Replies.Find(replyId));
+                        }
+                    }
+                    db.Messages.Remove(db.Messages.Find(messageId));
+                }
+            }
+
             db.Categories.Remove(category);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("CategoryList");
         }
 
         public ActionResult CreateReply(int? id)
@@ -192,12 +207,9 @@ namespace _5StarsSchoolForum.Controllers
         [HttpPost]
         public ActionResult CreateReply(int id)
         {
-
-
             var rep = new Reply();
             var cat = db.Categories.Find(id);
             var mes = db.Messages.Where(x => x.Id == cat.Id).ToString();
-
 
             rep.PostingTime = DateTime.Now;
             rep.MessageId = int.Parse(mes);
@@ -206,15 +218,12 @@ namespace _5StarsSchoolForum.Controllers
             db.SaveChanges();
 
             return View("Reply");
-
         }
         
             public ActionResult Assign(int id)
         {
-
             var model = db.Users.Find(id).Id;
             db.SaveChanges();
-
 
             return View(model);
         }

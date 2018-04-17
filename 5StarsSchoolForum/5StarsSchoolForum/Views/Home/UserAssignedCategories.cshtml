@@ -31,6 +31,7 @@
             }
 
         </table>
+        @Html.ActionLink("Back","StudentList","Categories")
     }
 
     else
@@ -47,7 +48,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CategoryAssigned)
+                        @Html.ActionLink(item.CategoryAssigned, "GetCategoryId","Home", new {categoryname = item.CategoryAssigned}, null)
                     </td>
                 </tr>
 

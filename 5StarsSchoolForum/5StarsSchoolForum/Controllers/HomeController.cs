@@ -62,29 +62,33 @@ namespace _5StarsSchoolForum.Controllers
         [HttpPost]
         public ActionResult Assign(string category, string id)
         {
-            var model = new UserCategoryAssigned();
-            var categoryAssigned = db.Categories.First(x => x.CategoryTitle == category);
-            var result = db.UserCategoryAssignees.Where(x =>
-                x.CategoryId == categoryAssigned.Id && x.ApplicationUser.Id == id && x.Assigned == false);
-            var user = db.Users.First(x => x.Id == id);
-          
-            if (result != null)
+            if (category != null)
             {
-                model.CategoryId = categoryAssigned.Id;
-                model.ApplicationUser = user;
-                model.Assigned = true;
-                db.UserCategoryAssignees.AddOrUpdate(model);
-                db.SaveChanges();
+                var model = new UserCategoryAssigned();
+                var categoryAssigned = db.Categories.First(x => x.CategoryTitle == category);
+                var result = db.UserCategoryAssignees.Where(x =>
+                    x.CategoryId == categoryAssigned.Id && x.ApplicationUser.Id == id && x.Assigned == false);
+                var user = db.Users.First(x => x.Id == id);
+
+                if (result != null)
+                {
+                    model.CategoryId = categoryAssigned.Id;
+                    model.ApplicationUser = user;
+                    model.Assigned = true;
+                    db.UserCategoryAssignees.AddOrUpdate(model);
+                    db.SaveChanges();
+                }
+
+                var modeltwo = new AssignedCategoryView
+                {
+                    Category = model.Category.CategoryTitle,
+                    Usertag = model.ApplicationUser.UserName
+                };
+
+                return View("AssignedCategoryView", modeltwo);
             }
 
-            var modeltwo = new AssignedCategoryView
-            {
-                Category = model.Category.CategoryTitle,
-                Usertag = model.ApplicationUser.UserName
-            };
-
-            return View("AssignedCategoryView", modeltwo);
-            
+            return RedirectToAction("StudentList", "Categories");
         }
 
         public ActionResult AssignedCategories(string id)
@@ -100,8 +104,7 @@ namespace _5StarsSchoolForum.Controllers
            
             return View("UserAssignedCategories", categories);
         }
-
-       
+        
         public ActionResult Unassign(string cat, string id)
         {
             var catid = db.Categories.First(x => x.CategoryTitle == cat).Id;
@@ -119,7 +122,7 @@ namespace _5StarsSchoolForum.Controllers
             var model = db.UserCategoryAssignees.Where(x => x.ApplicationUser.Id == id).Where(v => v.Assigned == true)
                 .Where(m => m.CategoryId == catid).ToList();
 
-            return RedirectToAction("AssignedCategories");
+            return RedirectToAction("AssignedCategories", new {id});
         }
 
         public ActionResult StudentCategories(string id)
@@ -143,6 +146,12 @@ namespace _5StarsSchoolForum.Controllers
 
             return View("AssignCategoryView", from c in db.Categories
                 select new AssignCategoryView { Category = c.CategoryTitle });
+        }
+
+        public ActionResult GetCategoryId(string categoryname)
+        {
+            var categoryId = db.Categories.First(x => x.CategoryTitle ==categoryname).Id;
+            return RedirectToAction("Details", "Categories", new {id = categoryId});
         }
     }
 }

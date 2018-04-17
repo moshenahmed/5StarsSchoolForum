@@ -1,0 +1,25 @@
+﻿@model _5StarsSchoolForum.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Detele User";
+}
+
+
+<h3>Are you sure you want to delete the below user?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayFor(model => model.UserName)
+        </dt>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "TeacherList","Categories")
+        </div>
+    }
+</div>

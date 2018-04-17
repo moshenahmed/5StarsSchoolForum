@@ -16,17 +16,28 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UserMessages)
+            @Html.DisplayFor(model => model.CategoryTitle)
         </dd>
 
-        @*<dt>
+        <dt>
             @Html.DisplayNameFor(model => model.UserMessages)
         </dt>
+        @foreach (var item in Model.UserMessages)
+    {
+        <dd>@Html.DisplayFor(modelItem => item.PostMessage)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>*@
+        <dd>@Html.DisplayFor(modelItem => item.PostingDate)</dd>
+        <dd>@Html.DisplayFor(modelItem => item.User)</dd>
+        <dt></dt>
 
+    foreach (var reply in item.Replies)
+    {
+        <dd>@Html.DisplayFor(modelItemReply => reply.ReplyMessage)</dd>
+
+        <dd>@Html.DisplayFor(modelItemReply => reply.PostingTime)</dd>
+        <dd>@Html.DisplayFor(modelItemReply => reply.User)</dd>
+}
+}
     </dl>
 
     @using (Html.BeginForm()) {
@@ -34,7 +45,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "CategoryList")
         </div>
     }
 </div>
