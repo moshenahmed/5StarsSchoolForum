@@ -410,6 +410,63 @@ namespace _5StarsSchoolForum.Controllers
             return View();
         }
 
+        public ActionResult GetDeleteUser(string id)
+        {
+            var user = db.Users.First(x => x.Id == id);
+            return View("GetDeleteUser", user);
+        }
+
+        [ActionName("GetDeleteUser")]
+        [HttpPost]
+        public ActionResult DeleteUser(string id)
+        {
+            var user = db.Users.Find(id);
+            var loggedInUserId = User.Identity.GetUserId();
+            if (loggedInUserId != id)
+            {
+                var assignedCategoryCount = db.UserCategoryAssignees.Count(x => x.ApplicationUser.Id == id);
+                if (assignedCategoryCount > 0)
+                {
+                    var assignedCategories = db.UserCategoryAssignees.Where(x => x.ApplicationUser.Id == id)
+                        .ToList();
+                    foreach (var assignedCategoryId in assignedCategories)
+                    {
+                        db.UserCategoryAssignees.Remove(assignedCategoryId);
+                    }
+
+                    var userName = db.Users.Where(x => x.Id == id).Select(v => v.UserName).ToString();
+                    var messagesCount = db.Messages.Count(x => x.User == userName);
+                    if (messagesCount > 0)
+                    {
+                        var messages = db.Messages.Where(x => x.User == userName).ToList();
+
+
+                        foreach (var message in messages)
+                        {
+                            db.Messages.Remove(message);
+                        }
+                    }
+
+                    var repliesCount = db.Replies.Count(x => x.User == userName);
+                    if (repliesCount > 0)
+                    {
+                        var replies = db.Replies.Where(x => x.User == userName).ToList();
+                        foreach (var reply in replies)
+                        {
+                            db.Replies.Remove(reply);
+                        }
+                    }
+                }
+
+                db.Users.Remove(user);
+                db.SaveChanges();
+
+                return RedirectToAction("TeacherList", "Categories");
+            }
+
+            return RedirectToAction("TeacherList", "Categories");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -113,5 +113,7 @@ namespace _5StarsSchoolForum.Models
     public class CategoryListViewModel
     {
         public string CategoryAssigned { get; set; }
+
+        public int CategoryAssignedId { get; set; }
     }
 }
