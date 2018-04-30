@@ -47,7 +47,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CategoryAssigned)
+                        @Html.ActionLink(item.CategoryAssigned, "Details","Categories", new {id = f})
                     </td>
                 </tr>
 
