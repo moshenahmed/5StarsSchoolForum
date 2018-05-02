@@ -20,15 +20,12 @@ namespace _5StarsSchoolForum.Controllers
 
         // GET: Messages
         public ActionResult Index(int? id)
-
-        {
-            //List<MessageReplyView> messagereply = new List<MessageReplyView>();
-            
+        {    
             var model = db.Messages.Where(x=>x.CategoryId==id).ToList();
-
-            
+  
             return PartialView( "IndexPartial", model);
         }
+
         public ActionResult Back(int id)
         {
             var model = db.Messages.FirstOrDefault(k => k.Id == id).CategoryId;
@@ -110,13 +107,16 @@ namespace _5StarsSchoolForum.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,PostMessage,PostingDate")] Message message)
+        public ActionResult Edit([Bind(Include = "Id,Title,PostMessage,PostingDate")] Message message, int id)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(message).State = System.Data.Entity.EntityState.Modified;
+                var messageToUpdate = db.Messages.Find(id);
+                messageToUpdate.PostMessage = message.PostMessage;
+
+                db.Entry(messageToUpdate).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Categories", new { id  = messageToUpdate.CategoryId});
             }
             return View(message);
         }
@@ -141,17 +141,22 @@ namespace _5StarsSchoolForum.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Message message = db.Messages.Find(id);
-            Reply reply = db.Replies.Find(id);
-            db.Messages.Remove(message);
+            var message = db.Messages.Find(id);
+            var reply = db.Replies.Where(x => x.MessageId  == id).Select(v => v.Id).ToList();
+            
             if (reply != null)
             {
-                db.Replies.Remove(reply);
+                foreach (var replyId in reply)
+                {
+                    db.Replies.Remove(db.Replies.Find(replyId));                    
+                }
+                db.Messages.Remove(message);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Categories", new { id  = message.CategoryId});
             }
+            db.Messages.Remove(message);
             db.SaveChanges();
-            return RedirectToAction("Index","Replies", new { id = Url.RequestContext.RouteData.Values["id"]});
+            return RedirectToAction("Details", "Categories", new { id = message.CategoryId }); 
 
         }
         public ActionResult CreateReply(int? id)

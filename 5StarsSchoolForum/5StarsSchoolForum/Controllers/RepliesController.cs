@@ -105,13 +105,16 @@ namespace _5StarsSchoolForum.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Users,MessageId,ReplyMessage,PostingTime")] Reply reply)
+        public ActionResult Edit([Bind(Include = "Id,Users,MessageId,ReplyMessage,PostingTime")] Reply reply, int id)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(reply).State = System.Data.Entity.EntityState.Modified;
+                var editedReply = db.Replies.First(x => x.Id == id);
+                editedReply.ReplyMessage = reply.ReplyMessage;
+
+                db.Entry(editedReply).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", new {id = editedReply.MessageId });
             }
             ViewBag.MessageId = new SelectList(db.Messages, "Id", "PostMessage", reply.MessageId);
             return View(reply);
@@ -140,7 +143,15 @@ namespace _5StarsSchoolForum.Controllers
             Reply reply = db.Replies.Find(id);
             db.Replies.Remove(reply);
             db.SaveChanges();
-            return RedirectToAction("Create", new { id = Url.RequestContext.RouteData.Values["id"] });
+            return RedirectToAction("Create", new { id = reply.MessageId });
+        }
+
+        public ActionResult GetMessageIdbyReplyId(int id)
+        {
+            var reply = db.Replies.Find(id);
+            var messageId = reply.MessageId;
+
+            return RedirectToAction("Create", new { id = messageId });
         }
 
         protected override void Dispose(bool disposing)

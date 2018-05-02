@@ -1,9 +1,5 @@
 ﻿@model _5StarsSchoolForum.Models.Reply
 
-@{
-    Layout = null;
-}
-
 <!DOCTYPE html>
 
 <html>
@@ -12,41 +8,16 @@
     <title>Delete</title>
 </head>
 <body>
-    <h3>Are you sure you want to delete this?</h3>
+    <h3>Are you sure you want to delete this reply?</h3>
     <div>
-        <h4>Reply</h4>
         <hr />
         <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Message.PostMessage)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Message.PostMessage)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Users)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Users)
-            </dd>
-    
             <dt>
                 @Html.DisplayNameFor(model => model.ReplyMessage)
             </dt>
     
             <dd>
                 @Html.DisplayFor(model => model.ReplyMessage)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.PostingTime)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.PostingTime)
             </dd>
     
         </dl>
@@ -56,7 +27,7 @@
     
             <div class="form-actions no-color">
                 <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "Index")
+                @Html.ActionLink("Back", "GetMessageIdbyReplyId", new { id = Model.Id})
             </div>
         }
     </div>

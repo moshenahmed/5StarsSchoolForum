@@ -228,6 +228,13 @@ namespace _5StarsSchoolForum.Controllers
             return View(model);
         }
 
+        public ActionResult GetLoggedInUserId()
+        {
+            var userId = db.Users.First(x  => x.UserName == User.Identity.Name).Id;
+
+            return RedirectToAction("AssignedCategories", "Home", new { id = userId });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

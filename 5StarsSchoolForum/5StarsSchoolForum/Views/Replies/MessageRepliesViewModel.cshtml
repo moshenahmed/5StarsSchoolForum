@@ -27,11 +27,7 @@
 		<h4><il>@c.ReplyMessage</il></h4>
 		<il>@c.PostingTime</il>
 		<il>@c.User</il>
-		<il>@Html.ActionLink("Edit", "Edit", "Replies", new { id = c.Id })	| @Html.ActionLink("Delete", "Delete", "Replies", new { id = c.Id })</il>
-
-
-
-
+		<il>@Html.ActionLink("Edit", "Edit", "Replies", new { id = c.Id }, null)	| @Html.ActionLink("Delete", "Delete", "Replies", new { id = c.Id }, null)</il>
 	}
 	<br />
 	<br />
