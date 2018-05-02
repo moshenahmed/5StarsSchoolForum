@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -465,6 +466,36 @@ namespace _5StarsSchoolForum.Controllers
             }
 
             return RedirectToAction("TeacherList", "Categories");
+        }
+
+        public ActionResult Edit(string id)
+        {
+            var user = db.Users.First(x => x.Id == id);
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Edit(ApplicationUser user, string id)
+        {
+            var editedUser = new  ApplicationUser
+                {
+                    Id = id,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Age = user.Age,
+                    Gender = user.Gender
+                };
+            db.Entry(editedUser).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("TeacherList", "Categories");
+        }
+
+        public ActionResult Details(string id)
+        {
+            var user = db.Users.First(x => x.Id == id);
+
+            return View(user);
         }
 
         protected override void Dispose(bool disposing)

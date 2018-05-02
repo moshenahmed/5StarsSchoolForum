@@ -1,65 +1,74 @@
 ﻿@model _5StarsSchoolForum.Models.MessageRepliesViewModel
-
-@{
-	/**/
-
-	ViewBag.Title = "Reply";
-}
-<div>
-
-	@foreach (var item in Model.mes)
-	{
-
-		<h4>
-			@item.PostMessage
-		</h4>
-		<ul>
-			<il>@item.PostingDate</il>
-
-			<il>@item.User</il>
-		</ul>
-		<hr />
-	}
-	@foreach (var c in Model.rep)
-	{
-
-
-		<h4><il>@c.ReplyMessage</il></h4>
-		<il>@c.PostingTime</il>
-		<il>@c.User</il>
-		<il>@Html.ActionLink("Edit", "Edit", "Replies", new { id = c.Id }, null)	| @Html.ActionLink("Delete", "Delete", "Replies", new { id = c.Id }, null)</il>
-	}
-	<br />
-	<br />
-	<br />
-
-	@using (Html.BeginForm())
+@if (Request.IsAuthenticated)
 {
-@Html.AntiForgeryToken()
+    {
+        /**/
 
-<div class="form-group">
-	@*@Html.LabelFor(model => model.ReplyMessage, htmlAttributes: new { @class = "control-label col-md-2" })*@
-	<div class="col-md-10">
-		@Html.EditorFor(model => model.reply, new { htmlAttributes = new { @class = "form-control" } })
+        ViewBag.Title = "Reply";
+    }
+    <div>
 
-	</div>
-	<br />
-	<div class="col-md-offset-2 col-md-10">
-		<input type="submit" value="Reply" class="btn btn-default" />
-	</div>
-</div>
+        @foreach (var item in Model.mes)
+        {
 
-}
+            <h4>
+                @item.PostMessage
+            </h4>
+            <ul>
+                <il>@item.PostingDate</il>
 
-</div>
+                <il>@item.User</il>
+            </ul>
+            <hr/>
+        }
+        @foreach (var c in Model.rep)
+        {
+
+
+            <h4><il>@c.ReplyMessage</il></h4>
+            <il>@c.PostingTime</il>
+            <il>@c.User</il>
+            if (User.IsInRole("Student"))
+            {
+                if (User.Identity.Name == c.User)
+                {
+                    <il>@Html.ActionLink("Edit", "Edit", "Replies", new {id = c.Id}, null) | @Html.ActionLink("Delete", "Delete", "Replies", new {id = c.Id}, null)</il>
+                }
+            }
+            else
+            {
+                <il>@Html.ActionLink("Edit", "Edit", "Replies", new {id = c.Id}, null) | @Html.ActionLink("Delete", "Delete", "Replies", new {id = c.Id}, null)</il>
+            }
+        }
+        <br/>
+        <br/>
+        <br/>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.ReplyMessage, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.reply, new {htmlAttributes = new {@class = "form-control"}})
+
+                </div>
+                <br/>
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Reply" class="btn btn-default"/>
+                </div>
+            </div>
+
+        }
+
+    </div>
 @section Scripts {
-	@Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
 }
 
 
-@Html.ActionLink("Back", "Index", new { id= Url.RequestContext.RouteData.Values["id"]})
-
-
-
+    @Html.ActionLink("Back", "Index", new {id = Url.RequestContext.RouteData.Values["id"]})
+}
 
 

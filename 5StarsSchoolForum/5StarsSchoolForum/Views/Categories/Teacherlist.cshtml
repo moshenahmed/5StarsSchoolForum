@@ -30,8 +30,8 @@
 				@Html.DisplayFor(modelItem => item.Roles.Name)
 			</td>
 			<td>
-				@Html.ActionLink("Edit", "Edit", new { id = item.User.Id }) |
-				@Html.ActionLink("Details", "Details", new { id = item.User.Id }) |
+				@Html.ActionLink("Edit", "Edit","Account", new { id = item.User.Id },null) |
+				@Html.ActionLink("Details", "Details","Account", new { id = item.User.Id },null) |
 				@Html.ActionLink("Delete user", "GetDeleteUser","Account", new { id = item.User.Id }, null)
 
 

@@ -1,30 +1,49 @@
-﻿@model IEnumerable<_5StarsSchoolForum.Models.Message>
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<_5StarsSchoolForum.Models.Message>
 
-<p>
-    @Html.ActionLink("Post New Message", "Create", new { id = Url.RequestContext.RouteData.Values["id"] }, null)
-</p>
-
-@foreach (var item in Model)
-{
-    <div>
-        <div>
-            <h4>@Html.DisplayFor(modelItem => item.PostMessage)</h4>
-        </div>
-        <div>
-            <p>@Html.DisplayFor(modelItem => item.User)</p>
-        </div>
-        <div>
-            @Html.DisplayFor(modelItem => item.PostingDate)
-        </div>
-        <div>
-            @Html.ActionLink("Reply", "Create", "Replies", new { id = item.Id }, null)|@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |@Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </div>
-    </div>
-    <h4>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</h4>
-}
 @if (Request.IsAuthenticated)
 {
-    if (User.IsInRole("Student"))
+    <p>
+        @Html.ActionLink("Post New Message", "Create", new { id = Url.RequestContext.RouteData.Values["id"] }, null)
+    </p>
+
+    foreach (var item in Model)
+    {
+        <div>
+            <div>
+                <h4>@Html.DisplayFor(modelItem => item.PostMessage)</h4>
+            </div>
+            <div>
+                <p>@Html.DisplayFor(modelItem => item.User)</p>
+            </div>
+            <div>
+                @Html.DisplayFor(modelItem => item.PostingDate)
+            </div>
+            <div>
+                @Html.ActionLink("Reply", "Create", "Replies", new { id = item.Id }, null) |
+                @if (User.IsInRole("Student"))
+                {
+                    if (User.Identity.Name == item.User)
+                    {
+                <il>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })|
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </il>
+                    }
+                }
+                else
+                {
+                    <il>
+                        @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                        @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                    </il>
+                }
+            </div>
+        </div>
+        <h4>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</h4>
+    }
+
+    if(User.IsInRole("Student"))
     {
         @Html.ActionLink("Back", "GetLoggedInUserId", "Categories")
     }

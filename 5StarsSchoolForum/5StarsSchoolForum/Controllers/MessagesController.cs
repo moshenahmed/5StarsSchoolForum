@@ -191,6 +191,12 @@ namespace _5StarsSchoolForum.Controllers
             return View("MessageRepliesViewModel", model);
         }
 
+        public ActionResult GetCategoryByMessageId(int id)
+        {
+            var categoryId = db.Messages.First(x => x.Id == id).CategoryId;
+            return RedirectToAction("CategoryList", "Categories", new {id = categoryId});
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

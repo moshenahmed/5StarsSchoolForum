@@ -4,32 +4,19 @@
 	ViewBag.Title = "AssignCategoryView";
 }
 
-<h2>Available Categories</h2>
+<h2>Select Category to be Assigned</h2>
+
+<br/>
 
 @using (Html.BeginForm())
 
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Category)
-                </th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <input type="checkbox" name="category" value="@item.Category">
-                        <label>@Html.DisplayFor(modelItem => item.Category)</label>
-                    </td>
-                </tr>
-            }
-
-        </table>
+    <div class="form-horizontal">        
+        @Html.DropDownList("Category",
+            new SelectList(Model.Select(i => i.Category).Distinct().ToList()),
+            new { @class = "input-large form-control" })
         <br/>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

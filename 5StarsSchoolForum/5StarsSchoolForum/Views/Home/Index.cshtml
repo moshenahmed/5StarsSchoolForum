@@ -23,7 +23,7 @@ ViewBag.Title = "Home Page";
 				<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-12">
 				<h2>
 					@Html.ActionLink("Users", "Teacherlist", "Categories")
 
@@ -35,12 +35,8 @@ ViewBag.Title = "Home Page";
 
 	else if (User.IsInRole("Student"))
 	{
-
-
-
 	    <div class="col-md-4">
 	        <h2>
-	            @*@Html.ActionLink("Students", "Studentlist", "Categories")*@
 	            You are a Student!
 	        </h2>
 	        <p>
